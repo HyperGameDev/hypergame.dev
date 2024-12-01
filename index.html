@@ -333,6 +333,13 @@
 											}
 										}
 										targetVideoId = earliestUpcoming ? earliestUpcoming.id : null;
+									} else if (mode === 'publishedOnly') {
+										for (var k = 0; k < items.length; k++) {
+											if (items[k].snippet.liveBroadcastContent !== 'upcoming') {
+												targetVideoId = items[k].snippet.resourceId.videoId;
+												break;
+											}
+										}
 									}
 			
 									if (targetVideoId) {
@@ -349,8 +356,8 @@
 						function initialize() {
 							// Check if cookies are enabled
 							if (navigator.cookieEnabled) {
-								loadPlaylistVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist1', 'latest');
-								loadPlaylistVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist2', 'latest');
+								loadPlaylistVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist1', 'publishedOnly'); // Ensures no upcoming videos
+								loadPlaylistVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist2', 'publishedOnly'); // Ensures no upcoming videos
 								loadPlaylistVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist3', 'upcoming');
 								loadPlaylistVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist4', 'upcoming');
 							} else {
@@ -370,6 +377,8 @@
 			</script>
 			
 			<script src="https://apis.google.com/js/api.js"></script>
+			
+			
 			
 			
 			
