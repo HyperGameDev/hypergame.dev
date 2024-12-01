@@ -269,47 +269,22 @@
 						return response.json();
 					})
 					.then(data => {
-						if (!data.apiKey) {
-							console.error('No API Key found in the response');
+						if (!data.videos) {
+							console.error('No videos found in the response');
 							return;
 						}
 			
-						function loadLatestVideos() {
-							gapi.client.setApiKey(data.apiKey);
+						var videos = data.videos;
+						var grid = document.querySelector('.grid');
 			
-							gapi.client.load('youtube', 'v3', function() {
-								var request = gapi.client.youtube.playlistItems.list({
-									part: 'snippet',
-									playlistId: 'UU5TfuWJq9iU-gUp4nXr0z3Q', // "Uploads" playlist ID
-									maxResults: 5
-								});
-			
-								request.execute(function(response) {
-									if (!response.items) {
-										console.error('No items in response for latest videos');
-										return;
-									}
-			
-									var videos = response.items;
-									var grid = document.querySelector('.grid');
-			
-									videos.forEach(video => {
-										var videoElement = document.createElement('div');
-										videoElement.style.textAlign = 'center';
-										videoElement.innerHTML = `
-											<iframe width="100%" height="200" frameborder="0" allowfullscreen src="https://www.youtube.com/embed/${video.snippet.resourceId.videoId}?rel=0&modestbranding=1&autoplay=1"></iframe>
-										`;
-										grid.appendChild(videoElement);
-									});
-								}, function(error) {
-									console.error('Error executing request for latest videos', error);
-								});
-							}, function(error) {
-								console.error('Error loading GAPI client', error);
-							});
-						}
-			
-						gapi.load('client', loadLatestVideos);
+						videos.forEach(video => {
+							var videoElement = document.createElement('div');
+							videoElement.style.textAlign = 'center';
+							videoElement.innerHTML = `
+								<iframe width="100%" height="200" frameborder="0" allowfullscreen src="https://www.youtube.com/embed/${video.videoId}?rel=0&modestbranding=1&autoplay=1"></iframe>
+							`;
+							grid.appendChild(videoElement);
+						});
 					})
 					.catch(error => {
 						console.error('Error:', error);
@@ -321,6 +296,7 @@
 			</script>
 			
 			<script src="https://apis.google.com/js/api.js"></script>
+			
 			
 			
 			
