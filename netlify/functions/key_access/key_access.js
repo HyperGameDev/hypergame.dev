@@ -13,8 +13,8 @@ exports.handler = async function(event, context) {
   }
 
   try {
-    // Use the API key to make a request to the YouTube API
-    const response = await axios.get(`https://www.googleapis.com/youtube/v3/some-endpoint?key=${apiKey}`);
+    // Correct endpoint for fetching playlist items
+    const response = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=YOUR_PLAYLIST_ID&key=${apiKey}`);
     
     return {
       statusCode: 200,
