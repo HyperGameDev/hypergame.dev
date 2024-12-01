@@ -1506,20 +1506,20 @@ input, select, textarea {
 	form input[type="password"],
 	form select,
 	form textarea {
-		-webkit-appearance: none;
+		appearance: none; /* Modern replacement for -webkit-appearance */
 		display: block;
 		width: 100%;
 		border-radius: 8px;
 		border: solid 1px #eee;
 	}
 
-		form input[type="text"]:focus,
-		form input[type="email"]:focus,
-		form input[type="password"]:focus,
-		form select:focus,
-		form textarea:focus {
-			border-color: #0090c5;
-		}
+	form input[type="text"]:focus,
+	form input[type="email"]:focus,
+	form input[type="password"]:focus,
+	form select:focus,
+	form textarea:focus {
+		border-color: #0090c5;
+	}
 
 	form input[type="text"],
 	form input[type="email"],
@@ -1538,25 +1538,16 @@ input, select, textarea {
 		padding: 1em;
 	}
 
-	form ::-webkit-input-placeholder {
+	/* Placeholder styling */
+	form ::placeholder {
 		color: #555 !important;
 	}
 
-	form :-moz-placeholder {
-		color: #555 !important;
-	}
-
-	form ::-moz-placeholder {
-		color: #555 !important;
-	}
-
-	form :-ms-input-placeholder {
-		color: #555 !important;
-	}
-
+	/* Remove inner focus border */
 	form ::-moz-focus-inner {
 		border: 0;
 	}
+
 
 /* Grid */
 
@@ -1671,11 +1662,8 @@ input, select, textarea {
 	input[type="reset"],
 	button,
 	.button {
-		-moz-transition: background-color .25s ease-in-out;
-		-webkit-transition: background-color .25s ease-in-out;
-		-ms-transition: background-color .25s ease-in-out;
-		transition: background-color .25s ease-in-out;
-		-webkit-appearance: none;
+		transition: background-color .25s ease-in-out; /* Modern transition without vendor prefixes */
+		appearance: none; /* Modern replacement for -webkit-appearance */
 		position: relative;
 		display: inline-block;
 		background: #fa61b9; /* Button background color */
@@ -1690,68 +1678,69 @@ input, select, textarea {
 		padding: 0.6em 1.5em;
 	}
 
-		input[type="button"].icon:before,
-		input[type="submit"].icon:before,
-		input[type="reset"].icon:before,
-		button.icon:before,
-		.button.icon:before {
-			position: relative;
-			margin-right: 0.5em;
-			top: 0.05em;
-		}
+	input[type="button"].icon:before,
+	input[type="submit"].icon:before,
+	input[type="reset"].icon:before,
+	button.icon:before,
+	.button.icon:before {
+		position: relative;
+		margin-right: 0.5em;
+		top: 0.05em;
+	}
 
-		input[type="button"]:hover,
-		input[type="submit"]:hover,
-		input[type="reset"]:hover,
-		button:hover,
-		.button:hover {
-			background: #9599ff; /* Button hover background color */
-		}
+	input[type="button"]:hover,
+	input[type="submit"]:hover,
+	input[type="reset"]:hover,
+	button:hover,
+	.button:hover {
+		background: #9599ff; /* Button hover background color */
+	}
 
-		input[type="button"]:active,
-		input[type="submit"]:active,
-		input[type="reset"]:active,
-		button:active,
-		.button:active {
-			background: #ffffff; /* Button active background color */
-		}
+	input[type="button"]:active,
+	input[type="submit"]:active,
+	input[type="reset"]:active,
+	button:active,
+	.button:active {
+		background: #ffffff; /* Button active background color */
+	}
 
-		input[type="button"].alt,
-		input[type="submit"].alt,
-		input[type="reset"].alt,
-		button.alt,
-		.button.alt {
-			background: #f1f1f1;
-			background: rgba(0, 0, 0, 0.05);
-			color: #444;
-		}
+	input[type="button"].alt,
+	input[type="submit"].alt,
+	input[type="reset"].alt,
+	button.alt,
+	.button.alt {
+		background: #f1f1f1;
+		background: rgba(0, 0, 0, 0.05);
+		color: #444;
+	}
 
-			input[type="button"].alt:hover,
-			input[type="submit"].alt:hover,
-			input[type="reset"].alt:hover,
-			button.alt:hover,
-			.button.alt:hover {
-				background: #e8e8e8;
-				background: rgba(0, 0, 0, 0.085);
-			}
+	input[type="button"].alt:hover,
+	input[type="submit"].alt:hover,
+	input[type="reset"].alt:hover,
+	button.alt:hover,
+	.button.alt:hover {
+		background: #e8e8e8;
+		background: rgba(0, 0, 0, 0.085);
+	}
 
-			input[type="button"].alt:active,
-			input[type="submit"].alt:active,
-			input[type="reset"].alt:active,
-			button.alt:active,
-			.button.alt:active {
-				background: #e4e4e4;
-				background: rgba(0, 0, 0, 0.15);
-			}
+	input[type="button"].alt:active,
+	input[type="submit"].alt:active,
+	input[type="reset"].alt:active,
+	button.alt:active,
+	.button.alt:active {
+		background: #e4e4e4;
+		background: rgba(0, 0, 0, 0.15);
+	}
 
-		input[type="button"].large,
-		input[type="submit"].large,
-		input[type="reset"].large,
-		button.large,
-		.button.large {
-			font-size: 2.25em;
-			padding: 0.8em 0.9em;
-		}
+	input[type="button"].large,
+	input[type="submit"].large,
+	input[type="reset"].large,
+	button.large,
+	.button.large {
+		font-size: 2.25em;
+		padding: 0.8em 0.9em;
+	}
+
 
 /* List */
 
