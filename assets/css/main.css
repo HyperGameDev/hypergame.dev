@@ -91,13 +91,13 @@ input, select, textarea {
 		background-image: -webkit-linear-gradient(top, rgba(48, 21, 69, 0.46), rgba(48, 21, 69, 0)), url("images/bg01.png");
 		background-image: -ms-linear-gradient(top, rgba(48, 21, 69, 0.46), rgba(48, 21, 69, 0)), url("images/bg01.png");
 		background-image: linear-gradient(top, rgba(48, 21, 69, 0.46), rgba(48, 21, 69, 0)), url("images/bg01.png");
-		background-color: #f7f7f7;
+		background-color: #301545; /* Body background color */
 		background-position: top left, top left;
 		background-repeat: repeat-x, repeat;
 		background-size: 100% 30em, auto;
 		font-family: 'Open Sans', sans-serif;
 		font-size: 13pt;
-		color: #696969;
+		color: #e6e6e6; /* Main, non-header text color */
 		font-weight: 300;
 		line-height: 2.25em;
 	}
@@ -116,13 +116,13 @@ input, select, textarea {
 	input, select, textarea {
 		font-family: 'Open Sans', sans-serif;
 		font-size: 13pt;
-		color: #696969;
+		color: #ff00e1; /* ??? text color */
 		font-weight: 300;
 		line-height: 2.25em;
 	}
 
 	a {
-		color: #0090c5;
+		color: #9599ff; /* Hyperlink text color */
 		text-decoration: underline;
 	}
 
@@ -131,7 +131,7 @@ input, select, textarea {
 		}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #444;
+		color: #e6e6e6; /* Header text color */
 		font-weight: 800;
 	}
 
@@ -154,7 +154,7 @@ input, select, textarea {
 
 	b, strong {
 		font-weight: 600;
-		color: #444;
+		color: #e6e6e6;
 	}
 
 	i, em {
@@ -179,11 +179,11 @@ input, select, textarea {
 
 	hr {
 		border: 0;
-		border-top: solid 1px #eee;
+		border-top: solid 1px #00c3ff; /* Horizontal rule color */
 	}
 
 	blockquote {
-		border-left: solid 0.5em #eee;
+		border-left: solid 0.5em #00fbff;
 		padding: 1em 0 1em 2em;
 		font-style: italic;
 	}
@@ -1678,8 +1678,8 @@ input, select, textarea {
 		-webkit-appearance: none;
 		position: relative;
 		display: inline-block;
-		background: #0090c5;
-		color: #fff;
+		background: #fa61b9; /* Button background color */
+		color: #200e2e; /* Button text color */
 		text-decoration: none;
 		border-radius: 6px;
 		font-weight: 800;
@@ -1705,7 +1705,7 @@ input, select, textarea {
 		input[type="reset"]:hover,
 		button:hover,
 		.button:hover {
-			background: #10a0d5;
+			background: #9599ff; /* Button hover background color */
 		}
 
 		input[type="button"]:active,
@@ -1713,7 +1713,7 @@ input, select, textarea {
 		input[type="reset"]:active,
 		button:active,
 		.button:active {
-			background: #20b0e5;
+			background: #ffffff; /* Button active background color */
 		}
 
 		input[type="button"].alt,
@@ -1808,7 +1808,7 @@ input, select, textarea {
 	}
 
 		ul.menu li {
-			border-left: solid 1px #e0e0e0;
+			border-left: solid 1px #3f3f3f; /* Vertical rule color */
 			display: inline-block;
 			padding: 0 0 0 0.75em;
 			margin: 0 0 0 0.75em;
@@ -1936,17 +1936,17 @@ input, select, textarea {
 			}
 
 				.widget.contact ul li a:before {
-					color: #f3f3f3;
+					color: #f3f3f3; /* Social Media icon color */
 					font-size: 1.5em;
 					line-height: inherit;
 				}
 
 				.widget.contact ul li a:hover {
-					background: #444444;
+					background: #444444; /* Social Media hover icon color */
 				}
 
 				.widget.contact ul li a:active {
-					background: #666666;
+					background: #666666; /* Social Media active icon color */
 				}
 
 /* Wrappers */
@@ -1960,7 +1960,7 @@ input, select, textarea {
 	}
 
 	#main-wrapper {
-		background: #fff;
+		background: #200e2e; /* Wrapper section background color */
 		box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.05);
 		padding: 5em 0 5em 0;
 	}
@@ -1991,7 +1991,7 @@ input, select, textarea {
 	}
 
 	#logo h1 {
-		color: #fff; /* Default color if any text doesn't match specified words */
+		color: #e6e6e6; /* Default text color if any text doesn't match specified words */
 		border-radius: 6px;
 		font-family: 'GUERRILLA', serif; /* Apply the GUERRILLA font */
 		font-weight: 400;
@@ -1999,7 +1999,7 @@ input, select, textarea {
 		font-size: 3.5em;
 		display: inline-block;
 		vertical-align: middle;
-		background-color: #301545; /* Purple background */
+		background-color: #301545; /* Logo background color */
 		white-space: nowrap; /* Prevent text wrapping */
 	}
 
@@ -2077,7 +2077,7 @@ input, select, textarea {
 					transition: background-color .25s ease-in-out;
 					font-weight: 800;
 					letter-spacing: 0.025em;
-					color: #696969;
+					color: #e6e6e6; /* Navigation menu text color */
 					text-decoration: none;
 					border-radius: 6px;
 					padding: 0.5em 1em 0.5em 1em;
@@ -2088,22 +2088,24 @@ input, select, textarea {
 				}
 
 				#nav ul li:hover a, #nav ul li:hover span {
-					background: #fff;
+					background: #9599ff; /* Navigation menu hover background color */
+					color: #200e2e; /* Navigation menu hover text color */
 				}
 
 				#nav ul li.active a, #nav ul li.active span {
-					background: #fff;
+					background: #9599ff; /* Navigation menu active background color, especially dropdown*/
+					color: #200e2e; /* Navigation menu active text color, especially dropdown*/
 				}
 
 				#nav ul li.current a {
-					background: #444;
-					color: #fff;
+					background: #fa61b9; /* Navigation menu current choice background color */
+					color: #200e2e; /* Navigation menu current choice text color */
 				}
 
 	.dropotron {
-		background: #fff;
+		background: #1E286D; /* Dropdown background color */
 		letter-spacing: 0.025em;
-		color: #696969;
+		color: #e6e6e6; /* Dropdown text color */
 		text-decoration: none;
 		border-radius: 6px;
 		padding: 0.75em 0;
@@ -2116,14 +2118,14 @@ input, select, textarea {
 	}
 
 		.dropotron li {
-			border-top: solid 1px #eee;
+			border-top: solid 1px #9599ff; /* Dropdown horizontal rule color */
 			line-height: 3em;
 			padding-left: 0;
 		}
 
 			.dropotron li:first-child {
 				border-top: 0;
-			}
+			}	
 
 			.dropotron li > a, .dropotron li > span {
 				-moz-transition: color .25s ease-in-out, background-color .25s ease-in-out;
@@ -2137,11 +2139,13 @@ input, select, textarea {
 			}
 
 				.dropotron li > a:hover, .dropotron li > span:hover {
-					background: #eee;
+					background: #9599ff; /* Dropdown option hover background color */
+					color: #200e2e; /* Dropdown option hover text color */
 				}
 
-			.dropotron li.active > a, .dropotron li.active > span {
-				background: #eee;
+			.dropotron li.active > a, .dropotron li.active > span {	
+				background: #9599ff; /* Dropdown submenu option hover background color */
+				color: #200e2e; /* Dropdown submenu option hover text color */
 			}
 
 		.dropotron.level-0 {
@@ -2155,7 +2159,7 @@ input, select, textarea {
 				position: absolute;
 				top: -0.5em;
 				left: 1em;
-				border-bottom: solid 0.75em #ffffff;
+				border-bottom: solid 0.75em #9599ff; /* Dropdown arrow icon color */
 				border-left: solid 0.75em transparent;
 				border-right: solid 0.75em transparent;
 				z-index: 1;
@@ -2463,12 +2467,12 @@ input, select, textarea {
 						position: absolute;
 						left: 6px;
 						top: 6px;
-						background: rgba(0, 0, 0, 0.5);
+						background: rgba(0, 0, 0, 0.5); /* Popout button background color */
 						width: 58px;
 						height: 38px;
 						border-radius: 6px;
 						content: '\f0c9';
-						color: #fff;
+						color: #9599ff; /* Popout button icon color */
 						text-align: center;
 						line-height: 38px;
 						font-size: 20px;
@@ -2499,7 +2503,7 @@ input, select, textarea {
 				top: 0;
 				width: 275px;
 				z-index: 10002;
-				background: #fff;
+				background: #200e2e; /* Popout menu background color */
 				box-shadow: inset -3px 0px 0px 0px #dfdfdf;
 				padding: 0 23px 0 20px;
 			}
@@ -2509,8 +2513,8 @@ input, select, textarea {
 					text-decoration: none;
 					height: 54px;
 					line-height: 54px;
-					border-top: solid 1px #e8e8e8;
-					color: #696969;
+					border-top: solid 1px #301545; /* Hamburger popout's horizontal rule color */
+					color: #e6e6e6; /* Hamburger popout's dropdown links text color */
 				}
 
 					#navPanel .link:first-child {
@@ -2543,7 +2547,7 @@ input, select, textarea {
 				}
 
 				#navPanel .depth-0 {
-					color: #444;
+					color: #e6e6e6; /* Hamburger popout's nav links' text color */
 					font-weight: 800;
 				}
 

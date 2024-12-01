@@ -38,7 +38,7 @@
                 <li><a href="#">Discord</a></li>
                 <li><a href="#">Live Queues</a></li>
                 <li><a href="#">Jam Topics</a></li>
-                <!-- <li>
+                <li>
                     <a href="#">Dropdown</a>
                     <ul>
                         <li><a href="#">Lorem ipsum dolor</a></li>
@@ -54,7 +54,7 @@
                         </li>
                         <li><a href="#">Veroeros feugiat</a></li>
                     </ul>
-                </li> -->
+                </li>
             </ul>
         </nav>
 
@@ -139,8 +139,8 @@
 					<div class="container">
 						<!-- About Section -->
 						<div id="about-section" style="text-align: center;">
-							<h2>A friendly, inclusive game dev community.</h2>
-							<p>Co-work along with other devs! Two to four times a week, <a href="https://www.youtube.com/@HyperGameDev">Lýz livestreams</a> her game development journey. Enjoy some problem solving and chat with her, and use this site to improve how you interact with the community!</p>
+							<h2>Friendly and Inclusive Game Dev</h2>
+							<p>Two to four times a week, Lýz <a href="https://www.youtube.com/@HyperGameDev">livestreams</a> her game development journey. Come problem solve with us, or tell us all about your own projects!</p>
 							<p><strong>Why only Lýz?</strong> Someday, she hopes <a href="https://www.youtube.com/@HyperGameDev">the HGD YouTube channel</a> could host other devs' journeys, too...</p>
 						</div>
 						
@@ -153,7 +153,7 @@
 										<!-- Videos will be dynamically inserted here -->
 									</div>
 									<div style="text-align: center; margin-top: 20px;">
-										<a href="https://www.youtube.com/@HyperGameDev/streams" class="button icon fa-file-alt">More</a>
+										<a href="https://www.youtube.com/@HyperGameDev/streams" class="button icon fa-file-alt">Watch More</a>
 									</div>
 								</section>
 							</div>
@@ -254,45 +254,53 @@
 			</div>
 
 		<!-- Scripts -->
+			<!-- Hamburger Menu -->
+				<script src="assets/js/jquery.min.js"></script>
+				<script src="assets/js/jquery.dropotron.min.js"></script>
+				<script src="assets/js/browser.min.js"></script>
+				<script src="assets/js/breakpoints.min.js"></script>
+				<script src="assets/js/util.js"></script>
+				<script src="assets/js/main.js"></script>
 
-		<script>
-			fetch('/.netlify/functions/key_access')
-				.then(response => {
-					if (!response.ok) {
-						throw new Error('Network response was not ok: ' + response.statusText);
-					}
-					return response.json();
-				})
-				.then(data => {
-					if (!data.videos) {
-						console.error('No videos found in the response');
-						return;
-					}
-		
-					var videos = data.videos.slice(0, 9); // Fetch only the first 9 videos
-					var grid = document.querySelector('.grid');
-		
-					videos.forEach(video => {
-						var videoElement = document.createElement('div');
-						videoElement.className = 'video-container'; // Add this line to ensure the video container has the correct class
-						videoElement.style.textAlign = 'center';
-						videoElement.innerHTML = `
-							<iframe frameborder="0" allowfullscreen src="https://www.youtube.com/embed/${video.videoId}?rel=0&modestbranding=1"></iframe>
-						`;
-						grid.appendChild(videoElement);
-					});
-				})
-				.catch(error => {
-					console.error('Error:', error);
-					if (error.message.includes('403') || error.message.includes('404')) {
-						document.querySelector('.row.gtr-200').style.display = 'none';
-						console.error('403 or 404 error: Hiding the Video and Text Grid section');
-					}
-				});
-		</script>
-		
-		<script src="https://apis.google.com/js/api.js"></script>
-		
+			<!-- Video Grid API Fetch -->
+				<script>
+					fetch('/.netlify/functions/key_access')
+						.then(response => {
+							if (!response.ok) {
+								throw new Error('Network response was not ok: ' + response.statusText);
+							}
+							return response.json();
+						})
+						.then(data => {
+							if (!data.videos) {
+								console.error('No videos found in the response');
+								return;
+							}
+				
+							var videos = data.videos.slice(0, 9); // Fetch only the first 9 videos
+							var grid = document.querySelector('.grid');
+				
+							videos.forEach(video => {
+								var videoElement = document.createElement('div');
+								videoElement.className = 'video-container'; // Add this line to ensure the video container has the correct class
+								videoElement.style.textAlign = 'center';
+								videoElement.innerHTML = `
+									<iframe frameborder="0" allowfullscreen src="https://www.youtube.com/embed/${video.videoId}?rel=0&modestbranding=1"></iframe>
+								`;
+								grid.appendChild(videoElement);
+							});
+						})
+						.catch(error => {
+							console.error('Error:', error);
+							if (error.message.includes('403') || error.message.includes('404')) {
+								document.querySelector('.row.gtr-200').style.display = 'none';
+								console.error('403 or 404 error: Hiding the Video and Text Grid section');
+							}
+						});
+				</script>
+				
+				<script src="https://apis.google.com/js/api.js"></script>
+				
 		
 		
 			
