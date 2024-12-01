@@ -12,6 +12,8 @@ exports.handler = async function(event, context) {
     };
   }
 
+  console.log('API Key:', apiKey);
+
   const playlists = [
     { id: 'PLfqB5nWLnc7LpCFS4vdwCoxKdBYRSMYBI', iframeId: 'playlist1' },
     { id: 'PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', iframeId: 'playlist2' },
@@ -35,6 +37,8 @@ exports.handler = async function(event, context) {
           break;
         }
       }
+
+      console.log('Playlist:', playlists[index].id, 'Latest Video ID:', latestVideoId);
 
       return { iframeId: playlists[index].iframeId, videoId: latestVideoId };
     });
