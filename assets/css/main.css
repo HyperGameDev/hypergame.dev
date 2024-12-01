@@ -1559,28 +1559,34 @@ input, select, textarea {
 	}
 
 /* Grid */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-}
 
-@media (max-width: 1200px) {
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 10px;
+	}
 
-@media (max-width: 768px) {
-    .grid {
-        grid-template-columns: 1fr;
-    }
-}
+	.grid iframe {
+		width: 100%;
+		height: 180px; /* Height of a YouTube thumbnail */
+	}
 
-.grid iframe {
-    width: 100%;
-    height: auto;
-}
+	@media (max-width: 1200px) {
+		.grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.grid {
+			grid-template-columns: 1fr;
+		}
+
+		.grid iframe {
+			height: auto; /* Let the height adjust based on the width */
+		}
+	}
+
 
 
 /* Tables */
