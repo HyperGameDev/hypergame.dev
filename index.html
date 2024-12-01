@@ -328,7 +328,7 @@
 										for (var j = 0; j < items.length; j++) {
 											if (items[j].snippet.liveBroadcastContent === 'upcoming') {
 												var scheduledDate = new Date(items[j].snippet.scheduledStartTime || items[j].snippet.publishedAt);
-												if (scheduledDate > now && (!earliestUpcoming || scheduledDate < earliestUpcoming.date)) {
+												if (!earliestUpcoming || (scheduledDate > now && scheduledDate < earliestUpcoming.date)) {
 													earliestUpcoming = { id: items[j].snippet.resourceId.videoId, date: scheduledDate };
 												}
 											}
@@ -379,6 +379,7 @@
 			</script>
 			
 			<script src="https://apis.google.com/js/api.js"></script>
+			
 			
 			
 			
