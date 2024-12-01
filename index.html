@@ -313,34 +313,15 @@
 									}
 			
 									var items = response.items;
-									var targetVideoId;
 									var now = new Date();
+									var targetVideoId = null;
 			
 									if (mode === 'latest') {
-										for (var i = 0; i < items.length; i++) {
-											if (items[i].snippet.liveBroadcastContent !== 'upcoming') {
-												targetVideoId = items[i].snippet.resourceId.videoId;
-												break;
-											}
-										}
+										targetVideoId = getLatestVideoId(items);
 									} else if (mode === 'upcoming') {
-										let earliestUpcoming = null;
-										for (var j = 0; j < items.length; j++) {
-											if (items[j].snippet.liveBroadcastContent === 'upcoming') {
-												var scheduledDate = new Date(items[j].snippet.scheduledStartTime || items[j].snippet.publishedAt);
-												if (!earliestUpcoming || (scheduledDate > now && scheduledDate < earliestUpcoming.date)) {
-													earliestUpcoming = { id: items[j].snippet.resourceId.videoId, date: scheduledDate };
-												}
-											}
-										}
-										targetVideoId = earliestUpcoming ? earliestUpcoming.id : null;
+										targetVideoId = getEarliestUpcomingVideoId(items, now);
 									} else if (mode === 'publishedOnly') {
-										for (var k = 0; k < items.length; k++) {
-											if (items[k].snippet.liveBroadcastContent !== 'upcoming') {
-												targetVideoId = items[k].snippet.resourceId.videoId;
-												break;
-											}
-										}
+										targetVideoId = getPublishedVideoId(items);
 									}
 			
 									if (targetVideoId) {
@@ -356,12 +337,43 @@
 							});
 						}
 			
+						function getLatestVideoId(items) {
+							for (var i = 0; i < items.length; i++) {
+								if (items[i].snippet.liveBroadcastContent !== 'upcoming') {
+									return items[i].snippet.resourceId.videoId;
+								}
+							}
+							return null;
+						}
+			
+						function getEarliestUpcomingVideoId(items, now) {
+							let earliestUpcoming = null;
+							for (var j = 0; j < items.length; j++) {
+								if (items[j].snippet.liveBroadcastContent === 'upcoming') {
+									var scheduledDate = new Date(items[j].snippet.scheduledStartTime || items[j].snippet.publishedAt);
+									if (scheduledDate > now && (!earliestUpcoming || scheduledDate < earliestUpcoming.date)) {
+										earliestUpcoming = { id: items[j].snippet.resourceId.videoId, date: scheduledDate };
+									}
+								}
+							}
+							return earliestUpcoming ? earliestUpcoming.id : null;
+						}
+			
+						function getPublishedVideoId(items) {
+							for (var k = 0; k < items.length; k++) {
+								if (items[k].snippet.liveBroadcastContent !== 'upcoming') {
+									return items[k].snippet.resourceId.videoId;
+								}
+							}
+							return null;
+						}
+			
 						function initialize() {
 							if (navigator.cookieEnabled) {
-								loadPlaylistVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist1', 'publishedOnly'); // Latest published
-								loadPlaylistVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist2', 'publishedOnly'); // Latest published
-								loadPlaylistVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist3', 'upcoming'); // Earliest upcoming
-								loadPlaylistVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist4', 'upcoming'); // Earliest upcoming
+								loadPlaylistVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist1', 'publishedOnly');
+								loadPlaylistVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist2', 'publishedOnly');
+								loadPlaylistVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist3', 'upcoming');
+								loadPlaylistVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist4', 'upcoming');
 							} else {
 								console.error('Cookies are not enabled. Unable to load videos.');
 							}
@@ -379,17 +391,6 @@
 			</script>
 			
 			<script src="https://apis.google.com/js/api.js"></script>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			
