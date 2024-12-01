@@ -20,7 +20,7 @@ exports.handler = async function(event, context) {
     const response = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems`, {
       params: {
         part: 'snippet',
-        playlistId: 'https://www.youtube.com/playlist?list=UULV5TfuWJq9iU-gUp4nXr0z3Q', // Replace with your channel's "Uploads" playlist ID
+        playlistId: 'UU5TfuWJq9iU-gUp4nXr0z3Q', // Updated with the "Uploads" playlist ID
         maxResults: 5,
         key: apiKey
       }
