@@ -173,7 +173,7 @@
 									<div class="col-6 col-12-small" style="text-align: center;">
 										<div>
 											<iframe id="playlist4" width="100%" height="200" frameborder="0" allowfullscreen></iframe>
-											<p style="margin-top: 5px;">Last Jam Stream</p>
+											<p style="margin-top: 5px;">Next Devlog Stream</p>
 										</div>
 									</div>
 								</div>
@@ -298,7 +298,7 @@
 			
 						console.log('Fetched API Key:', data.apiKey); // Log the fetched API key
 			
-						function loadPlaylistLatestVideo(playlistId, iframeId, mode) {
+						function loadPlaylistVideo(playlistId, iframeId, mode) {
 							gapi.client.setApiKey(data.apiKey);
 							console.log('API Key set to:', data.apiKey); // Log the API key after setting it
 			
@@ -326,7 +326,7 @@
 											}
 										}
 									} else if (mode === 'upcoming') {
-										let earliestUpcoming;
+										let earliestUpcoming = null;
 										for (var j = 0; j < items.length; j++) {
 											if (items[j].snippet.liveBroadcastContent === 'upcoming') {
 												var scheduledDate = new Date(items[j].snippet.publishedAt);
@@ -352,10 +352,10 @@
 						function initialize() {
 							// Check if cookies are enabled
 							if (navigator.cookieEnabled) {
-								loadPlaylistLatestVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist1', 'latest');
-								loadPlaylistLatestVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist2', 'latest');
-								loadPlaylistLatestVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist3', 'upcoming');
-								loadPlaylistLatestVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist4', 'upcoming');
+								loadPlaylistVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist1', 'latest');
+								loadPlaylistVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist2', 'latest');
+								loadPlaylistVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist3', 'upcoming');
+								loadPlaylistVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist4', 'upcoming');
 							} else {
 								console.error('Cookies are not enabled. Unable to load videos.');
 							}
@@ -373,6 +373,9 @@
 			</script>
 			
 			<script src="https://apis.google.com/js/api.js"></script>
+			
+			
+			
 			
 			
 			
