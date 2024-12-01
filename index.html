@@ -255,49 +255,43 @@
 
 		<!-- Scripts -->
 
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-			<script>
-				fetch('/.netlify/functions/key_access')
-					.then(response => {
-						if (!response.ok) {
-							throw new Error('Network response was not ok: ' + response.statusText);
-						}
-						return response.json();
-					})
-					.then(data => {
-						if (!data.videos) {
-							console.error('No videos found in the response');
-							return;
-						}
-			
-						var videos = data.videos;
-						var grid = document.querySelector('.grid');
-			
-						videos.forEach(video => {
-							var videoElement = document.createElement('div');
-							videoElement.style.textAlign = 'center';
-							videoElement.innerHTML = `
-								<iframe width="320" height="180" frameborder="0" allowfullscreen src="https://www.youtube.com/embed/${video.videoId}?rel=0&modestbranding=1&autoplay=1"></iframe>
-							`;
-							grid.appendChild(videoElement);
-						});
-					})
-					.catch(error => {
-						console.error('Error:', error);
-						if (error.message.includes('403') || error.message.includes('404')) {
-							document.querySelector('.row.gtr-200').style.display = 'none';
-							console.error('403 or 404 error: Hiding the Video and Text Grid section');
-						}
+		<script>
+			fetch('/.netlify/functions/key_access')
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok: ' + response.statusText);
+					}
+					return response.json();
+				})
+				.then(data => {
+					if (!data.videos) {
+						console.error('No videos found in the response');
+						return;
+					}
+		
+					var videos = data.videos;
+					var grid = document.querySelector('.grid');
+		
+					videos.forEach(video => {
+						var videoElement = document.createElement('div');
+						videoElement.style.textAlign = 'center';
+						videoElement.innerHTML = `
+							<iframe width="320" height="180" frameborder="0" allowfullscreen src="https://www.youtube.com/embed/${video.videoId}?rel=0&modestbranding=1"></iframe>
+						`;
+						grid.appendChild(videoElement);
 					});
-			</script>
-			
-			<script src="https://apis.google.com/js/api.js"></script>
+				})
+				.catch(error => {
+					console.error('Error:', error);
+					if (error.message.includes('403') || error.message.includes('404')) {
+						document.querySelector('.row.gtr-200').style.display = 'none';
+						console.error('403 or 404 error: Hiding the Video and Text Grid section');
+					}
+				});
+		</script>
+		
+		<script src="https://apis.google.com/js/api.js"></script>
+		
 			
 			
 			
