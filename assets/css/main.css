@@ -1566,9 +1566,18 @@ input, select, textarea {
 		gap: 10px;
 	}
 
-	.grid iframe {
+	.grid .video-container {
+		position: relative;
 		width: 100%;
-		height: 300px; /* Height of a YouTube thumbnail */
+		padding-top: 56.25%; /* 16:9 aspect ratio */
+	}
+
+	.grid iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
 	}
 
 	@media (max-width: 1200px) {
@@ -1581,11 +1590,8 @@ input, select, textarea {
 		.grid {
 			grid-template-columns: 1fr;
 		}
-
-		.grid iframe {
-			height: auto; /* Let the height adjust based on the width */
-		}
 	}
+
 
 
 
