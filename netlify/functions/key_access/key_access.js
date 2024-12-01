@@ -1,5 +1,5 @@
 // Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
-// functions/get-api-data.js
+// functions/key_access.js
 const axios = require('axios');
 
 exports.handler = async function() {
