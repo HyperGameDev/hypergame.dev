@@ -296,11 +296,8 @@
 							return;
 						}
 			
-						console.log('Fetched API Key:', data.apiKey); // Log the fetched API key
-			
 						function loadPlaylistVideo(playlistId, iframeId, mode) {
 							gapi.client.setApiKey(data.apiKey);
-							console.log('API Key set to:', data.apiKey); // Log the API key after setting it
 			
 							gapi.client.load('youtube', 'v3', function() {
 								var request = gapi.client.youtube.playlistItems.list({
@@ -311,7 +308,7 @@
 			
 								request.execute(function(response) {
 									if (!response.items) {
-										console.error('No items in response:', response);
+										console.error('No items in response for playlist:', playlistId);
 										return;
 									}
 			
@@ -373,6 +370,7 @@
 			</script>
 			
 			<script src="https://apis.google.com/js/api.js"></script>
+			
 			
 			
 			
