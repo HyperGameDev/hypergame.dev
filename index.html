@@ -298,7 +298,7 @@
 			
 						console.log('Fetched API Key:', data.apiKey); // Log the fetched API key
 			
-						function loadPlaylistLatestVideo(playlistId, iframeId) {
+						function loadPlaylistLatestVideo(playlistId, iframeId, mode) {
 							gapi.client.setApiKey(data.apiKey);
 							console.log('API Key set to:', data.apiKey); // Log the API key after setting it
 			
@@ -316,15 +316,30 @@
 									}
 			
 									var items = response.items;
-									var latestVideoId;
-									for (var i = 0; i < items.length; i++) {
-										if (items[i].snippet.liveBroadcastContent !== 'upcoming') {
-											latestVideoId = items[i].snippet.resourceId.videoId;
-											break;
+									var targetVideoId;
+			
+									if (mode === 'latest') {
+										for (var i = 0; i < items.length; i++) {
+											if (items[i].snippet.liveBroadcastContent !== 'upcoming') {
+												targetVideoId = items[i].snippet.resourceId.videoId;
+												break;
+											}
 										}
+									} else if (mode === 'upcoming') {
+										let earliestUpcoming;
+										for (var j = 0; j < items.length; j++) {
+											if (items[j].snippet.liveBroadcastContent === 'upcoming') {
+												var scheduledDate = new Date(items[j].snippet.publishedAt);
+												if (!earliestUpcoming || scheduledDate < earliestUpcoming.date) {
+													earliestUpcoming = { id: items[j].snippet.resourceId.videoId, date: scheduledDate };
+												}
+											}
+										}
+										targetVideoId = earliestUpcoming ? earliestUpcoming.id : null;
 									}
-									if (latestVideoId) {
-										document.getElementById(iframeId).src = "https://www.youtube.com/embed/" + latestVideoId + "?rel=0&modestbranding=1&autoplay=1";
+			
+									if (targetVideoId) {
+										document.getElementById(iframeId).src = "https://www.youtube.com/embed/" + targetVideoId + "?rel=0&modestbranding=1&autoplay=1";
 									} else {
 										console.error('No suitable video found in playlist:', playlistId);
 									}
@@ -337,9 +352,10 @@
 						function initialize() {
 							// Check if cookies are enabled
 							if (navigator.cookieEnabled) {
-								loadPlaylistLatestVideo('PLfqB5nWLnc7LpCFS4vdwCoxKdBYRSMYBI', 'playlist1');
-								loadPlaylistLatestVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist2');
-								loadPlaylistLatestVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist3');
+								loadPlaylistLatestVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist1', 'latest');
+								loadPlaylistLatestVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist2', 'latest');
+								loadPlaylistLatestVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist3', 'upcoming');
+								loadPlaylistLatestVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist4', 'upcoming');
 							} else {
 								console.error('Cookies are not enabled. Unable to load videos.');
 							}
@@ -357,6 +373,7 @@
 			</script>
 			
 			<script src="https://apis.google.com/js/api.js"></script>
+			
 			
 			
 			
