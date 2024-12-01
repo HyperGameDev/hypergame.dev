@@ -295,26 +295,27 @@
 							console.error('No API Key found in the response');
 							return;
 						}
-
+			
 						function loadPlaylistVideo(playlistId, iframeId, mode) {
 							gapi.client.setApiKey(data.apiKey);
-
+			
 							gapi.client.load('youtube', 'v3', function() {
 								var request = gapi.client.youtube.playlistItems.list({
 									part: 'snippet',
 									maxResults: 50,
 									playlistId: playlistId
 								});
-
+			
 								request.execute(function(response) {
 									if (!response.items) {
 										console.error('No items in response for playlist:', playlistId);
 										return;
 									}
-
+			
 									var items = response.items;
 									var targetVideoId;
-
+									var now = new Date();
+			
 									if (mode === 'latest') {
 										for (var i = 0; i < items.length; i++) {
 											if (items[i].snippet.liveBroadcastContent !== 'upcoming') {
@@ -327,7 +328,7 @@
 										for (var j = 0; j < items.length; j++) {
 											if (items[j].snippet.liveBroadcastContent === 'upcoming') {
 												var scheduledDate = new Date(items[j].snippet.scheduledStartTime || items[j].snippet.publishedAt);
-												if (!earliestUpcoming || scheduledDate < earliestUpcoming.date) {
+												if (scheduledDate > now && (!earliestUpcoming || scheduledDate < earliestUpcoming.date)) {
 													earliestUpcoming = { id: items[j].snippet.resourceId.videoId, date: scheduledDate };
 												}
 											}
@@ -341,7 +342,7 @@
 											}
 										}
 									}
-
+			
 									if (targetVideoId) {
 										document.getElementById(iframeId).src = "https://www.youtube.com/embed/" + targetVideoId + "?rel=0&modestbranding=1&autoplay=1";
 									} else {
@@ -354,7 +355,7 @@
 								console.error('Error loading GAPI client:', error);
 							});
 						}
-
+			
 						function initialize() {
 							if (navigator.cookieEnabled) {
 								loadPlaylistVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist1', 'publishedOnly'); // Latest published
@@ -365,7 +366,7 @@
 								console.error('Cookies are not enabled. Unable to load videos.');
 							}
 						}
-
+			
 						gapi.load('client', initialize);
 					})
 					.catch(error => {
@@ -378,6 +379,7 @@
 			</script>
 			
 			<script src="https://apis.google.com/js/api.js"></script>
+			
 			
 			
 			
