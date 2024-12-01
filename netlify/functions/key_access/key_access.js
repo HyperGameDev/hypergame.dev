@@ -21,7 +21,7 @@ exports.handler = async function(event, context) {
             params: {
                 part: 'snippet',
                 playlistId: 'UU5TfuWJq9iU-gUp4nXr0z3Q', // "Uploads" playlist ID
-                maxResults: 6,
+                maxResults: 9,
                 key: apiKey
             }
         });

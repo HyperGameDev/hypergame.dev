@@ -166,6 +166,7 @@
 				
 				
 				
+				
 
 
 
@@ -269,7 +270,7 @@
 						return;
 					}
 		
-					var videos = data.videos;
+					var videos = data.videos.slice(0, 9); // Fetch only the first 9 videos
 					var grid = document.querySelector('.grid');
 		
 					videos.forEach(video => {
@@ -291,6 +292,7 @@
 		</script>
 		
 		<script src="https://apis.google.com/js/api.js"></script>
+		
 		
 			
 			
