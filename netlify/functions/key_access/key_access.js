@@ -53,7 +53,7 @@ exports.handler = async function(event, context) {
         "Access-Control-Allow-Origin": "*", // Allow requests from any domain
         "Access-Control-Allow-Headers": "Content-Type"
       },
-      body: JSON.stringify(results)
+      body: JSON.stringify({ apiKey: apiKey, results: results })
     };
   } catch (error) {
     console.error('Error:', error); // Log the full error for your reference
