@@ -12,13 +12,36 @@ exports.handler = async function(event, context) {
     };
   }
 
+  const playlists = [
+    { id: 'PLfqB5nWLnc7LpCFS4vdwCoxKdBYRSMYBI', iframeId: 'playlist1' },
+    { id: 'PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', iframeId: 'playlist2' },
+    { id: 'PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', iframeId: 'playlist3' }
+  ];
+
   try {
-    // Correct endpoint for fetching playlist items
-    const response = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=YOUR_PLAYLIST_ID&key=${apiKey}`);
-    
+    const responses = await Promise.all(
+      playlists.map(playlist => 
+        axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlist.id}&key=${apiKey}`)
+      )
+    );
+
+    const results = responses.map((response, index) => {
+      const items = response.data.items;
+      let latestVideoId;
+
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].snippet.liveBroadcastContent !== 'upcoming') {
+          latestVideoId = items[i].snippet.resourceId.videoId;
+          break;
+        }
+      }
+
+      return { iframeId: playlists[index].iframeId, videoId: latestVideoId };
+    });
+
     return {
       statusCode: 200,
-      body: JSON.stringify(response.data)
+      body: JSON.stringify(results)
     };
   } catch (error) {
     console.error('Error:', error); // Log the full error for your reference
