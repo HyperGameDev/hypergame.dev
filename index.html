@@ -135,56 +135,32 @@
 					</div>
 				</div> -->
 				
-			<div id="main-wrapper">
-				<div class="container">
-					<!-- About Section -->
-					<div id="about-section" style="text-align: center;">
-						<h2>A friendly, inclusive game dev community.</h2>
-						<p>Co-work along with other devs! Two to four times a week, <a href="https://www.youtube.com/@HyperGameDev">Lýz livestreams</a> her game development journey. Enjoy some problem solving and chat with her, and use this site to improve how you interact with the community!</p>
-						<p><strong>Why only Lýz?</strong> Someday, she hopes <a href="https://www.youtube.com/@HyperGameDev">the HGD YouTube channel</a> could host other devs' journeys, too...</p>
-					</div>
-			
-					<!-- Video and Text Grid -->
-					<div class="row gtr-200" style="justify-content: center;">
-						<div class="col-10 col-12-medium" style="margin: 0 auto;">
-							<section class="widget thumbnails">
-								<h3 style="text-align: center;">Recent & Upcoming Streams</h3>
-								<div class="grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-									<!-- First Row: Exclude Upcoming Videos -->
-									<div class="col-6 col-12-small" style="text-align: center;">
-										<div>
-											<iframe id="playlist1" width="100%" height="200" frameborder="0" allowfullscreen></iframe>
-											<p style="margin-top: 5px;">Last Jam Stream</p>
-										</div>
+				<div id="main-wrapper">
+					<div class="container">
+						<!-- About Section -->
+						<div id="about-section" style="text-align: center;">
+							<h2>A friendly, inclusive game dev community.</h2>
+							<p>Co-work along with other devs! Two to four times a week, <a href="https://www.youtube.com/@HyperGameDev">Lýz livestreams</a> her game development journey. Enjoy some problem solving and chat with her, and use this site to improve how you interact with the community!</p>
+							<p><strong>Why only Lýz?</strong> Someday, she hopes <a href="https://www.youtube.com/@HyperGameDev">the HGD YouTube channel</a> could host other devs' journeys, too...</p>
+						</div>
+						
+						<!-- Video Previews -->
+						<div class="row gtr-200" style="justify-content: center;">
+							<div class="col-10 col-12-medium" style="margin: 0 auto;">
+								<section class="widget thumbnails">
+									<h3 style="text-align: center;">Recent Streams</h3>
+									<div class="grid" style="display: grid; grid-template-columns: 1fr; gap: 10px;">
+										<!-- Videos will be dynamically inserted here -->
 									</div>
-									<div class="col-6 col-12-small" style="text-align: center;">
-										<div>
-											<iframe id="playlist2" width="100%" height="200" frameborder="0" allowfullscreen></iframe>
-											<p style="margin-top: 5px;">Last Devlog Stream</p>
-										</div>
+									<div style="text-align: center; margin-top: 20px;">
+										<a href="https://www.youtube.com/@HyperGameDev/streams" class="button icon fa-file-alt">Watch More</a>
 									</div>
-									<!-- Second Row: Only Upcoming Videos -->
-									<div class="col-6 col-12-small" style="text-align: center;">
-										<div>
-											<iframe id="playlist3" width="100%" height="200" frameborder="0" allowfullscreen></iframe>
-											<p style="margin-top: 5px;">Next Jam Stream</p>
-										</div>
-									</div>
-									<div class="col-6 col-12-small" style="text-align: center;">
-										<div>
-											<iframe id="playlist4" width="100%" height="200" frameborder="0" allowfullscreen></iframe>
-											<p style="margin-top: 5px;">Next Devlog Stream</p>
-										</div>
-									</div>
-								</div>
-								<div style="text-align: center; margin-top: 20px;">
-									<a href="https://www.youtube.com/@HyperGameDev/streams" class="button icon fa-file-alt">More</a>
-								</div>
-							</section>
+								</section>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+				
 				
 
 
@@ -296,90 +272,43 @@
 							return;
 						}
 			
-						function loadPlaylistVideo(playlistId, iframeId, mode) {
+						function loadLatestVideos() {
 							gapi.client.setApiKey(data.apiKey);
 			
 							gapi.client.load('youtube', 'v3', function() {
-								var request = gapi.client.youtube.playlistItems.list({
+								var request = gapi.client.youtube.search.list({
 									part: 'snippet',
-									maxResults: 50,
-									playlistId: playlistId
+									channelId: 'YOUR_CHANNEL_ID', // Replace with your YouTube channel ID
+									maxResults: 5,
+									order: 'date'
 								});
 			
 								request.execute(function(response) {
 									if (!response.items) {
-										console.error('No items in response for playlist:', playlistId);
+										console.error('No items in response for latest videos');
 										return;
 									}
 			
-									var items = response.items;
-									var now = new Date();
-									var targetVideoId = null;
+									var videos = response.items;
+									var grid = document.querySelector('.grid');
 			
-									if (mode === 'latest') {
-										targetVideoId = getLatestVideoId(items);
-									} else if (mode === 'upcoming') {
-										targetVideoId = getEarliestUpcomingVideoId(items, now);
-									} else if (mode === 'publishedOnly') {
-										targetVideoId = getPublishedVideoId(items);
-									}
-			
-									if (targetVideoId) {
-										document.getElementById(iframeId).src = "https://www.youtube.com/embed/" + targetVideoId + "?rel=0&modestbranding=1&autoplay=1";
-									} else {
-										console.error('No suitable video found in playlist:', playlistId);
-									}
+									videos.forEach(video => {
+										var videoElement = document.createElement('div');
+										videoElement.style.textAlign = 'center';
+										videoElement.innerHTML = `
+											<iframe width="100%" height="200" frameborder="0" allowfullscreen src="https://www.youtube.com/embed/${video.id.videoId}?rel=0&modestbranding=1&autoplay=1"></iframe>
+										`;
+										grid.appendChild(videoElement);
+									});
 								}, function(error) {
-									console.error('Error executing request for playlist:', playlistId, error);
+									console.error('Error executing request for latest videos', error);
 								});
 							}, function(error) {
-								console.error('Error loading GAPI client:', error);
+								console.error('Error loading GAPI client', error);
 							});
 						}
 			
-						function getLatestVideoId(items) {
-							for (var i = 0; i < items.length; i++) {
-								if (items[i].snippet.liveBroadcastContent !== 'upcoming') {
-									return items[i].snippet.resourceId.videoId;
-								}
-							}
-							return null;
-						}
-			
-						function getEarliestUpcomingVideoId(items, now) {
-							let earliestUpcoming = null;
-							for (var j = 0; j < items.length; j++) {
-								if (items[j].snippet.liveBroadcastContent === 'upcoming') {
-									var scheduledDate = new Date(items[j].snippet.scheduledStartTime || items[j].snippet.publishedAt);
-									if (scheduledDate > now && (!earliestUpcoming || scheduledDate < earliestUpcoming.date)) {
-										earliestUpcoming = { id: items[j].snippet.resourceId.videoId, date: scheduledDate };
-									}
-								}
-							}
-							return earliestUpcoming ? earliestUpcoming.id : null;
-						}
-			
-						function getPublishedVideoId(items) {
-							for (var k = 0; k < items.length; k++) {
-								if (items[k].snippet.liveBroadcastContent !== 'upcoming') {
-									return items[k].snippet.resourceId.videoId;
-								}
-							}
-							return null;
-						}
-			
-						function initialize() {
-							if (navigator.cookieEnabled) {
-								loadPlaylistVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist1', 'publishedOnly');
-								loadPlaylistVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist2', 'publishedOnly');
-								loadPlaylistVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist3', 'upcoming');
-								loadPlaylistVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist4', 'upcoming');
-							} else {
-								console.error('Cookies are not enabled. Unable to load videos.');
-							}
-						}
-			
-						gapi.load('client', initialize);
+						gapi.load('client', loadLatestVideos);
 					})
 					.catch(error => {
 						console.error('Error:', error);
@@ -391,6 +320,7 @@
 			</script>
 			
 			<script src="https://apis.google.com/js/api.js"></script>
+			
 			
 			
 			
