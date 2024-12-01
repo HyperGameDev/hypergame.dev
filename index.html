@@ -154,31 +154,31 @@
 									<div class="col-6 col-12-small" style="text-align: center;">
 										<div>
 											<iframe id="playlist1" width="100%" height="200" frameborder="0" allowfullscreen></iframe>
-											<p style="margin-top: 5px;">Playlist 1 (excluding upcoming)</p>
+											<p style="margin-top: 5px;">Last Jam Stream</p>
 										</div>
 									</div>
 									<div class="col-6 col-12-small" style="text-align: center;">
 										<div>
 											<iframe id="playlist2" width="100%" height="200" frameborder="0" allowfullscreen></iframe>
-											<p style="margin-top: 5px;">Playlist 2 (excluding upcoming)</p>
+											<p style="margin-top: 5px;">Last Devlog Stream</p>
 										</div>
 									</div>
 									<!-- Second Row: Only Upcoming Videos -->
 									<div class="col-6 col-12-small" style="text-align: center;">
 										<div>
 											<iframe id="playlist3" width="100%" height="200" frameborder="0" allowfullscreen></iframe>
-											<p style="margin-top: 5px;">Playlist 1 (only upcoming)</p>
+											<p style="margin-top: 5px;">Next Jam Stream</p>
 										</div>
 									</div>
 									<div class="col-6 col-12-small" style="text-align: center;">
 										<div>
 											<iframe id="playlist4" width="100%" height="200" frameborder="0" allowfullscreen></iframe>
-											<p style="margin-top: 5px;">Playlist 2 (only upcoming)</p>
+											<p style="margin-top: 5px;">Last Jam Stream</p>
 										</div>
 									</div>
 								</div>
 								<div style="text-align: center; margin-top: 20px;">
-									<a href="#" class="button icon fa-file-alt">More</a>
+									<a href="https://www.youtube.com/@HyperGameDev/streams" class="button icon fa-file-alt">More</a>
 								</div>
 							</section>
 						</div>
@@ -291,6 +291,11 @@
 						return response.json();
 					})
 					.then(data => {
+						if (!data.apiKey) {
+							console.error('No API Key found in the response');
+							return;
+						}
+			
 						console.log('Fetched API Key:', data.apiKey); // Log the fetched API key
 			
 						function loadPlaylistLatestVideo(playlistId, iframeId) {
@@ -342,10 +347,18 @@
 			
 						gapi.load('client', initialize);
 					})
-					.catch(error => console.error('Error:', error));
+					.catch(error => {
+						console.error('Error:', error);
+						if (error.message.includes('403') || error.message.includes('404')) {
+							document.querySelector('.row.gtr-200').style.display = 'none';
+							console.error('403 or 404 error: Hiding the Video and Text Grid section');
+						}
+					});
 			</script>
 			
 			<script src="https://apis.google.com/js/api.js"></script>
+			
+			
 			
 			
 			
