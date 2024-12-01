@@ -16,36 +16,21 @@ exports.handler = async function(event, context) {
     };
   }
 
-  console.log('API Key:', apiKey);
-
-  const playlists = [
-    { id: 'PLfqB5nWLnc7LpCFS4vdwCoxKdBYRSMYBI', iframeId: 'playlist1' },
-    { id: 'PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', iframeId: 'playlist2' },
-    { id: 'PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', iframeId: 'playlist3' }
-  ];
-
   try {
-    const responses = await Promise.all(
-      playlists.map(playlist => 
-        axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlist.id}&key=${apiKey}`)
-      )
-    );
-
-    const results = responses.map((response, index) => {
-      const items = response.data.items;
-      let latestVideoId;
-
-      for (let i = 0; i < items.length; i++) {
-        if (items[i].snippet.liveBroadcastContent !== 'upcoming') {
-          latestVideoId = items[i].snippet.resourceId.videoId;
-          break;
-        }
+    const response = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems`, {
+      params: {
+        part: 'snippet',
+        playlistId: 'https://www.youtube.com/playlist?list=UULV5TfuWJq9iU-gUp4nXr0z3Q', // Replace with your channel's "Uploads" playlist ID
+        maxResults: 5,
+        key: apiKey
       }
-
-      console.log('Playlist:', playlists[index].id, 'Latest Video ID:', latestVideoId);
-
-      return { iframeId: playlists[index].iframeId, videoId: latestVideoId };
     });
+
+    const items = response.data.items.map(item => ({
+      videoId: item.snippet.resourceId.videoId,
+      title: item.snippet.title,
+      thumbnail: item.snippet.thumbnails.default.url
+    }));
 
     return {
       statusCode: 200,
@@ -53,7 +38,7 @@ exports.handler = async function(event, context) {
         "Access-Control-Allow-Origin": "*", // Allow requests from any domain
         "Access-Control-Allow-Headers": "Content-Type"
       },
-      body: JSON.stringify({ apiKey: apiKey, results: results })
+      body: JSON.stringify({ videos: items })
     };
   } catch (error) {
     console.error('Error:', error); // Log the full error for your reference
