@@ -295,26 +295,26 @@
 							console.error('No API Key found in the response');
 							return;
 						}
-			
+
 						function loadPlaylistVideo(playlistId, iframeId, mode) {
 							gapi.client.setApiKey(data.apiKey);
-			
+
 							gapi.client.load('youtube', 'v3', function() {
 								var request = gapi.client.youtube.playlistItems.list({
 									part: 'snippet',
 									maxResults: 50,
 									playlistId: playlistId
 								});
-			
+
 								request.execute(function(response) {
 									if (!response.items) {
 										console.error('No items in response for playlist:', playlistId);
 										return;
 									}
-			
+
 									var items = response.items;
 									var targetVideoId;
-			
+
 									if (mode === 'latest') {
 										for (var i = 0; i < items.length; i++) {
 											if (items[i].snippet.liveBroadcastContent !== 'upcoming') {
@@ -341,30 +341,31 @@
 											}
 										}
 									}
-			
+
 									if (targetVideoId) {
 										document.getElementById(iframeId).src = "https://www.youtube.com/embed/" + targetVideoId + "?rel=0&modestbranding=1&autoplay=1";
 									} else {
 										console.error('No suitable video found in playlist:', playlistId);
 									}
+								}, function(error) {
+									console.error('Error executing request for playlist:', playlistId, error);
 								});
 							}, function(error) {
-								console.error('Error loading GAPI client:', error); // Error handling for gapi.client.load
+								console.error('Error loading GAPI client:', error);
 							});
 						}
-			
+
 						function initialize() {
-							// Check if cookies are enabled
 							if (navigator.cookieEnabled) {
-								loadPlaylistVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist1', 'publishedOnly'); // Ensures no upcoming videos
-								loadPlaylistVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist2', 'publishedOnly'); // Ensures no upcoming videos
-								loadPlaylistVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist3', 'upcoming');
-								loadPlaylistVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist4', 'upcoming');
+								loadPlaylistVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist1', 'publishedOnly'); // Latest published
+								loadPlaylistVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist2', 'publishedOnly'); // Latest published
+								loadPlaylistVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist3', 'upcoming'); // Earliest upcoming
+								loadPlaylistVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist4', 'upcoming'); // Earliest upcoming
 							} else {
 								console.error('Cookies are not enabled. Unable to load videos.');
 							}
 						}
-			
+
 						gapi.load('client', initialize);
 					})
 					.catch(error => {
