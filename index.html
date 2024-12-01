@@ -284,45 +284,58 @@
 
 			<script>
 				fetch('/.netlify/functions/key_access')
-				  .then(response => response.json())
-				  .then(data => {
-					function loadPlaylistLatestVideo(playlistId, iframeId) {
-						gapi.client.setApiKey(data.apiKey);
-						gapi.client.load('youtube', 'v3', function() {
-							var request = gapi.client.youtube.playlistItems.list({
-								part: 'snippet',
-								maxResults: 50,
-								playlistId: playlistId
-							});
-		  
-							request.execute(function(response) {
-								var items = response.items;
-								var latestVideoId;
-								for (var i = 0; i < items.length; i++) {
-									if (items[i].snippet.liveBroadcastContent !== 'upcoming') {
-										latestVideoId = items[i].snippet.resourceId.videoId;
-										break;
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Network response was not ok: ' + response.statusText);
+						}
+						return response.json();
+					})
+					.then(data => {
+						function loadPlaylistLatestVideo(playlistId, iframeId) {
+							gapi.client.setApiKey(data.apiKey);
+							gapi.client.load('youtube', 'v3', function() {
+								var request = gapi.client.youtube.playlistItems.list({
+									part: 'snippet',
+									maxResults: 50,
+									playlistId: playlistId
+								});
+			
+								request.execute(function(response) {
+									if (!response.items) {
+										console.error('No items in response:', response);
+										return;
 									}
-								}
-								if (latestVideoId) {
-									document.getElementById(iframeId).src = "https://www.youtube.com/embed/" + latestVideoId + "?rel=0&modestbranding=1&autoplay=1";
-								}
+			
+									var items = response.items;
+									var latestVideoId;
+									for (var i = 0; i < items.length; i++) {
+										if (items[i].snippet.liveBroadcastContent !== 'upcoming') {
+											latestVideoId = items[i].snippet.resourceId.videoId;
+											break;
+										}
+									}
+									if (latestVideoId) {
+										document.getElementById(iframeId).src = "https://www.youtube.com/embed/" + latestVideoId + "?rel=0&modestbranding=1&autoplay=1";
+									} else {
+										console.error('No suitable video found in playlist:', playlistId);
+									}
+								});
 							});
-						});
-					}
-		  
-					function initialize() {
-						loadPlaylistLatestVideo('PLfqB5nWLnc7LpCFS4vdwCoxKdBYRSMYBI', 'playlist1');
-						loadPlaylistLatestVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist2');
-						loadPlaylistLatestVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist3');
-					}
-		  
-					gapi.load('client', initialize);
-				  })
-				  .catch(error => console.error('Error:', error));
-			  </script>
-		  
-			  <script src="https://apis.google.com/js/api.js"></script>	
+						}
+			
+						function initialize() {
+							loadPlaylistLatestVideo('PLfqB5nWLnc7LpCFS4vdwCoxKdBYRSMYBI', 'playlist1');
+							loadPlaylistLatestVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist2');
+							loadPlaylistLatestVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist3');
+						}
+			
+						gapi.load('client', initialize);
+					})
+					.catch(error => console.error('Error:', error));
+			</script>
+			
+			<script src="https://apis.google.com/js/api.js"></script>
+			
 
 	</body>
 </html>
