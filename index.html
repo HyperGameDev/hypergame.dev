@@ -149,7 +149,7 @@
 							<div class="col-12" style="margin: 0 auto;">
 								<section class="widget thumbnails">
 									<h3 style="text-align: center;">Recent Streams</h3>
-									<div class="grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+									<div class="grid">
 										<!-- Videos will be dynamically inserted here -->
 									</div>
 									<div style="text-align: center; margin-top: 20px;">
@@ -158,8 +158,7 @@
 								</section>
 							</div>
 						</div>
-					</div>
-				</div>
+
 				
 				
 				
@@ -275,9 +274,10 @@
 		
 					videos.forEach(video => {
 						var videoElement = document.createElement('div');
+						videoElement.className = 'video-container'; // Add this line to ensure the video container has the correct class
 						videoElement.style.textAlign = 'center';
 						videoElement.innerHTML = `
-							<iframe width="320" height="180" frameborder="0" allowfullscreen src="https://www.youtube.com/embed/${video.videoId}?rel=0&modestbranding=1"></iframe>
+							<iframe frameborder="0" allowfullscreen src="https://www.youtube.com/embed/${video.videoId}?rel=0&modestbranding=1"></iframe>
 						`;
 						grid.appendChild(videoElement);
 					});
@@ -292,6 +292,7 @@
 		</script>
 		
 		<script src="https://apis.google.com/js/api.js"></script>
+		
 		
 		
 			
