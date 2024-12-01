@@ -330,9 +330,14 @@
 						}
 			
 						function initialize() {
-							loadPlaylistLatestVideo('PLfqB5nWLnc7LpCFS4vdwCoxKdBYRSMYBI', 'playlist1');
-							loadPlaylistLatestVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist2');
-							loadPlaylistLatestVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist3');
+							// Check if cookies are enabled
+							if (navigator.cookieEnabled) {
+								loadPlaylistLatestVideo('PLfqB5nWLnc7LpCFS4vdwCoxKdBYRSMYBI', 'playlist1');
+								loadPlaylistLatestVideo('PLfqB5nWLnc7K5ZJ9Wc2DUnds9zjyMrvYy', 'playlist2');
+								loadPlaylistLatestVideo('PLfqB5nWLnc7JRW5u1vyxx76hzAAdI0FIf', 'playlist3');
+							} else {
+								console.error('Cookies are not enabled. Unable to load videos.');
+							}
 						}
 			
 						gapi.load('client', initialize);
@@ -341,6 +346,7 @@
 			</script>
 			
 			<script src="https://apis.google.com/js/api.js"></script>
+			
 			
 			
 			
