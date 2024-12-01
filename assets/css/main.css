@@ -1584,6 +1584,7 @@ input, select, textarea {
 
 		.grid iframe {
 			height: auto; /* Let the height adjust based on the width */
+			width: auto;
 		}
 	}
 
