@@ -8,6 +8,10 @@ exports.handler = async function(event, context) {
     console.error('API key is not set');
     return {
       statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*", // Allow requests from any domain
+        "Access-Control-Allow-Headers": "Content-Type"
+      },
       body: JSON.stringify({ error: 'API key is not configured' })
     };
   }
@@ -45,12 +49,20 @@ exports.handler = async function(event, context) {
 
     return {
       statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*", // Allow requests from any domain
+        "Access-Control-Allow-Headers": "Content-Type"
+      },
       body: JSON.stringify(results)
     };
   } catch (error) {
     console.error('Error:', error); // Log the full error for your reference
     return {
       statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*", // Allow requests from any domain
+        "Access-Control-Allow-Headers": "Content-Type"
+      },
       body: JSON.stringify({ 
         error: 'Error fetching data from YouTube API',
         message: error.message // Include the error message, but be cautious about exposing sensitive info
