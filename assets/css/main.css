@@ -1985,46 +1985,67 @@ input, select, textarea {
 }
 
 /* Logo */
-#logo {
-    display: inline-block;
-}
+	#logo {
+		display: inline-block;
+	}
 
-#logo h1 {
-    color: #fff; /* Default color if any text doesn't match specified words */
-    border-radius: 6px;
-    font-family: 'GUERRILLA', serif; /* Apply the GUERRILLA font */
-    font-weight: 400;
-    padding: 0.25em 0.2em 0.25em 0.2em;
-    font-size: 3.5em;
-    display: inline-block;
-    vertical-align: middle;
-}
+	#logo h1 {
+		color: #fff; /* Default color if any text doesn't match specified words */
+		border-radius: 6px;
+		font-family: 'GUERRILLA', serif; /* Apply the GUERRILLA font */
+		font-weight: 400;
+		padding: 0.25em 0.2em 0.25em 0.2em;
+		font-size: 3.5em;
+		display: inline-block;
+		vertical-align: middle;
+		background-color: #301545; /* Purple background */
+		white-space: nowrap; /* Prevent text wrapping */
+	}
 
-/* Style individual words */
-#logo h1 span {
-    display: inline;
-    letter-spacing: 0.1em; /* Adjust letter spacing here */
-}
+	/* Style individual words */
+	#logo h1 span {
+		display: inline;
+		letter-spacing: 0.1em; /* Adjust letter spacing here */
+	}
 
-#logo h1 .hyper {
-    color: #fa61b9; /* Color for HYPER */
-    margin-right: 5px; /* Adjust spacing as needed */
-}
+	#logo h1 .hyper {
+		color: #fa61b9; /* Color for HYPER */
+		margin-right: 5px; /* Adjust spacing as needed */
+	}
 
-#logo h1 .game {
-    color: #9599ff; /* Color for GAME */
-    margin-right: 5px; /* Adjust spacing as needed */
-}
+	#logo h1 .game {
+		color: #9599ff; /* Color for GAME */
+		margin-right: 5px; /* Adjust spacing as needed */
+	}
 
-#logo h1 .dot {
-    color: #ffffff; /* Color for dot */
-    margin-left: -2px; /* Adjust spacing to position dot correctly */
-    margin-right: -2px; /* Ensure dot is squarely between GAME and DEV */
-}
+	#logo h1 .dot {
+		color: #ffffff; /* Color for dot */
+		margin-left: -2px; /* Adjust spacing to position dot correctly */
+		margin-right: -2px; /* Ensure dot is squarely between GAME and DEV */
+	}
 
-#logo h1 .dev {
-    color: #fa61b9; /* Color for DEV */
-}
+	#logo h1 .dev {
+		color: #fa61b9; /* Color for DEV */
+	}
+
+	/* Responsive adjustments */
+	@media (max-width: 1200px) {
+		#logo h1 {
+			font-size: 2.5em;
+		}
+	}
+
+	@media (max-width: 768px) {
+		#logo h1 {
+			font-size: 2em;
+		}
+	}
+
+	@media (max-width: 480px) {
+		#logo h1 {
+			font-size: 1.5em;
+		}
+	}
 
 
 
