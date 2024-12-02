@@ -63,15 +63,18 @@
                                             <h3>Submit your game</h3>
                                             <form name="queue-jam" action="/pages/queue-joined.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                                                 <p class="hidden">
-                                                    <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                                                    <label>Don't fill this out if you're human:</label>
+                                                    <input name="bot-field" />
                                                 </p>
                                                 <p>
-                                                    <label>Game Name <span class="required">*</span> <input type="text" name="game-name" required /></label>
+                                                    <label>Game Name <span class="required">*</span></label><br>
+                                                    <input type="text" name="game-name" required />
                                                 </p>
                                                 <p>
                                                     <button type="submit" class="button icon solid fa-plus" id="submit-button" disabled>Join Queue</button>
                                                 </p>
                                             </form>
+                                            
                                             <footer>
                                                 <i><b>NOTE:</b> "Submit" will only function on Fridays!</i>
                                             </footer>

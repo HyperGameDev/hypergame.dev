@@ -63,31 +63,35 @@
                                             <h3>Share your thing!</h3>
                                             <form name="queue-shares" action="/pages/queue-joined.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                                                 <p class="hidden">
-                                                    <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                                                    <label>Don't fill this out if you're human:</label>
+                                                    <input name="bot-field" />
                                                 </p>
                                                 <p>
-                                                    <label>What are you sharing? <span class="required">*</span> <input type="text" name="game-name" required /></label>
+                                                    <label>What are you sharing? <span class="required">*</span></label><br>
+                                                    <input type="text" name="game-name" required />
                                                 </p>
                                                 <p>
-                                                    <label>Where can it be found? <span class="required">*</span>
-                                                        <select name="location-type" id="location-type" required>
-                                                            <option value="Discord">Discord</option>
-                                                            <option value="Other">Other</option>
-                                                        </select>
-                                                    </label>
+                                                    <label>Where can it be found? <span class="required">*</span></label><br>
+                                                    <select name="location-type" id="location-type" required>
+                                                        <option value="Discord">Discord</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
                                                 </p>
                                                 <p id="location-container" class="hidden">
-                                                    <label>Location: <span class="required">*</span> <input type="text" name="location" id="location" /></label>
+                                                    <label>Location: <span class="required">*</span></label><br>
+                                                    <input type="text" name="location" id="location" />
                                                 </p>
                                                 <p>
-                                                    <label>What feedback are you looking for? (Optional)
-                                                        <textarea name="feedback" rows="4" cols="50"></textarea>
-                                                    </label>
+                                                    <label>What feedback are you looking for? (Optional)</label><br>
+                                                    <textarea name="feedback" rows="4" cols="40"></textarea>
                                                 </p>
                                                 <p>
                                                     <button type="submit" class="button icon solid fa-plus" id="submit-button" disabled>Join Queue</button>
                                                 </p>
                                             </form>
+                                            
+                                            
+                                            
                                             <footer>
                                                 <i><b>NOTE:</b> "Submit" will only function on Fridays!</i>
                                             </footer>
@@ -119,72 +123,79 @@
 
             <!-- Submit Disable -->
             <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const submitButton = document.getElementById('submit-button');
-                const locationType = document.getElementById('location-type');
-                const locationContainer = document.getElementById('location-container');
-                const locationField = document.getElementById('location');
-                const requiredFields = document.querySelectorAll('input[required], select[required]');
-
-                const dayOnly = true;
-
-                // Function to check if the current time is within the CT zone and it's Friday
-                function checkCTFriday() {
-                    const now = new Date();
-                    const options = { timeZone: 'America/Chicago', weekday: 'long' };
-                    const dayInCT = now.toLocaleDateString('en-US', options);
-
-                    // Enable button if today is Friday and required fields are filled, or if the day check is disabled
-                    if ((dayInCT === 'Friday' || dayOnly) && checkRequiredFields()) {
-                        submitButton.disabled = false;
-                    } else {
-                        submitButton.disabled = true;
+                document.addEventListener('DOMContentLoaded', function () {
+                    const submitButton = document.getElementById('submit-button');
+                    const locationType = document.getElementById('location-type');
+                    const locationContainer = document.getElementById('location-container');
+                    const locationField = document.getElementById('location');
+                    const requiredFields = document.querySelectorAll('input[required], select[required]');
+                
+                    // Check if all elements are found
+                    if (!submitButton || !locationType || !locationContainer || !locationField) {
+                        console.error('One or more required elements are missing.');
+                        return; // Exit if any element is not found
                     }
-                }
-
-                // Function to check if all required fields are filled
-                function checkRequiredFields() {
-                    for (const field of requiredFields) {
-                        if (!field.value) {
-                            return false;
+                
+                    const dayOnly = true;
+                
+                    // Function to check if the current time is within the CT zone and it's Friday
+                    function checkCTFriday() {
+                        const now = new Date();
+                        const options = { timeZone: 'America/Chicago', weekday: 'long' };
+                        const dayInCT = now.toLocaleDateString('en-US', options);
+                
+                        // Enable button if today is Friday and required fields are filled, or if the day check is disabled
+                        if ((dayInCT === 'Friday' || dayOnly) && checkRequiredFields()) {
+                            submitButton.disabled = false;
+                        } else {
+                            submitButton.disabled = true;
                         }
                     }
-                    // If 'Other' is selected, check the Location field
-                    if (locationType.value === 'Other' && !locationField.value) {
-                        return false;
+                
+                    // Function to check if all required fields are filled
+                    function checkRequiredFields() {
+                        for (const field of requiredFields) {
+                            if (!field.value) {
+                                return false;
+                            }
+                        }
+                        // If 'Other' is selected, check the Location field
+                        if (locationType.value === 'Other' && !locationField.value) {
+                            return false;
+                        }
+                        return true;
                     }
-                    return true;
-                }
-
-                // Run the check once on page load
-                checkCTFriday();
-
-                // Optionally, you can set an interval to keep checking (e.g., every hour)
-                setInterval(checkCTFriday, 3600000); // Check every hour
-
-                // Show/Hide location field based on dropdown selection
-                locationType.addEventListener('change', function() {
-                    if (locationType.value === 'Other') {
-                        locationContainer.classList.remove('hidden');
-                        locationField.required = true;
-                    } else {
-                        locationContainer.classList.add('hidden');
-                        locationField.value = ''; // Clear the Location field when hidden
-                        locationField.required = false;
+                
+                    // Run the check once on page load
+                    checkCTFriday();
+                
+                    // Optionally, you can set an interval to keep checking (e.g., every hour)
+                    setInterval(checkCTFriday, 3600000); // Check every hour
+                
+                    // Show/Hide location field based on dropdown selection
+                    locationType.addEventListener('change', function() {
+                        console.log('Location type changed to:', locationType.value); // Debugging log
+                        if (locationType.value === 'Other') {
+                            locationContainer.classList.remove('hidden');
+                            locationField.required = true;
+                        } else {
+                            locationContainer.classList.add('hidden');
+                            locationField.value = ''; // Clear the Location field when hidden
+                            locationField.required = false;
+                        }
+                        checkCTFriday(); // Re-check after changing dropdown value
+                    });
+                
+                    // Check required fields on input change
+                    for (const field of requiredFields) {
+                        field.addEventListener('input', checkCTFriday);
                     }
-                    checkCTFriday(); // Re-check after changing dropdown value
+                
+                    // Add event listener for the Location field
+                    locationField.addEventListener('input', checkCTFriday);
                 });
-
-                // Check required fields on input change
-                for (const field of requiredFields) {
-                    field.addEventListener('input', checkCTFriday);
-                }
-
-                // Add event listener for the Location field
-                locationField.addEventListener('input', checkCTFriday);
-            });
-
-            </script>
+                </script>
+                
 
 
 			<!-- Header/Footer -->
