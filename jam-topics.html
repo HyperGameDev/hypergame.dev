@@ -44,7 +44,7 @@
                             <!-- Content -->
                             <article>
                                 <h2>Yet Unchosen Jam Topics</h2>
-                                <p id="last-updated">Updated: Not Available</p>
+                                <p id="last-updated" style="display: none;">Updated: </p>
                                 <div class="table-wrapper" style="max-height: 400px; overflow-y: auto;">
                                     <table>
                                         <thead>
@@ -135,9 +135,9 @@
                         const lastModified = response.headers.get('Last-Modified');
                         if (lastModified) {
                             const date = new Date(lastModified);
-                            document.getElementById('last-updated').textContent = `Updated: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-                        } else {
-                            document.getElementById('last-updated').textContent = 'Updated: Not Available';
+                            const lastUpdatedElem = document.getElementById('last-updated');
+                            lastUpdatedElem.textContent = `Updated: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+                            lastUpdatedElem.style.display = 'block'; // Show the element if date is available
                         }
                         return response.json();
                     })
@@ -159,7 +159,7 @@
                     })
                     .catch(error => {
                         console.error('Error loading wheel topics:', error);
-                        document.getElementById('last-updated').textContent = 'Updated: Not Available';
+                        document.getElementById('last-updated').style.display = 'none'; // Hide the element if an error occurs
                     });
             }
 
