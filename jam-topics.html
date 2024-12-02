@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="en" data-current-navlink="Jam Topics">
 <head>
     <meta name="description" content="Official Website for the Hyper Game Dev YouTube Channel. Near-daily livestream videos featuring live development, problem solving, and social chat.">
     <title>Hyper Game Dev!</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="assets/css/main.css" />
 
     <!-- Favicon Links -->
@@ -53,7 +53,7 @@
         }
     </style>
 </head>
-<body class="is-preload homepage">
+<body class="is-preload homepage" data-current-navlink="Jam Topics">
     <noscript>
         <div class="noscript-warning">
             <p>JavaScript is disabled in your browser. Please enable JavaScript to view this website properly!</p>
@@ -128,6 +128,7 @@
                         if (containerId === 'header-container') {
                             applyDropdownFunctionality();
                             updateFlyoutMenu();
+                            applyCurrentNavLinkClass(); // Apply current class after header is loaded
                         }
                     })
                     .catch(error => console.error('Error loading content:', error));
@@ -162,10 +163,33 @@
                 }
             }
 
+            // Apply the "current" class based on the data-current-navlink attribute
+            function applyCurrentNavLinkClass() {
+                const navLinks = document.querySelectorAll('#nav a');
+                const currentPageNavLink = document.documentElement.getAttribute('data-current-navlink');
+
+                if (!currentPageNavLink) {
+                    console.error('No data-current-navlink attribute found.');
+                    return;
+                }
+
+                navLinks.forEach(link => {
+                    const linkText = link.textContent.trim();
+                    if (linkText === currentPageNavLink) {
+                        link.parentElement.classList.add('current');
+                        const parentLi = link.closest('li');
+                        if (parentLi && parentLi.parentElement.closest('li')) {
+                            parentLi.parentElement.closest('li').classList.add('current');
+                        }
+                    }
+                });
+            }
+
             loadContent('header.html', 'header-container');
             loadContent('footer.html', 'footer-container');
         });
     </script>
+
 
     <!-- Sorting Function Script -->
     <script>

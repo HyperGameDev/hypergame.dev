@@ -4,12 +4,12 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<html>
+<html lang="en" data-current-navlink="Live Queues">
 	<head>
 		<meta name="description" content="Official Website for the Hyper Game Dev YouTube Channel. Near-daily livestream videos featuring live development, problem solving, and social chat.">
 		<title>Hyper Game Dev!</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 
         <!-- Favicon Links -->
@@ -20,7 +20,7 @@
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="manifest" href="site.webmanifest">
     </head>
-    <body class="is-preload homepage">
+    <body class="is-preload homepage" data-current-navlink="Live Queues">
         <noscript>
             <div class="noscript-warning">
                 <p>JavaScript is disabled in your browser. Please enable JavaScript to view this website properly!</p>
@@ -60,26 +60,27 @@
                                 <div id="sidebar">
 
                                     <!-- Sidebar -->
-                                        <section>
-                                            <h3>Submit your game</h3>
-                                            <form name="queue-jam" action="messages/queue-joined.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                                                <p class="hidden">
-                                                    <label>Don't fill this out if you're human:</label>
-                                                    <input name="bot-field" />
-                                                </p>
-                                                <p>
-                                                    <label>Game Name <span class="required">*</span></label><br>
-                                                    <input type="text" name="game-name" required />
-                                                </p>
-                                                <p>
-                                                    <button type="submit" class="button icon solid fa-plus" id="submit-button" disabled>Join Queue</button>
-                                                </p>
-                                            </form>
-                                            
-                                            <footer>
-                                                <i><b>NOTE:</b> "Submit" will only function on Fridays!</i>
-                                            </footer>
-                                        </section>
+                                    <section>
+                                        <h3>Submit your game</h3>
+                                        <form name="queue-jam" action="messages/queue-joined.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                                            <p class="hidden">
+                                                <label for="bot-field">Don't fill this out if you're human:</label>
+                                                <input name="bot-field" id="bot-field" title="Bot field" placeholder="Leave this field empty" />
+                                            </p>
+                                            <p>
+                                                <label for="game-name">Game Name <span class="required">*</span></label><br>
+                                                <input type="text" name="game-name" id="game-name" required title="Enter the name of your game" placeholder="My great game" />
+                                            </p>
+                                            <p>
+                                                <button type="submit" class="button icon solid fa-plus" id="submit-button" disabled>Join Queue</button>
+                                            </p>
+                                        </form>
+                                    
+                                        <footer>
+                                            <i><b>NOTE:</b> "Submit" will only function on Fridays!</i>
+                                        </footer>
+                                    </section>
+                                    
 
                                         <section>
                                             <!-- <h3>Subheading</h3>
@@ -145,54 +146,78 @@
                 
 
 
-			<!-- Header/Footer -->
-			<script>
-				document.addEventListener('DOMContentLoaded', function() {
-					function loadContent(url, containerId) {
-						fetch(url)
-							.then(response => response.text())
-							.then(data => {
-								document.getElementById(containerId).innerHTML = data;
-								if (containerId === 'header-container') {
-									applyDropdownFunctionality();
-									updateFlyoutMenu();
-								}
-							});
-					}
-			
-					function applyDropdownFunctionality() {
-						jQuery(document).ready(function($) {
-							$('#nav > ul').dropotron({
-								alignment: 'right',
-								mode: 'fade',
-								noOpenerFade: true,
-								speed: 300
-							});
-						});
-					}
-			
-					function updateFlyoutMenu() {
-						const navLinks = document.querySelectorAll('#nav ul li a');
-						const navPanel = document.querySelector('#navPanel nav');
-			
-						if (navPanel) {
-							navPanel.innerHTML = ''; // Clear previous links
-							navLinks.forEach(link => {
-								const newLink = document.createElement('a');
-								newLink.href = link.href;
-								newLink.textContent = link.textContent;
-								newLink.className = 'link depth-0';
-								navPanel.appendChild(newLink);
-							});
-						} else {
-							console.error('Nav panel container not found!');
-						}
-					}
-			
-					loadContent('header.html', 'header-container');
-					loadContent('footer.html', 'footer-container');
-				});
-			</script>
+            <!-- Header/Footer -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    function loadContent(url, containerId) {
+                        fetch(url)
+                            .then(response => response.text())
+                            .then(data => {
+                                document.getElementById(containerId).innerHTML = data;
+                                if (containerId === 'header-container') {
+                                    applyDropdownFunctionality();
+                                    updateFlyoutMenu();
+                                    applyCurrentNavLinkClass(); // Apply current class after header is loaded
+                                }
+                            });
+                    }
+
+                    function applyDropdownFunctionality() {
+                        jQuery(document).ready(function($) {
+                            $('#nav > ul').dropotron({
+                                alignment: 'right',
+                                mode: 'fade',
+                                noOpenerFade: true,
+                                speed: 300
+                            });
+                        });
+                    }
+
+                    function updateFlyoutMenu() {
+                        const navLinks = document.querySelectorAll('#nav ul li a');
+                        const navPanel = document.querySelector('#navPanel nav');
+
+                        if (navPanel) {
+                            navPanel.innerHTML = ''; // Clear previous links
+                            navLinks.forEach(link => {
+                                const newLink = document.createElement('a');
+                                newLink.href = link.href;
+                                newLink.textContent = link.textContent;
+                                newLink.className = 'link depth-0';
+                                navPanel.appendChild(newLink);
+                            });
+                        } else {
+                            console.error('Nav panel container not found!');
+                        }
+                    }
+
+                    // Apply the "current" class based on the data-current-navlink attribute
+                    function applyCurrentNavLinkClass() {
+                        const navLinks = document.querySelectorAll('#nav a');
+                        const currentPageNavLink = document.documentElement.getAttribute('data-current-navlink');
+
+                        if (!currentPageNavLink) {
+                            console.error('No data-current-navlink attribute found.');
+                            return;
+                        }
+
+                        navLinks.forEach(link => {
+                            const linkText = link.textContent.trim();
+                            if (linkText === currentPageNavLink) {
+                                link.parentElement.classList.add('current');
+                                const parentLi = link.closest('li');
+                                if (parentLi && parentLi.parentElement.closest('li')) {
+                                    parentLi.parentElement.closest('li').classList.add('current');
+                                }
+                            }
+                        });
+                    }
+
+                    loadContent('header.html', 'header-container');
+                    loadContent('footer.html', 'footer-container');
+                });
+            </script>
+
 
             <script src="assets/js/jquery.min.js"></script>
             <script src="assets/js/jquery.dropotron.min.js"></script>
