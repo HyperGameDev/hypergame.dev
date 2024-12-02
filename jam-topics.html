@@ -44,7 +44,7 @@
                             <!-- Content -->
                             <article>
                                 <h2>Yet Unchosen Jam Topics</h2>
-                                <p id="last-updated" style="display: none;">Updated: </p>
+                                <p id="last-updated" style="display: none;">Last Updated: </p>
                                 <div class="table-wrapper" style="max-height: 400px; overflow-y: auto;">
                                     <table>
                                         <thead>
@@ -133,6 +133,7 @@
 
                         // Extract last modified date from response headers
                         const lastModified = response.headers.get('Last-Modified');
+                        console.log('Last-Modified header:', lastModified); // Debugging statement
                         if (lastModified) {
                             const date = new Date(lastModified);
                             const lastUpdatedElem = document.getElementById('last-updated');
@@ -170,6 +171,7 @@
             setInterval(loadWheelTopics, 60000); // Update every 60 seconds
         });
     </script>
+
 
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.dropotron.min.js"></script>
