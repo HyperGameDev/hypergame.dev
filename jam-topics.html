@@ -131,15 +131,11 @@
                             throw new Error('Network response was not ok');
                         }
 
-                        // Extract last modified date from response headers
-                        const lastModified = response.headers.get('Last-Modified');
-                        console.log('Last-Modified header:', lastModified); // Debugging statement
-                        if (lastModified) {
-                            const date = new Date(lastModified);
-                            const lastUpdatedElem = document.getElementById('last-updated');
-                            lastUpdatedElem.textContent = `Updated: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-                            lastUpdatedElem.style.display = 'block'; // Show the element if date is available
-                        }
+                        // Use the current date and time as the "Last Updated" timestamp
+                        const date = new Date();
+                        const lastUpdatedElem = document.getElementById('last-updated');
+                        lastUpdatedElem.textContent = `Updated: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+                        lastUpdatedElem.style.display = 'block'; // Show the element
                         return response.json();
                     })
                     .then(data => {
@@ -171,6 +167,7 @@
             setInterval(loadWheelTopics, 60000); // Update every 60 seconds
         });
     </script>
+
 
 
     <script src="assets/js/jquery.min.js"></script>
