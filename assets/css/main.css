@@ -1514,7 +1514,7 @@ input, select, textarea {
 		margin: 0 0 1em 0;
 		font-size: 0.8em;
 		color: #e6e6e6; /* Form label text color */
-	}
+	/*}*/
 
 	form input[type="text"],
 	form input[type="email"],

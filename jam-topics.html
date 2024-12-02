@@ -14,6 +14,44 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
+
+    <style>
+        .table-wrapper {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            position: sticky;
+            top: 0;
+            background-color: #e6e6e6;
+            z-index: 1;
+            border-bottom: 2px solid #9599ff;
+            cursor: pointer;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #1E286D; /* Adjust as necessary */
+        }
+        tr {
+            border-bottom: 1px solid #414587; /* Row divider color */
+        }
+        .arrow {
+            margin-left: 5px;
+            font-size: 12px;
+        }
+        .random-topic {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 2.2em;
+        }
+    </style>
 </head>
 <body class="is-preload homepage">
     <noscript>
@@ -32,9 +70,18 @@
                     <div class="col-4 col-12-medium">
                         <div id="sidebar">
                             <section>
+                                <h3>Pick a random topic</h3>
+                                <p id="random-topic" class="random-topic"></p>
+                                <footer>
+                                    <button class="button icon solid fa-random" onclick="generateRandomTopic()">Shuffle</button>
+                                </footer>
+                            </section>
+                            <p></p>
+                            <br></br>
+                            <section>
                                 <h3>HGD on itch.io</h3>
                                 <footer>
-                                    <a href="https://itch.io/jams/sort-date/hosted-by-hypergamedev" class="button" target="_blank">Join the Current Jam</a>
+                                    <a href="https://itch.io/jams/sort-date/hosted-by-hypergamedev" class="button icon solid fa-external-link-alt" target="_blank">Join the Current Jam</a>
                                 </footer>
                             </section>
                         </div>
@@ -45,12 +92,12 @@
                             <article>
                                 <h2>Yet Unchosen Jam Topics</h2>
                                 <p id="last-updated" style="display: none;">Last Updated: </p>
-                                <div class="table-wrapper" style="max-height: 400px; overflow-y: auto;">
+                                <div class="table-wrapper">
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th>Topic Name</th>
-                                                <th>Times On Wheel</th>
+                                                <th onclick="sortTable(0)">Topic Name <span class="arrow" id="arrow-0"></span></th>
+                                                <th onclick="sortTable(1)">Times On Wheel <span class="arrow" id="arrow-1"></span></th>
                                             </tr>
                                         </thead>
                                         <tbody id="topic-table-body">
@@ -70,7 +117,7 @@
     </div>
 
     <!-- Scripts -->
-    <!-- Navlinks Script -->
+    <!-- Header/Footer -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             function loadContent(url, containerId) {
@@ -120,6 +167,38 @@
         });
     </script>
 
+    <!-- Sorting Function Script -->
+    <script>
+        let sortOrder = {};
+        function sortTable(columnIndex) {
+            const table = document.querySelector("table tbody");
+            const rows = Array.from(table.rows);
+
+            const currentOrder = sortOrder[columnIndex] || "asc";
+            const newOrder = currentOrder === "asc" ? "desc" : "asc";
+            sortOrder[columnIndex] = newOrder;
+
+            rows.sort((rowA, rowB) => {
+                const cellA = rowA.cells[columnIndex].innerText.toLowerCase();
+                const cellB = rowB.cells[columnIndex].innerText.toLowerCase();
+                if (cellA < cellB) {
+                    return newOrder === "asc" ? -1 : 1;
+                }
+                if (cellA > cellB) {
+                    return newOrder === "asc" ? 1 : -1;
+                }
+                return 0;
+            });
+
+            rows.forEach(row => table.appendChild(row));
+
+            // Update the sorting arrows
+            document.querySelectorAll('.arrow').forEach(arrow => arrow.textContent = ''); // Clear all arrows
+            const arrowElem = document.getElementById(`arrow-${columnIndex}`);
+            arrowElem.textContent = newOrder === "asc" ? '▲' : '▼';
+        }
+    </script>
+
     <!-- Wheel Topics Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -153,6 +232,8 @@
                             row.appendChild(timesCell);
                             tableBody.appendChild(row);
                         }
+                        // Store data globally for random topic generation
+                        window.wheelTopics = Object.keys(data);
                     })
                     .catch(error => {
                         console.error('Error loading wheel topics:', error);
@@ -166,9 +247,18 @@
             // Reload topics every X seconds (e.g., 60 seconds)
             setInterval(loadWheelTopics, 60000); // Update every 60 seconds
         });
+
+        // Generate a random topic
+        function generateRandomTopic() {
+            if (window.wheelTopics && window.wheelTopics.length > 0) {
+                const randomIndex = Math.floor(Math.random() * window.wheelTopics.length);
+                const randomTopic = window.wheelTopics[randomIndex];
+                document.getElementById('random-topic').textContent = `${randomTopic}`;
+            } else {
+                document.getElementById('random-topic').textContent = 'No topics available.';
+            }
+        }
     </script>
-
-
 
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.dropotron.min.js"></script>
