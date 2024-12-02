@@ -34,7 +34,7 @@
 
                                             <h2>Right Sidebar</h2>
 
-                                            <p>The form itself will go here.</p>
+                                            <p>The queue itself will go here.</p>
 
                                             <h3>More intriguing information</h3>
                                             <p>And somewhere around here.</p>
@@ -50,10 +50,17 @@
 
                                     <!-- Sidebar -->
                                         <section>
-                                            <h3>Join the Queue!</h3>
-                                            <p>Form submission code will ultimately go here.</p>
+                                            <h3>Submit your game</h3>
+                                            <form name="queue-jam" data-netlify="true">
+                                              <p>
+                                                <label>Game Name <input type="text" name="game-name" /></label>
+                                              </p>
+                                              <p>
+                                                <button type="submit" class="button icon solid fa-plus">Join Queue</button>
+                                              </p>
+                                            </form>
                                             <footer>
-                                                <a href="#" class="button icon solid fa-info-circle">Find out more</a>
+                                                <!-- <a href="#" class="button icon solid fa-plus">Find out more</a> -->
                                             </footer>
                                         </section>
 

@@ -116,8 +116,8 @@ input, select, textarea {
 	input, select, textarea {
 		font-family: 'Open Sans', sans-serif;
 		font-size: 13pt;
-		color: #ff00e1; /* ??? text color */
-		font-weight: 300;
+		color: #200e2e; /* Input box text color */
+		font-weight: 700;
 		line-height: 2.25em;
 	}
 
@@ -1498,7 +1498,7 @@ input, select, textarea {
 		font-weight: 800;
 		margin: 0 0 1em 0;
 		font-size: 0.8em;
-		color: #444;
+		color: #e6e6e6; /* Form label text color */
 	}
 
 	form input[type="text"],
