@@ -11,37 +11,16 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload homepage">
-		<div id="page-wrapper">
-
-		<!-- Header -->
-		<div id="header-wrapper">
-			<header id="header" class="container">
-
-						<!-- Logo -->
-                            <div id="logo">
-                                <h1>
-                                    <a href="index.html">
-                                        <span class="hyper">HYPER</span> 
-                                        <span class="game">GAME</span><span class="dot">.</span>
-                                        <span class="dev">DEV</span>
-                                    </a>
-                                </h1>
-                            </div>
-
-                        <!-- Nav -->
-                            <nav id="nav">
-                                <ul>
-                                    <li class="current"><a href="index.html">Home</a></li>
-                                    <li><a href="#">Discord</a></li>
-                                    <li><a href="#">Live Queues</a></li>
-                                    <li><a href="#">Jam Topics</a></li>
-                                </ul>
-                            </nav>
-
-                    </header>
-                </div>
+    </head>
+    <body class="is-preload homepage">
+        <noscript>
+            <div class="noscript-warning">
+                <p>JavaScript is disabled in your browser. Please enable JavaScript to view this website properly!</p>
+            </div>
+        </noscript>
+        <div id="page-wrapper">
+            <!-- Header -->
+            <div id="header-container"></div>
 
             <!-- Main -->
                 <div id="main-wrapper">
@@ -66,80 +45,41 @@
                     </div>
                 </div>
 
-            <!-- Footer -->
-                <div id="footer-wrapper">
-                    <footer id="footer" class="container">
-                        <div class="row">
-                            <div class="col-3 col-6-medium col-12-small">
-
-                                <!-- Links -->
-                                    <section class="widget links">
-                                        <h3>YouTube Channel</h3>
-                                        <ul class="style2">
-                                            <li><a href="https://www.youtube.com/@HyperGameDev">Main Channel Page</a></li>
-                                            <li><a href="https://www.youtube.com/channel/UC5TfuWJq9iU-gUp4nXr0z3Q/join?themeRefresh=1">Become a Member</a></li>
-                                            <li><a href="https://www.youtube.com/@HyperGameDev/membership">Members-Only Area</a></li>
-                                            <li><a href="https://www.youtube.com/@HyperGameDev/community">YouTube Community Page</a></li>
-                                            <li><a href="https://www.youtube.com/@HyperGameDev/playlists">All Channel Playlists</a></li>
-                                        </ul>
-                                    </section>
-
-                            </div>
-                            <div class="col-3 col-6-medium col-12-small">
-
-                                <!-- Links -->
-                                    <section class="widget links">
-                                        <h3>Livestream Projects</h3>
-                                        <ul class="style2">
-                                            <li><a href="https://github.com/HyperGameDev">Main GitHub Profile</a></li>
-                                            <li><a href="https://github.com/HyperGameDev/Alien-Meat-World-0.1">Harvest EARTH! GitHub Repo</a></li>
-                                            <li><a href="https://docs.google.com/spreadsheets/d/18sNHRUy0WmAL3Gzo8xI9gAq4eJD3nLzMznWri01CLxQ/edit?usp=sharing">Harvest EARTH! Credits List</a></li>
-                                            <li><a href="https://anchorfishgames.com">AnchorFish Games Website</a></li>
-                                            <li><a href="https://survivescape.dev">SurvivEscape Website</a></li>
-                                        </ul>
-                                    </section>
-
-                            </div>
-                            <div class="col-3 col-6-medium col-12-small">
-
-                                <!-- Links -->
-                                    <section class="widget links">
-                                        <h3>HGD Jams & Tools</h3>
-                                        <ul class="style2">
-                                            <li><a href="#">Past Topics Page</a></li>
-                                            <li><a href="#">Live Queues</a></li>
-                                            <li><a href="https://github.com/HyperGameDev/text-input-wheel-godot">Topics Wheel on GitHub</a></li>
-                                            <li><a href="https://hypergamedev.itch.io/">HGD itch.io Profile</a></li>
-                                            <li><a href="https://itch.io/jams/sort-date/hosted-by-hypergamedev">All Past And Upcoming Jams</a></li>
-                                        </ul>
-                                    </section>
-
-                            </div>
-                            <div class="col-3 col-6-medium col-12-small">
-
-                                <!-- Contact -->
-                                    <section class="widget contact last">
-                                        <h3>Contact</h3>
-                                        <p><a href="#">Contact Form</a></p>
-                                    </section>
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div id="copyright">
-                                    <ul class="menu">
-                                        <li>&copy; Hyper Game Dev 2024-2025. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
-                </div>
-
-            </div>
+		<!-- Footer -->
+			<div id="footer-container"></div> </div>
 
         <!-- Scripts -->
+
+			<!-- Header/Footer -->
+			<script>
+				document.addEventListener('DOMContentLoaded', function() {
+					function loadContent(url, containerId) {
+						fetch(url)
+							.then(response => response.text())
+							.then(data => {
+								document.getElementById(containerId).innerHTML = data;
+								// Re-apply dropdown functionality after loading the content
+								if (containerId === 'header-container') {
+									applyDropdownFunctionality();
+								}
+							});
+					}
+	
+					function applyDropdownFunctionality() {
+						jQuery(document).ready(function($) {
+							$('#nav > ul').dropotron({
+								alignment: 'right',
+								mode: 'fade',
+								noOpenerFade: true,
+								speed: 300
+							});
+						});
+					}
+	
+					loadContent('header.html', 'header-container');
+					loadContent('footer.html', 'footer-container');
+				});
+			</script>
 
             <script src="assets/js/jquery.min.js"></script>
             <script src="assets/js/jquery.dropotron.min.js"></script>

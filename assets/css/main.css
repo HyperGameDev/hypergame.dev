@@ -2039,72 +2039,72 @@ input, select, textarea {
 
 
 
-/* Nav */
-
-	#nav {
-		position: absolute;
-		right: 0;
-		top: 0;
-		font-size: 0.9em;
-	}
+	/* Nav */
+		#nav {
+			position: absolute;
+			right: 0;
+			top: 0;
+			font-size: 0.9em;
+		}
 
 		#nav ul {
 			list-style: none;
 			padding-left: 0;
 		}
 
-			#nav ul li {
-				float: left;
-				line-height: 4.5em;
-				padding-left: 1.5em;
-			}
+		#nav ul li {
+			float: left;
+			line-height: 4.5em;
+			padding-left: 1.5em;
+			position: relative; /* Ensure positioning context for the arrow */
+		}
 
-				#nav ul li a, #nav ul li span {
-					-moz-transition: background-color .25s ease-in-out;
-					-webkit-transition: background-color .25s ease-in-out;
-					-ms-transition: background-color .25s ease-in-out;
-					transition: background-color .25s ease-in-out;
-					font-weight: 800;
-					letter-spacing: 0.025em;
-					color: #e6e6e6; /* Navigation menu text color */
-					text-decoration: none;
-					border-radius: 6px;
-					padding: 0.5em 1em 0.5em 1em;
-				}
+		#nav ul li a, #nav ul li span {
+			-moz-transition: background-color .25s ease-in-out;
+			-webkit-transition: background-color .25s ease-in-out;
+			-ms-transition: background-color .25s ease-in-out;
+			transition: background-color .25s ease-in-out;
+			font-weight: 800;
+			letter-spacing: 0.025em;
+			color: #e6e6e6; /* Navigation menu text color */
+			text-decoration: none;
+			border-radius: 6px;
+			padding: 0.5em 1em 0.5em 1em;
+		}
 
-				#nav ul li > ul {
-					display: none;
-				}
+		#nav ul li > ul {
+			display: none;
+		}
 
-				#nav ul li:hover a, #nav ul li:hover span {
-					background: #9599ff; /* Navigation menu hover background color */
-					color: #200e2e; /* Navigation menu hover text color */
-				}
+		#nav ul li:hover a, #nav ul li:hover span {
+			background: #9599ff; /* Navigation menu hover background color */
+			color: #200e2e; /* Navigation menu hover text color */
+		}
 
-				#nav ul li.active a, #nav ul li.active span {
-					background: #9599ff; /* Navigation menu active background color, especially dropdown*/
-					color: #200e2e; /* Navigation menu active text color, especially dropdown*/
-				}
+		#nav ul li.active a, #nav ul li.active span {
+			background: #9599ff; /* Navigation menu active background color */
+			color: #200e2e; /* Navigation menu active text color */
+		}
 
-				#nav ul li.current a {
-					background: #fa61b9; /* Navigation menu current choice background color */
-					color: #200e2e; /* Navigation menu current choice text color */
-				}
+		#nav ul li.current a {
+			background: #fa61b9; /* Navigation menu current choice background color */
+			color: #200e2e; /* Navigation menu current choice text color */
+		}
 
-	.dropotron {
-		background: #1E286D; /* Dropdown background color */
-		letter-spacing: 0.025em;
-		color: #e6e6e6; /* Dropdown text color */
-		text-decoration: none;
-		border-radius: 6px;
-		padding: 0.75em 0;
-		min-width: 15em;
-		box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0.25em 0.25em 0.1em rgba(0, 0, 0, 0.025);
-		margin-top: calc(-0.75em + 1px);
-		margin-left: -1px;
-		list-style: none;
-		padding-left: 0;
-	}
+		.dropotron {
+			background: #1E286D; /* Dropdown background color */
+			letter-spacing: 0.025em;
+			color: #e6e6e6; /* Dropdown text color */
+			text-decoration: none;
+			border-radius: 6px;
+			padding: 0.75em 0;
+			min-width: 15em;
+			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0.25em 0.25em 0.1em rgba(0, 0, 0, 0.025);
+			margin-top: calc(-0.75em + 1px);
+			margin-left: 0; /* Adjust this as needed */
+			list-style: none;
+			padding-left: 0;
+		}
 
 		.dropotron li {
 			border-top: solid 1px #9599ff; /* Dropdown horizontal rule color */
@@ -2112,47 +2112,47 @@ input, select, textarea {
 			padding-left: 0;
 		}
 
-			.dropotron li:first-child {
-				border-top: 0;
-			}	
+		.dropotron li:first-child {
+			border-top: 0;
+		}
 
-			.dropotron li > a, .dropotron li > span {
-				-moz-transition: color .25s ease-in-out, background-color .25s ease-in-out;
-				-webkit-transition: color .25s ease-in-out, background-color .25s ease-in-out;
-				-ms-transition: color .25s ease-in-out, background-color .25s ease-in-out;
-				transition: color .25s ease-in-out, background-color .25s ease-in-out;
-				text-decoration: none;
-				color: inherit;
-				display: block;
-				padding: 0 1.5em;
-			}
+		.dropotron li > a, .dropotron li > span {
+			-moz-transition: color .25s ease-in-out, background-color .25s ease-in-out;
+			-webkit-transition: color .25s ease-in-out, background-color .25s ease-in-out;
+			-ms-transition: color .25s ease-in-out, background-color .25s ease-in-out;
+			transition: color .25s ease-in-out, background-color .25s ease-in-out;
+			text-decoration: none;
+			color: inherit;
+			display: block;
+			padding: 0 1.5em;
+		}
 
-				.dropotron li > a:hover, .dropotron li > span:hover {
-					background: #9599ff; /* Dropdown option hover background color */
-					color: #200e2e; /* Dropdown option hover text color */
-				}
+		.dropotron li > a:hover, .dropotron li > span:hover {
+			background: #9599ff; /* Dropdown option hover background color */
+			color: #200e2e; /* Dropdown option hover text color */
+		}
 
-			.dropotron li.active > a, .dropotron li.active > span {	
-				background: #9599ff; /* Dropdown submenu option hover background color */
-				color: #200e2e; /* Dropdown submenu option hover text color */
-			}
+		.dropotron li.active > a, .dropotron li.active > span {
+			background: #9599ff; /* Dropdown submenu option hover background color */
+			color: #200e2e; /* Dropdown submenu option hover text color */
+		}
 
 		.dropotron.level-0 {
 			font-size: 0.8em;
-			margin-left: 1.5em;
 			margin-top: 0;
 		}
 
-			.dropotron.level-0:before {
-				content: '';
-				position: absolute;
-				top: -0.5em;
-				left: 1em;
-				border-bottom: solid 0.75em #9599ff; /* Dropdown arrow icon color */
-				border-left: solid 0.75em transparent;
-				border-right: solid 0.75em transparent;
-				z-index: 1;
-			}
+		.dropotron.level-0:before {
+			content: '';
+			position: absolute;
+			top: -0.5em;
+			left: calc(50% - 0.75em); /* Center the arrow relative to the dropdown */
+			border-bottom: solid 0.75em #9599ff; /* Dropdown arrow icon color */
+			border-left: solid 0.75em transparent;
+			border-right: solid 0.75em transparent;
+			z-index: 1;
+		}
+
 
 /* Banner */
 
