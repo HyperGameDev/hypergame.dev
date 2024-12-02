@@ -1,10 +1,5 @@
 <!DOCTYPE HTML>
-<!--
-    Verti by HTML5 UP
-    html5up.net | @ajlkn
-    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
+<html lang="en">
 <head>
     <meta name="description" content="Official Website for the Hyper Game Dev YouTube Channel. Near-daily livestream videos featuring live development, problem solving, and social chat.">
     <title>Hyper Game Dev!</title>
@@ -46,14 +41,9 @@
                             </section>
 
                             <section>
-                                <h3>Subheading</h3>
-                                <ul class="style2">
-                                    <li><a href="#">Amet turpis, feugiat et sit amet</a></li>
-                                    <li><a href="#">Ornare in hendrerit in lectus</a></li>
-                                    <li><a href="#">Semper mod quis eget mi dolore</a></li>
-                                    <li><a href="#">Quam turpis feugiat sit dolor</a></li>
-                                    <li><a href="#">Amet ornare in hendrerit in lectus</a></li>
-                                    <li><a href="#">Semper mod quisturpis nisi</a></li>
+                                <h3>Previous Jams</h3>
+                                <ul id="previous-jams" class="style2">
+                                    <!-- Previous jam links will be dynamically loaded here -->
                                 </ul>
                             </section>
 
@@ -156,6 +146,7 @@
                     const doc = parser.parseFromString(data, 'text/html');
                     const jamLinks = [...doc.querySelectorAll('.jam_card a')];
                     let latestJamNumber = 0;
+                    const jamData = [];
 
                     jamLinks.forEach(link => {
                         const match = link.href.match(/hyper-1-hour-game-jam-(\d{3})/);
@@ -164,12 +155,43 @@
                             if (jamNumber > latestJamNumber) {
                                 latestJamNumber = jamNumber;
                             }
+                            jamData.push({
+                                number: jamNumber,
+                                href: link.href
+                            });
                         }
                     });
 
                     if (latestJamNumber > 0) {
                         const currentJamLink = document.getElementById('current-jam-link');
                         currentJamLink.href = `https://itch.io/jam/hyper-1-hour-game-jam-${latestJamNumber.toString().padStart(3, '0')}`;
+
+                        const previousJamsList = document.getElementById('previous-jams');
+                        for (let i = 1; i <= 6; i++) {
+                            const previousJamNumber = latestJamNumber - i;
+                            const previousJamData = jamData.find(jam => jam.number === previousJamNumber);
+                            if (previousJamData) {
+                                const previousJamLink = document.createElement('a');
+                                previousJamLink.href = previousJamData.href;
+
+                                // Fetching jam title
+                                fetch(previousJamData.href)
+                                    .then(res => res.text())
+                                    .then(pageData => {
+                                        const pageDoc = new DOMParser().parseFromString(pageData, 'text/html');
+                                        const jamTitle = pageDoc.querySelector('h1').textContent;
+                                        previousJamLink.textContent = jamTitle || `Hyper 1 Hour Game Jam ${previousJamNumber.toString().padStart(3, '0')}`;
+                                    })
+                                    .catch(err => {
+                                        console.error('Error fetching jam title:', err);
+                                        previousJamLink.textContent = `Hyper 1 Hour Game Jam ${previousJamNumber.toString().padStart(3, '0')}`;
+                                    });
+
+                                const listItem = document.createElement('li');
+                                listItem.appendChild(previousJamLink);
+                                previousJamsList.appendChild(listItem);
+                            }
+                        }
                     }
                 })
                 .catch(error => console.error('Error fetching game jams:', error));
