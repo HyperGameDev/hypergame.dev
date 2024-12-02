@@ -153,13 +153,13 @@
 							.then(response => response.text())
 							.then(data => {
 								document.getElementById(containerId).innerHTML = data;
-								// Re-apply dropdown functionality after loading the content
 								if (containerId === 'header-container') {
 									applyDropdownFunctionality();
+									updateFlyoutMenu();
 								}
 							});
 					}
-	
+			
 					function applyDropdownFunctionality() {
 						jQuery(document).ready(function($) {
 							$('#nav > ul').dropotron({
@@ -170,7 +170,25 @@
 							});
 						});
 					}
-	
+			
+					function updateFlyoutMenu() {
+						const navLinks = document.querySelectorAll('#nav ul li a');
+						const navPanel = document.querySelector('#navPanel nav');
+			
+						if (navPanel) {
+							navPanel.innerHTML = ''; // Clear previous links
+							navLinks.forEach(link => {
+								const newLink = document.createElement('a');
+								newLink.href = link.href;
+								newLink.textContent = link.textContent;
+								newLink.className = 'link depth-0';
+								navPanel.appendChild(newLink);
+							});
+						} else {
+							console.error('Nav panel container not found!');
+						}
+					}
+			
 					loadContent('header.html', 'header-container');
 					loadContent('footer.html', 'footer-container');
 				});

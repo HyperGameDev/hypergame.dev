@@ -70,61 +70,60 @@
     </div>
 
     <!-- Scripts -->
-        <!-- Navlinks Script -->
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Load header and footer
-                loadContent('header.html', 'header-container');
-                loadContent('footer.html', 'footer-container');
-
-                function loadContent(url, containerId) {
-                    fetch(url)
-                        .then(response => response.text())
-                        .then(data => {
-                            document.getElementById(containerId).innerHTML = data;
-                            if (containerId === 'header-container') {
-                                applyDropdownFunctionality();
-                                updateFlyoutMenu();
-                            }
-                        })
-                        .catch(error => console.error('Error loading content:', error));
-                }
-
-                function applyDropdownFunctionality() {
-                    jQuery(document).ready(function($) {
-                        $('#nav > ul').dropotron({
-                            alignment: 'right',
-                            mode: 'fade',
-                            noOpenerFade: true,
-                            speed: 300
-                        });
+    <!-- Navlinks Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function loadContent(url, containerId) {
+                fetch(url)
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById(containerId).innerHTML = data;
+                        if (containerId === 'header-container') {
+                            applyDropdownFunctionality();
+                            updateFlyoutMenu();
+                        }
                     });
+            }
+
+            function applyDropdownFunctionality() {
+                jQuery(document).ready(function($) {
+                    $('#nav > ul').dropotron({
+                        alignment: 'right',
+                        mode: 'fade',
+                        noOpenerFade: true,
+                        speed: 300
+                    });
+                });
+            }
+
+            function updateFlyoutMenu() {
+                const navLinks = document.querySelectorAll('#nav ul li a');
+                const navPanel = document.querySelector('#navPanel nav');
+
+                if (navPanel) {
+                    navPanel.innerHTML = ''; // Clear previous links
+                    navLinks.forEach(link => {
+                        const newLink = document.createElement('a');
+                        newLink.href = link.href;
+                        newLink.textContent = link.textContent;
+                        newLink.className = 'link depth-0';
+                        navPanel.appendChild(newLink);
+                    });
+                } else {
+                    console.error('Nav panel container not found!');
                 }
+            }
 
-                function updateFlyoutMenu() {
-                    const navLinks = document.querySelectorAll('#nav ul li a');
-                    const navPanel = document.querySelector('#navPanel nav');
+            loadContent('header.html', 'header-container');
+            loadContent('footer.html', 'footer-container');
+        });
+    </script>
 
-                    if (navPanel) {
-                        navPanel.innerHTML = ''; // Clear previous links
-                        navLinks.forEach(link => {
-                            const newLink = document.createElement('a');
-                            newLink.href = link.href;
-                            newLink.textContent = link.textContent;
-                            newLink.className = 'link depth-0';
-                            navPanel.appendChild(newLink);
-                        });
-                    } else {
-                        console.error('Nav panel container not found!');
-                    }
-                }
-            });
-        </script>
-
-        <!-- Wheel Topics Script -->
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Load wheel topics and populate the table
+    <!-- Wheel Topics Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load wheel topics and populate the table
+            function loadWheelTopics() {
                 fetch('data/wheel-topics.json')
                     .then(response => {
                         // Extract last modified date from response headers
@@ -137,6 +136,7 @@
                     })
                     .then(data => {
                         const tableBody = document.getElementById('topic-table-body');
+                        tableBody.innerHTML = ''; // Clear previous content
                         for (const [topic, times] of Object.entries(data)) {
                             const row = document.createElement('tr');
                             const topicCell = document.createElement('td');
@@ -151,11 +151,16 @@
                         }
                     })
                     .catch(error => console.error('Error loading wheel topics:', error));
-            });
-        </script>
+            }
 
+            // Load topics on page load
+            loadWheelTopics();
 
-    
+            // Reload topics every X seconds (e.g., 60 seconds)
+            setInterval(loadWheelTopics, 60000); // Update every 60 seconds
+        });
+    </script>
+
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.dropotron.min.js"></script>
     <script src="assets/js/browser.min.js"></script>
