@@ -190,7 +190,6 @@
         });
     </script>
 
-
     <!-- Sorting Function Script -->
     <script>
         let sortOrder = {};
@@ -233,14 +232,6 @@
                         if (!response.ok) {
                             throw new Error('Network response was not ok');
                         }
-
-                        const lastModified = response.headers.get('Last-Modified');
-                        if (lastModified) {
-                            const date = new Date(lastModified);
-                            const lastUpdatedElem = document.getElementById('last-updated');
-                            lastUpdatedElem.textContent = `Last Updated: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-                            lastUpdatedElem.style.display = 'block'; // Show the element
-                        }
                         return response.json();
                     })
                     .then(data => {
@@ -260,6 +251,7 @@
                         }
                         // Store data globally for random topic generation
                         window.wheelTopics = Object.keys(data);
+                        updateLastUpdatedTopics(); // Call to update the last-updated-topics.json file
                     })
                     .catch(error => {
                         console.error('Error loading wheel topics:', error);
@@ -267,11 +259,52 @@
                     });
             }
 
-            // Load topics on page load
+            function updateLastUpdatedTopics() {
+                fetch('/scripts/update-timestamp-topics.sh', {
+                    method: 'POST'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error updating last updated time:', error);
+                });
+            }
+
+            // Load "Last Updated" timestamp and topics on page load
+            function loadLastUpdatedTopics() {
+                fetch('data/last-updated-topics.json')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const date = new Date(data.lastUpdatedTopics);
+                        const lastUpdatedElem = document.getElementById('last-updated');
+                        lastUpdatedElem.textContent = `Last Updated: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+                        lastUpdatedElem.style.display = 'block'; // Show the element
+                    })
+                    .catch(error => {
+                        console.error('Error loading last updated time:', error);
+                    });
+            }
+
+            loadLastUpdatedTopics();
             loadWheelTopics();
 
-            // Reload topics every X seconds (e.g., 60 seconds)
-            setInterval(loadWheelTopics, 60000); // Update every 60 seconds
+            // Reload topics every 60 seconds
+            setInterval(() => {
+                loadLastUpdatedTopics();
+                loadWheelTopics();
+            }, 60000); // Update every 60 seconds
         });
 
         // Generate a random topic
@@ -285,6 +318,7 @@
             }
         }
     </script>
+
 
 
     <script src="assets/js/jquery.min.js"></script>
