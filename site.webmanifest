@@ -1,0 +1,21 @@
+{
+    "name": "Hyper Game Dev",
+    "short_name": "HyperGame",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#200e2e",
+    "theme_color": "#301545",
+    "icons": [
+      {
+        "src": "favicon-192x192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "favicon-512x512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ]
+  }
+  

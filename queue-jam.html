@@ -11,6 +11,14 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+
+        <!-- Favicon Links -->
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="icon" type="image/svg+xml" href="favicon.svg">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="manifest" href="site.webmanifest">
     </head>
     <body class="is-preload homepage">
         <noscript>
@@ -53,7 +61,7 @@
                                     <!-- Sidebar -->
                                         <section>
                                             <h3>Submit your game</h3>
-                                            <form name="queue-jam" data-netlify="true" netlify-honeypot="bot-field">
+                                            <form name="queue-jam" action="/pages/queue-joined.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                                                 <p class="hidden">
                                                     <label>Don't fill this out if you're human: <input name="bot-field" /></label>
                                                 </p>
@@ -99,7 +107,7 @@
                     const submitButton = document.getElementById('submit-button');
                     const requiredField = document.querySelector('input[required]');
 
-                    const dayOnly = true;
+                    const dayOnly = false;
 
                     // Function to check if the current time is within the CT zone and it's Friday
                     function checkCTFriday() {

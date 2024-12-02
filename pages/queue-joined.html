@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="description" content="Official Website for the Hyper Game Dev YouTube Channel. Near-daily livestream videos featuring live development, problem solving, and social chat.">
+    <title>Queue Joined!</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../assets/css/main.css" /> <!-- Updated path -->
+
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="manifest" href="../site.webmanifest">
+</head>
+<body>
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <!-- Main -->
+        <div id="main">
+            <div class="inner">
+                <!-- Centering Section -->
+                <section id="about" class="main special">
+                    <div class="content">
+                        <header class="major">
+                            <h2>Queue Joined!</h2>
+                        </header>
+                        <p>Nice! You have successfully joined the queue!</p>
+                        <ul class="actions">
+                            <li><a href="https://hypergame.dev/queue-shares" class="button primary">← Go Back</a></li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            if (document.referrer && document.location.host && document.referrer.match(new RegExp("^https?://" + document.location.host))) {
+                document.querySelector(".button").setAttribute("href", document.referrer);
+            }
+        })();
+    </script>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</body>
+</html>
