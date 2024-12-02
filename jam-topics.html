@@ -234,11 +234,13 @@
                             throw new Error('Network response was not ok');
                         }
 
-                        // Use the current date and time as the "Last Updated" timestamp
-                        const date = new Date();
-                        const lastUpdatedElem = document.getElementById('last-updated');
-                        lastUpdatedElem.textContent = `Updated: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-                        lastUpdatedElem.style.display = 'block'; // Show the element
+                        const lastModified = response.headers.get('Last-Modified');
+                        if (lastModified) {
+                            const date = new Date(lastModified);
+                            const lastUpdatedElem = document.getElementById('last-updated');
+                            lastUpdatedElem.textContent = `Last Updated: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+                            lastUpdatedElem.style.display = 'block'; // Show the element
+                        }
                         return response.json();
                     })
                     .then(data => {
@@ -283,6 +285,7 @@
             }
         }
     </script>
+
 
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.dropotron.min.js"></script>
