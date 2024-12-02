@@ -109,15 +109,20 @@
                 document.addEventListener('DOMContentLoaded', function () {
                     const submitButton = document.getElementById('submit-button');
                     const requiredField = document.querySelector('input[required]');
-
+                
+                    if (!submitButton || !requiredField) {
+                        console.error('One or more required elements are missing.');
+                        return;
+                    }
+                
                     const dayOnly = false;
-
+                
                     // Function to check if the current time is within the CT zone and it's Friday
                     function checkCTFriday() {
                         const now = new Date();
                         const options = { timeZone: 'America/Chicago', weekday: 'long' };
                         const dayInCT = now.toLocaleDateString('en-US', options);
-
+                
                         // Enable button if today is Friday and required field is filled, or if the day check is disabled
                         if ((dayInCT === 'Friday' || dayOnly) && requiredField.value) {
                             submitButton.disabled = false;
@@ -125,17 +130,18 @@
                             submitButton.disabled = true;
                         }
                     }
-
+                
                     // Run the check once on page load
                     checkCTFriday();
-
+                
                     // Optionally, you can set an interval to keep checking (e.g., every hour)
                     setInterval(checkCTFriday, 3600000); // Check every hour
-
+                
                     // Check required field on input change
                     requiredField.addEventListener('input', checkCTFriday);
                 });
-            </script>
+                </script>
+                
 
 
 			<!-- Header/Footer -->
