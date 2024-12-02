@@ -1493,6 +1493,21 @@ input, select, textarea {
 
 /* Forms */
 
+    .hidden {
+        display: none;
+    }
+
+    /* Required field asterisk */
+    .required {
+        color: red;
+        margin-left: 0.25em;
+    }
+
+    /* Required field styling */
+    /* input[required], select[required] {
+        border: 1px solid red; */ /* Red border for required fields */
+    /*}*/
+
 	form label {
 		display: block;
 		font-weight: 800;
@@ -1656,6 +1671,14 @@ input, select, textarea {
 			}
 
 /* Button */
+
+	/* Disabled Button Style */
+	button[disabled] {
+		background-color: #cccccc; /* Gray background color for disabled state */
+		color: #666666; /* Dark gray text color for disabled state */
+		cursor: not-allowed; /* Change cursor to indicate not clickable */
+		opacity: 0.6; /* Slight transparency to indicate disabled state */
+	}
 
 	input[type="button"],
 	input[type="submit"],

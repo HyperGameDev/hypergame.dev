@@ -32,15 +32,17 @@
                                     <!-- Content -->
                                         <article>
 
-                                            <h2>Right Sidebar</h2>
+                                            <h2>Current Queue</h2>
 
-                                            <p>The queue itself will go here.</p>
-
-                                            <h3>More intriguing information</h3>
-                                            <p>And somewhere around here.</p>
-
-                                            <p>And down here too.</p>
-
+                                            <p>Fill out the form to join the queue. Displaying the current queue is a W.I.P. feature.</p>
+                                            <br></br>
+                                            <h2>FAQ</h2>
+                                            <h4>How will I know if I'm next?</h4>
+                                            <p>Just ask!</p>
+                                            <h4>Can I submit multiple times?</h4>
+                                            <p>Preferrably not, unless you actually have another thing to share. <b>There is a two share maximum for the Community/Secret streams.</b></p>
+                                            <h4>Can I just submit in here for fun?</h4>
+                                            <p>Please don't. It could literally cost the channel money!</p>
                                         </article>
 
                                 </div>
@@ -50,15 +52,41 @@
 
                                     <!-- Sidebar -->
                                         <section>
-                                            <h3>Join the Queue!</h3>
-                                            <p>Form submission code will ultimately go here.</p>
+                                            <h3>Share your thing!</h3>
+                                            <form name="queue-shares" data-netlify="true" netlify-honeypot="bot-field">
+                                                <p class="hidden">
+                                                    <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                                                </p>
+                                                <p>
+                                                    <label>What are you sharing? <span class="required">*</span> <input type="text" name="game-name" required /></label>
+                                                </p>
+                                                <p>
+                                                    <label>Where can it be found? <span class="required">*</span>
+                                                        <select name="location-type" id="location-type" required>
+                                                            <option value="Discord">Discord</option>
+                                                            <option value="Other">Other</option>
+                                                        </select>
+                                                    </label>
+                                                </p>
+                                                <p id="location-container" class="hidden">
+                                                    <label>Location: <span class="required">*</span> <input type="text" name="location" id="location" /></label>
+                                                </p>
+                                                <p>
+                                                    <label>What feedback are you looking for? (Optional)
+                                                        <textarea name="feedback" rows="4" cols="50"></textarea>
+                                                    </label>
+                                                </p>
+                                                <p>
+                                                    <button type="submit" class="button icon solid fa-plus" id="submit-button" disabled>Join Queue</button>
+                                                </p>
+                                            </form>
                                             <footer>
-                                                <a href="#" class="button icon solid fa-info-circle">Find out more</a>
+                                                <i><b>NOTE:</b> "Submit" will only function on Fridays!</i>
                                             </footer>
                                         </section>
 
                                         <section>
-                                            <h3>Subheading</h3>
+                                            <!-- <h3>Subheading</h3>
                                             <ul class="style2">
                                                 <li><a href="#">Amet turpis, feugiat et sit amet</a></li>
                                                 <li><a href="#">Ornare in hendrerit in lectus</a></li>
@@ -66,7 +94,7 @@
                                                 <li><a href="#">Quam turpis feugiat sit dolor</a></li>
                                                 <li><a href="#">Amet ornare in hendrerit in lectus</a></li>
                                                 <li><a href="#">Semper mod quisturpis nisi</a></li>
-                                            </ul>
+                                            </ul> -->
                                         </section>
 
                                 </div>
@@ -80,6 +108,76 @@
 			<div id="footer-container"></div> </div>
 
         <!-- Scripts -->
+
+            <!-- Submit Disable -->
+            <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const submitButton = document.getElementById('submit-button');
+                const locationType = document.getElementById('location-type');
+                const locationContainer = document.getElementById('location-container');
+                const locationField = document.getElementById('location');
+                const requiredFields = document.querySelectorAll('input[required], select[required]');
+
+                const dayOnly = true;
+
+                // Function to check if the current time is within the CT zone and it's Friday
+                function checkCTFriday() {
+                    const now = new Date();
+                    const options = { timeZone: 'America/Chicago', weekday: 'long' };
+                    const dayInCT = now.toLocaleDateString('en-US', options);
+
+                    // Enable button if today is Friday and required fields are filled, or if the day check is disabled
+                    if ((dayInCT === 'Friday' || dayOnly) && checkRequiredFields()) {
+                        submitButton.disabled = false;
+                    } else {
+                        submitButton.disabled = true;
+                    }
+                }
+
+                // Function to check if all required fields are filled
+                function checkRequiredFields() {
+                    for (const field of requiredFields) {
+                        if (!field.value) {
+                            return false;
+                        }
+                    }
+                    // If 'Other' is selected, check the Location field
+                    if (locationType.value === 'Other' && !locationField.value) {
+                        return false;
+                    }
+                    return true;
+                }
+
+                // Run the check once on page load
+                checkCTFriday();
+
+                // Optionally, you can set an interval to keep checking (e.g., every hour)
+                setInterval(checkCTFriday, 3600000); // Check every hour
+
+                // Show/Hide location field based on dropdown selection
+                locationType.addEventListener('change', function() {
+                    if (locationType.value === 'Other') {
+                        locationContainer.classList.remove('hidden');
+                        locationField.required = true;
+                    } else {
+                        locationContainer.classList.add('hidden');
+                        locationField.value = ''; // Clear the Location field when hidden
+                        locationField.required = false;
+                    }
+                    checkCTFriday(); // Re-check after changing dropdown value
+                });
+
+                // Check required fields on input change
+                for (const field of requiredFields) {
+                    field.addEventListener('input', checkCTFriday);
+                }
+
+                // Add event listener for the Location field
+                locationField.addEventListener('input', checkCTFriday);
+            });
+
+            </script>
+
 
 			<!-- Header/Footer -->
 			<script>
@@ -121,3 +219,5 @@
 
     </body>
 </html>
+
+
