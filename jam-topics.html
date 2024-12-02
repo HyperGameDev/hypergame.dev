@@ -44,7 +44,7 @@
                             <!-- Content -->
                             <article>
                                 <h2>Yet Unchosen Jam Topics</h2>
-                                <p id="last-updated">Updated: </p>
+                                <p id="last-updated">Updated: Not Available</p>
                                 <div class="table-wrapper" style="max-height: 400px; overflow-y: auto;">
                                     <table>
                                         <thead>
@@ -82,7 +82,8 @@
                             applyDropdownFunctionality();
                             updateFlyoutMenu();
                         }
-                    });
+                    })
+                    .catch(error => console.error('Error loading content:', error));
             }
 
             function applyDropdownFunctionality() {
@@ -126,11 +127,17 @@
             function loadWheelTopics() {
                 fetch('data/wheel-topics.json')
                     .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+
                         // Extract last modified date from response headers
                         const lastModified = response.headers.get('Last-Modified');
                         if (lastModified) {
                             const date = new Date(lastModified);
                             document.getElementById('last-updated').textContent = `Updated: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+                        } else {
+                            document.getElementById('last-updated').textContent = 'Updated: Not Available';
                         }
                         return response.json();
                     })
@@ -150,7 +157,10 @@
                             tableBody.appendChild(row);
                         }
                     })
-                    .catch(error => console.error('Error loading wheel topics:', error));
+                    .catch(error => {
+                        console.error('Error loading wheel topics:', error);
+                        document.getElementById('last-updated').textContent = 'Updated: Not Available';
+                    });
             }
 
             // Load topics on page load
