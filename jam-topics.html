@@ -111,7 +111,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Footer -->
         <div id="footer-container"></div>
     </div>
@@ -225,15 +224,9 @@
     <!-- Wheel Topics Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Load wheel topics and populate the table
             function loadWheelTopics() {
                 fetch('data/wheel-topics.json')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
+                    .then(response => response.json())
                     .then(data => {
                         const tableBody = document.getElementById('topic-table-body');
                         tableBody.innerHTML = ''; // Clear previous content
@@ -251,7 +244,6 @@
                         }
                         // Store data globally for random topic generation
                         window.wheelTopics = Object.keys(data);
-                        updateLastUpdatedTopics(); // Call to update the last-updated-topics.json file
                     })
                     .catch(error => {
                         console.error('Error loading wheel topics:', error);
@@ -259,33 +251,9 @@
                     });
             }
 
-            function updateLastUpdatedTopics() {
-                fetch('/scripts/update-timestamp-topics.sh', {
-                    method: 'POST'
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    console.log(data);
-                })
-                .catch(error => {
-                    console.error('Error updating last updated time:', error);
-                });
-            }
-
-            // Load "Last Updated" timestamp and topics on page load
             function loadLastUpdatedTopics() {
                 fetch('data/last-updated-topics.json')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
+                    .then(response => response.json())
                     .then(data => {
                         const date = new Date(data.lastUpdatedTopics);
                         const lastUpdatedElem = document.getElementById('last-updated');
@@ -300,14 +268,13 @@
             loadLastUpdatedTopics();
             loadWheelTopics();
 
-            // Reload topics every 60 seconds
+            // Reload topics and last updated time every 60 seconds
             setInterval(() => {
                 loadLastUpdatedTopics();
                 loadWheelTopics();
-            }, 60000); // Update every 60 seconds
+            }, 60000);
         });
 
-        // Generate a random topic
         function generateRandomTopic() {
             if (window.wheelTopics && window.wheelTopics.length > 0) {
                 const randomIndex = Math.floor(Math.random() * window.wheelTopics.length);
