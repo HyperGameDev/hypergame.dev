@@ -63,9 +63,9 @@
                                     <section>
                                         <h3>Share your thing!</h3>
                                         <form name="queue-shares" action="messages/queue-joined.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                                            <p class="hidden">
-                                                <label for="bot-field">Don't fill this out if you're human:</label>
-                                                <input name="bot-field" id="bot-field" title="Bot field" placeholder="Leave this field empty" />
+                                            <p>
+                                                <label for="user-name">Who are you? <span class="required">*</span></label><br>
+                                                <input type="text" name="user-name" id="user-name" required title="Enter your name" placeholder="A hyper game dev" />
                                             </p>
                                             <p>
                                                 <label for="game-name">What are you sharing? <span class="required">*</span></label><br>
@@ -86,10 +86,15 @@
                                                 <label for="feedback">What feedback are you looking for? (Optional)</label><br>
                                                 <textarea name="feedback" id="feedback" rows="4" cols="40" title="Feedback details" placeholder="I want feedback on..."></textarea>
                                             </p>
+                                            <p class="hidden">
+                                                <label for="bot-field">Don't fill this out if you're human:</label>
+                                                <input name="bot-field" id="bot-field" title="Bot field" placeholder="Leave this field empty" />
+                                            </p>
                                             <p>
                                                 <button type="submit" class="button icon solid fa-plus" id="submit-button" disabled>Join Queue</button>
                                             </p>
                                         </form>
+                                        
                                         
                                         <footer>
                                             <i><b>NOTE:</b> "Join Queue" only works on Fridays!</i>
