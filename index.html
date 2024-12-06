@@ -116,7 +116,7 @@
 							<div class="col-12" style="margin: 0 auto;">
 								<section class="widget thumbnails">
 									<h3 style="text-align: center;">Recent Streams</h3>
-									<div class="grid">
+									<div class="grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
 										<!-- Videos will be dynamically inserted here -->
 									</div>
 									<div style="text-align: center; margin-top: 20px;">
@@ -125,6 +125,7 @@
 								</section>
 							</div>
 						</div>
+
 
 				
 				
@@ -232,10 +233,10 @@
 								console.error('No videos found in the response');
 								return;
 							}
-				
-							var videos = data.videos.slice(0, 9); // Fetch only the first 9 videos
+
+							var videos = data.videos.slice(0, 10); // Fetch the first 10 videos
 							var grid = document.querySelector('.grid');
-				
+
 							videos.forEach(video => {
 								var videoElement = document.createElement('div');
 								videoElement.className = 'video-container'; // Add this line to ensure the video container has the correct class
@@ -254,6 +255,7 @@
 							}
 						});
 				</script>
+
 				
 				<script src="https://apis.google.com/js/api.js"></script>
 				
