@@ -116,7 +116,7 @@
 							<div class="col-12" style="margin: 0 auto;">
 								<section class="widget thumbnails">
 									<h3 style="text-align: center;">Recent Streams</h3>
-									<div class="grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+									<div class="grid">
 										<!-- Videos will be dynamically inserted here -->
 									</div>
 									<div style="text-align: center; margin-top: 20px;">
@@ -126,9 +126,7 @@
 							</div>
 						</div>
 
-
-
-
+				
 				
 				
 				
@@ -220,7 +218,7 @@
 				<script src="assets/js/util.js"></script>
 				<script src="assets/js/main.js"></script>
 
-				<!-- Video Grid API Fetch -->
+			<!-- Video Grid API Fetch -->
 				<script>
 					fetch('/.netlify/functions/key_access')
 						.then(response => {
@@ -234,42 +232,28 @@
 								console.error('No videos found in the response');
 								return;
 							}
-
-							var videos = data.videos.slice(0, 10); // Fetch the first 10 videos
+				
+							var videos = data.videos.slice(0, 9); // Fetch only the first 9 videos
 							var grid = document.querySelector('.grid');
-
-							// Clear existing grid content (if any)
-							grid.innerHTML = '';
-
+				
 							videos.forEach(video => {
 								var videoElement = document.createElement('div');
-								videoElement.className = 'video-container';
+								videoElement.className = 'video-container'; // Add this line to ensure the video container has the correct class
 								videoElement.style.textAlign = 'center';
-								videoElement.style.marginBottom = '20px';
 								videoElement.innerHTML = `
-									<iframe width="100%" height="auto" frameborder="0" allowfullscreen src="https://www.youtube.com/embed/${video.videoId}?rel=0&modestbranding=1"></iframe>
+									<iframe frameborder="0" allowfullscreen src="https://www.youtube.com/embed/${video.videoId}?rel=0&modestbranding=1"></iframe>
 								`;
 								grid.appendChild(videoElement);
 							});
-
-							// Ensure the grid displays in two columns
-							grid.style.display = 'grid';
-							grid.style.gridTemplateColumns = 'repeat(2, 1fr)';
-							grid.style.gap = '20px';
 						})
 						.catch(error => {
 							console.error('Error:', error);
-							if (error.message includes '403' || error.message.includes('404')) {
+							if (error.message.includes('403') || error.message.includes('404')) {
 								document.querySelector('.row.gtr-200').style.display = 'none';
 								console.error('403 or 404 error: Hiding the Video and Text Grid section');
 							}
 						});
 				</script>
-
-
-
-
-
 				
 				<script src="https://apis.google.com/js/api.js"></script>
 				
