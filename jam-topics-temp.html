@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html lang="en" data-current-navlink="Jam Topics">
+<head>
+    <meta name="description" content="Official Website for the Hyper Game Dev YouTube Channel. Near-daily livestream videos featuring live development, problem solving, and social chat.">
+    <title>Hyper Game Dev!</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <style>
+        .table-wrapper {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            position: sticky;
+            top: 0;
+            background-color: #e6e6e6;
+            z-index: 1;
+            border-bottom: 2px solid #9599ff;
+            cursor: pointer;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #1E286D; /* Adjust as necessary */
+        }
+        tr {
+            border-bottom: 1px solid #414587; /* Row divider color */
+        }
+        .arrow {
+            margin-left: 5px;
+            font-size: 12px;
+        }
+        .random-topic {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 2.2em;
+        }
+    </style>
+</head>
+<body class="is-preload homepage" data-current-navlink="Jam Topics">
+    <noscript>
+        <div class="noscript-warning">
+            <p>JavaScript is disabled in your browser. Please enable JavaScript to view this website properly!</p>
+        </div>
+    </noscript>
+    <div id="page-wrapper">
+        <!-- Header -->
+        <div id="header-container"></div>
+
+        <!-- Main -->
+        <div id="main-wrapper">
+            <div class="container">
+                <div class="row gtr-200">
+                    <div class="col-4 col-12-medium">
+                        <div id="sidebar">
+                            <section>
+                                <h3>Login to View Page/Welcome Back [Name]</h3>
+                                <footer>
+                                    Data about the user here:<br></br>Eg how many topics suggested, voted on, jams entered, etc. In a list.<br></br>If not logged in, offer form to do so/sign up.
+                                </footer>
+                            </section>
+                            <p></p>
+                            <br></br>
+                            <section>
+                                <h3>HGD on itch.io</h3>
+                                <footer>
+                                    <a href="https://itch.io/jams/sort-date/hosted-by-hypergamedev" class="button icon solid fa-external-link-alt" target="_blank">Join the Jam!</a>
+                                </footer>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="col-8 col-12-medium imp-medium">
+                        <div id="content">
+                            <!-- Content -->
+                            <article>
+                                <h2>Suggest & Vote On A Topic!</h2>
+                                <div style="width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center;">
+                                    <div style="width: 100%; height: 100%; position: relative;">
+                                        <iframe src="apps/jam-topic-picker/index.html" style="width: 100%; height: 100%; border: none;"></iframe>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div id="footer-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Header/Footer -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function loadContent(url, containerId) {
+                fetch(url)
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById(containerId).innerHTML = data;
+                        if (containerId === 'header-container') {
+                            applyDropdownFunctionality();
+                            updateFlyoutMenu();
+                            applyCurrentNavLinkClass(); // Apply current class after header is loaded
+                        }
+                    })
+                    .catch(error => console.error('Error loading content:', error));
+            }
+
+            function applyDropdownFunctionality() {
+                jQuery(document).ready(function($) {
+                    $('#nav > ul').dropotron({
+                        alignment: 'right',
+                        mode: 'fade',
+                        noOpenerFade: true,
+                        speed: 300
+                    });
+                });
+            }
+
+            function updateFlyoutMenu() {
+                const navLinks = document.querySelectorAll('#nav ul li a');
+                const navPanel = document.querySelector('#navPanel nav');
+
+                if (navPanel) {
+                    navPanel.innerHTML = ''; // Clear previous links
+                    navLinks.forEach(link => {
+                        const newLink = document.createElement('a');
+                        newLink.href = link.href;
+                        newLink.textContent = link.textContent;
+                        newLink.className = 'link depth-0';
+                        navPanel.appendChild(newLink);
+                    });
+                } else {
+                    console.error('Nav panel container not found!');
+                }
+            }
+
+            // Apply the "current" class based on the data-current-navlink attribute
+            function applyCurrentNavLinkClass() {
+                const navLinks = document.querySelectorAll('#nav a');
+                const currentPageNavLink = document.documentElement.getAttribute('data-current-navlink');
+
+                if (!currentPageNavLink) {
+                    console.error('No data-current-navlink attribute found.');
+                    return;
+                }
+
+                navLinks.forEach(link => {
+                    const linkText = link.textContent.trim();
+                    if (linkText === currentPageNavLink) {
+                        link.parentElement.classList.add('current');
+                        const parentLi = link.closest('li');
+                        if (parentLi && parentLi.parentElement.closest('li')) {
+                            parentLi.parentElement.closest('li').classList.add('current');
+                        }
+                    }
+                });
+            }
+
+            loadContent('header.html', 'header-container');
+            loadContent('footer.html', 'footer-container');
+        });
+    </script>
+
+
+
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.dropotron.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>
