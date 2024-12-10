@@ -2,7 +2,7 @@ const admin = require('firebase-admin');
 
 admin.initializeApp({
     credential: admin.credential.cert({
-        type: process.env.HGD_FB1_TYPE,
+        type: "service_account",
         project_id: process.env.HGD_FB1_PROJECT_ID,
         private_key_id: process.env.HGD_FB1_PRIVATE_KEY_ID,
         private_key: process.env.HGD_FB1_PRIVATE_KEY.replace(/\\n/g, '\n'),
