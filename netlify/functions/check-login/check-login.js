@@ -8,7 +8,7 @@ admin.initializeApp({
         private_key: process.env.HGD_FB1_PRIVATE_KEY.replace(/\\n/g, '\n'),
         client_email: process.env.HGD_FB1_CLIENT_EMAIL,
         client_id: process.env.HFD_FB1_CLIENT_ID,
-        auth_uri: process.env.HFD_FB1_AUTH_URI,
+        auth_uri: "https://accounts.google.com/o/oauth2/auth",
         token_uri: process.env.HFD_FB1_TOKEN_URI,
         auth_provider_x509_cert_url: process.env.HGD_FB1_AUTH_PROVIDER_X509_CERT_URL,
         client_x509_cert_url: process.env.HGD_FB1_CLIENT_X509_CERT_URL
