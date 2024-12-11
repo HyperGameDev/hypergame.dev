@@ -1,5 +1,6 @@
 const admin = require('firebase-admin');
 
+// Initialize Firebase Admin SDK with service account
 admin.initializeApp({
     credential: admin.credential.cert({
         type: "service_account",
@@ -13,13 +14,16 @@ admin.initializeApp({
         auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
         client_x509_cert_url: process.env.HGD_FB1_CLIENT_X509_CERT_URL
     }),
-    databaseURL: process.env.HGD_FB1_RTDB1  // Use the environment variable for the database URL
+    databaseURL: process.env.HGD_FB1_RTDB1
 });
 
 exports.handler = async function(event, context) {
+    console.log("Debug: Event Headers", event.headers);
+
     const idToken = event.headers.authorization?.split('Bearer ')[1];
 
     if (!idToken) {
+        console.error('No ID token found in request headers');
         return {
             statusCode: 401,
             body: JSON.stringify({ message: 'Unauthorized' })
@@ -28,6 +32,7 @@ exports.handler = async function(event, context) {
 
     try {
         const decodedToken = await admin.auth().verifyIdToken(idToken);
+        console.log('Debug: Decoded Token', decodedToken);
         return {
             statusCode: 200,
             body: JSON.stringify({ uid: decodedToken.uid })
