@@ -1495,6 +1495,10 @@ footer, header, hgroup, menu, nav, section {
 
 /* Forms */
 
+	input[type="radio"] {
+		margin: 0 5px 0 0; /* Adds spacing between radio button and label */
+	}
+
     .hidden {
         display: none;
     }

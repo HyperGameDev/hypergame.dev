@@ -64,7 +64,7 @@
                                             <!-- 1. Name of your game (Text input, Required) -->
                                             <p>
                                                 <label for="game-name">Name of your game <span class="required">*</span></label><br>
-                                                <input type="text" name="game-name" id="game-name" required title="Enter the name of your game" placeholder="My cool game" />
+                                                <input type="text" name="game-name" id="game-name" required placeholder="My cool game" />
                                             </p>
                                         
                                             <!-- 2. Is your game on the jam submission page? (Radio button, Required) -->
@@ -79,7 +79,7 @@
                                             <!-- Location input (shown only if "No" is selected above) -->
                                             <p id="location-container" class="hidden">
                                                 <label for="location">Location <span class="required">*</span></label><br>
-                                                <input type="text" name="location" id="location" required title="Specify the location" placeholder="Paste URL or Describe" />
+                                                <input type="text" name="location" id="location" required placeholder="Paste URL or Describe" />
                                             </p>
                                         
                                             <!-- 3. Did you/your team make ALL of the music? (Radio button, Required) -->
@@ -102,25 +102,25 @@
                                             <!-- 4. Your itch.io Name (Text input, Required) -->
                                             <p>
                                                 <label for="itch-io-name">Your itch.io Name <span class="required">*</span></label><br>
-                                                <input type="text" name="itch-io-name" id="itch-io-name" required title="Enter your itch.io name" placeholder="Your itch.io username" />
+                                                <input type="text" name="itch-io-name" id="itch-io-name" required placeholder="Your itch.io username" />
                                             </p>
                                         
                                             <!-- 5. Your YouTube Chat Name (Text input, Optional) -->
                                             <p>
                                                 <label for="youtube-chat-name">Your YouTube Chat Name (Optional)</label><br>
-                                                <input type="text" name="youtube-chat-name" id="youtube-chat-name" title="Enter your YouTube chat name" placeholder="Your YouTube chat name" />
+                                                <input type="text" name="youtube-chat-name" id="youtube-chat-name" placeholder="Your YouTube chat name" />
                                             </p>
                                         
                                             <!-- 6. Got any notes to add? (Text Area, Optional) -->
                                             <p>
                                                 <label for="notes">Got any notes to add? (Optional)</label><br>
-                                                <textarea name="notes" id="notes" rows="4" cols="40" title="Additional notes" placeholder="Add any notes here..."></textarea>
+                                                <textarea name="notes" id="notes" rows="4" cols="40" placeholder="Add any notes here..."></textarea>
                                             </p>
                                         
                                             <!-- Honeypot field for bots -->
                                             <p class="hidden">
                                                 <label for="bot-field">Don't fill this out if you're human:</label>
-                                                <input name="bot-field" id="bot-field" title="Bot field" placeholder="Leave this field empty" />
+                                                <input name="bot-field" id="bot-field" placeholder="Leave this field empty" />
                                             </p>
                                         
                                             <!-- Submit button -->
@@ -159,93 +159,99 @@
 			<div id="footer-container"></div> </div>
 
         <!-- Scripts -->
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                // Elements for location input visibility
-                const onSubmissionPageNo = document.getElementById('on-submission-page-no');
-                const locationContainer = document.getElementById('location-container');
-        
-                // Elements for Streamer Mode checkbox visibility
-                const musicNo = document.getElementById('music-no');
-                const musicYesCopyrighted = document.getElementById('music-yes-copyrighted');
-                const streamerModeContainer = document.getElementById('streamer-mode-container');
-        
-                // Elements for submit button control
-                const submitButton = document.getElementById('submit-button');
-                const locationType = document.getElementById('location-type');
-                const locationField = document.getElementById('location');
-                const requiredFields = document.querySelectorAll('input[required], select[required]');
-        
-                // Boolean to control whether the submit button is enabled
-                const enableSubmitButton = true; // Change this to `false` to disable the button
-        
-                // Check if all elements are found
-                if (!submitButton || !locationType || !locationContainer || !locationField || !onSubmissionPageNo || !musicNo || !musicYesCopyrighted || !streamerModeContainer) {
-                    console.error('One or more required elements are missing.');
-                    return; // Exit if any element is not found
-                }
-        
-                // Function to show/hide location input based on radio button selection
-                onSubmissionPageNo.addEventListener('change', () => {
-                    locationContainer.classList.toggle('hidden', !onSubmissionPageNo.checked);
-                    updateSubmitButton(); // Re-check form validity
-                });
-        
-                // Function to show/hide Streamer Mode checkbox based on music ownership selection
-                const updateStreamerModeVisibility = () => {
-                    streamerModeContainer.classList.toggle('hidden', !(musicNo.checked || musicYesCopyrighted.checked));
-                };
-                musicNo.addEventListener('change', updateStreamerModeVisibility);
-                musicYesCopyrighted.addEventListener('change', updateStreamerModeVisibility);
-        
-                // Function to check if all required fields are filled
-                function checkRequiredFields() {
-                    for (const field of requiredFields) {
-                        if (!field.value) {
-                            return false;
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        // Elements for location input visibility
+                        const onSubmissionPageNo = document.getElementById('on-submission-page-no');
+                        const locationContainer = document.getElementById('location-container');
+                
+                        // Elements for Streamer Mode checkbox visibility
+                        const musicNo = document.getElementById('music-no');
+                        const musicYesCopyrightFree = document.getElementById('music-yes-copyright-free');
+                        const musicYesCopyrighted = document.getElementById('music-yes-copyrighted');
+                        const streamerModeContainer = document.getElementById('streamer-mode-container');
+                
+                        // Elements for submit button control
+                        const submitButton = document.getElementById('submit-button');
+                        const locationField = document.getElementById('location');
+                        const requiredFields = document.querySelectorAll('input[required], select[required], textarea[required]');
+                
+                        // Boolean to control whether the submit button is enabled
+                        const enableSubmitButton = true; // Change this to `false` to disable the button
+                
+                        // Check if all elements are found
+                        if (!submitButton || !locationContainer || !locationField || !onSubmissionPageNo || !musicNo || !musicYesCopyrightFree || !musicYesCopyrighted || !streamerModeContainer) {
+                            console.error('One or more required elements are missing.');
+                            return; // Exit if any element is not found
                         }
-                    }
-                    // If 'Other' is selected, check the Location field
-                    if (locationType.value === 'Other' && !locationField.value) {
-                        return false;
-                    }
-                    return true;
-                }
-        
-                // Function to update the submit button state
-                function updateSubmitButton() {
-                    if (enableSubmitButton && checkRequiredFields()) {
-                        submitButton.disabled = false;
-                    } else {
-                        submitButton.disabled = true;
-                    }
-                }
-        
-                // Run the check once on page load
-                updateSubmitButton();
-        
-                // Show/Hide location field based on dropdown selection
-                locationType.addEventListener('change', function () {
-                    if (locationType.value === 'Other') {
-                        locationContainer.classList.remove('hidden');
-                        locationField.required = true;
-                    } else {
-                        locationContainer.classList.add('hidden');
-                        locationField.value = ''; // Clear the Location field when hidden
-                        locationField.required = false;
-                    }
-                    updateSubmitButton(); // Re-check after changing dropdown value
-                });
-        
-                // Check required fields on input change
-                for (const field of requiredFields) {
-                    field.addEventListener('input', updateSubmitButton);
-                }
-        
-                // Add event listener for the Location field
-                locationField.addEventListener('input', updateSubmitButton);
-            });
-        </script>
+                
+                        // Function to show/hide location input based on radio button selection
+                        const updateLocationVisibility = () => {
+                            locationContainer.classList.toggle('hidden', !onSubmissionPageNo.checked);
+                            if (onSubmissionPageNo.checked) {
+                                locationField.required = true; // Make location field required if "No" is selected
+                            } else {
+                                locationField.required = false; // Make location field optional if "Yes" is selected
+                            }
+                            updateSubmitButton(); // Re-check form validity
+                        };
+                        onSubmissionPageNo.addEventListener('change', updateLocationVisibility);
+                
+                        // Function to show/hide Streamer Mode checkbox based on music ownership selection
+                        const updateStreamerModeVisibility = () => {
+                            const showStreamerMode = musicNo.checked || musicYesCopyrighted.checked;
+                            streamerModeContainer.classList.toggle('hidden', !showStreamerMode);
+                            if (showStreamerMode) {
+                                document.getElementById('streamer-mode').required = true; // Make Streamer Mode required if applicable
+                            } else {
+                                document.getElementById('streamer-mode').required = false; // Make Streamer Mode optional otherwise
+                            }
+                            updateSubmitButton(); // Re-check form validity
+                        };
+                        musicNo.addEventListener('change', updateStreamerModeVisibility);
+                        musicYesCopyrighted.addEventListener('change', updateStreamerModeVisibility);
+                        musicYesCopyrightFree.addEventListener('change', updateStreamerModeVisibility);
+                
+                        // Function to check if all required fields are filled
+                        function checkRequiredFields() {
+                            for (const field of requiredFields) {
+                                if (!field.value) {
+                                    return false;
+                                }
+                            }
+                            // If Streamer Mode is visible, ensure it's checked
+                            if (!streamerModeContainer.classList.contains('hidden') && !document.getElementById('streamer-mode').checked) {
+                                return false;
+                            }
+                            return true;
+                        }
+                
+                        // Function to update the submit button state
+                        function updateSubmitButton() {
+                            if (enableSubmitButton && checkRequiredFields()) {
+                                submitButton.disabled = false;
+                            } else {
+                                submitButton.disabled = true;
+                            }
+                        }
+                
+                        // Run the check once on page load
+                        updateLocationVisibility(); // Initialize location field visibility
+                        updateStreamerModeVisibility(); // Initialize Streamer Mode checkbox visibility
+                        updateSubmitButton(); // Initialize submit button state
+                
+                        // Check required fields on input change
+                        for (const field of requiredFields) {
+                            field.addEventListener('input', updateSubmitButton);
+                        }
+                
+                        // Add event listener for the Location field
+                        locationField.addEventListener('input', updateSubmitButton);
+                
+                        // Add event listener for the Streamer Mode checkbox
+                        document.getElementById('streamer-mode').addEventListener('change', updateSubmitButton);
+                    });
+                </script>
                 
 
                 <!-- Header/Footer -->
