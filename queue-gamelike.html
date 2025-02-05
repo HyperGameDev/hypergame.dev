@@ -60,49 +60,56 @@
                                     <!-- Sidebar -->
                                     <section>
                                         <h3>Join up so your game gets played sooner than later!</h3>
-                                        <form name="queue-shares" action="messages/queue-joined.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                                            <p style="background-color: #301545; color: white; padding: 10px;">
-                                                <span style="font-size: 20px; font-weight: bold;">Name of your game <span class="required">*</span></span><br>
-                                                <input type="text" name="game-name" id="game-name" required title="Enter the name of your game" placeholder="Your game's name" />
-                                            </p>
-                                            <p style="background-color: #162553; color: white; padding: 10px;">
-                                                <span style="font-size: 20px; font-weight: bold;">Is your game on the jam submission page? <span class="required">*</span></span><br>
-                                                <input type="radio" name="jam-submission" value="Yes" id="jam-yes" required style="font-size: 18px;"> Yes<br>
-                                                <input type="radio" name="jam-submission" value="No" id="jam-no" required style="font-size: 18px;"> No<br>
-                                                <div id="location-container" class="hidden" style="background-color: #162553; color: white; padding: 10px;">
-                                                    <label for="location">Location <span class="required">*</span></label><br>
-                                                    <input type="text" name="location" id="location" placeholder="Paste URL or Describe" />
-                                                </div>
-                                            </p>
-                                            <p style="background-color: #301545; color: white; padding: 10px;">
-                                                <span style="font-size: 20px; font-weight: bold;">Did you/your team make ALL of the music? <span class="required">*</span></span><br>
-                                                <input type="radio" name="music" value="No" id="music-no" required style="font-size: 18px;"> No<br>
-                                                <input type="radio" name="music" value="Yes, and it is copyright free" id="music-yes-free" required style="font-size: 18px;"> Yes, and it is copyright free<br>
-                                                <input type="radio" name="music" value="Yes, and it is copyrighted (or will be)" id="music-yes-copyright" required style="font-size: 18px;"> Yes, and it is copyrighted (or will be)<br>
-                                                <div id="streamer-mode-container" class="hidden" style="background-color: #301545; color: white; padding: 10px;">
-                                                    <input type="checkbox" name="streamer-mode" id="streamer-mode" required style="font-size: 18px;"> Has a Streamer Mode
-                                                </div>
-                                            </p>
-                                            <p style="background-color: #162553; color: white; padding: 10px;">
-                                                <span style="font-size: 20px; font-weight: bold;">Your itch.io Name <span class="required">*</span></span><br>
-                                                <input type="text" name="itchio-name" id="itchio-name" required title="Enter your itch.io name" placeholder="Your itch.io name" />
-                                            </p>
-                                            <p style="background-color: #301545; color: white; padding: 10px;">
-                                                <span style="font-size: 20px; font-weight: bold;">Your YouTube Chat Name (Optional)</span><br>
-                                                <input type="text" name="youtube-chat-name" id="youtube-chat-name" placeholder="Your YouTube Chat name" />
-                                            </p>
-                                            <p style="background-color: #162553; color: white; padding: 10px;">
-                                                <span style="font-size: 20px; font-weight: bold;">Got any notes to add? (Optional)</span><br>
-                                                <textarea name="notes" id="notes" rows="4" cols="40" placeholder="Any additional notes or comments"></textarea>
-                                            </p>
-                                            <p class="hidden">
-                                                <label for="bot-field">Don't fill this out if you're human:</label>
-                                                <input name="bot-field" id="bot-field" placeholder="Leave this field empty" />
-                                            </p>
-                                            <p>
-                                                <button type="submit" class="button icon solid fa-plus" id="submit-button">Join Queue</button>
-                                            </p>
-                                        </form>
+                                        <section>
+                                            <h3>Join up so your game gets played sooner than later!</h3>
+                                            <form name="queue-gamelike" action="messages/queue-joined.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                                                <p style="background-color: #301545; color: white; padding: 10px;">
+                                                    <span style="font-size: 20px; font-weight: bold;">Name of your game <span class="required">*</span></span><br>
+                                                    <input type="text" name="game-name" id="game-name" required title="Enter the name of your game" placeholder="Your game's name" />
+                                                </p>
+                                                <p style="background-color: #162553; color: white; padding: 10px;">
+                                                    <span style="font-size: 20px; font-weight: bold;">Is your game on the jam submission page? <span class="required">*</span></span><br>
+                                                    <input type="radio" name="jam-submission" value="Yes" id="jam-yes" required style="font-size: 18px;"> Yes<br>
+                                                    <input type="radio" name="jam-submission" value="No" id="jam-no" required style="font-size: 18px;"> No<br>
+                                                    <div id="location-container" class="hidden" style="background-color: #162553; color: white; padding: 10px;">
+                                                        <label for="location">Location <span class="required">*</span></label><br>
+                                                        <input type="text" name="location" id="location" placeholder="Paste URL or Describe" />
+                                                    </div>
+                                                </p>
+                                                <p style="background-color: #301545; color: white; padding: 10px;">
+                                                    <span style="font-size: 20px; font-weight: bold;">Did you/your team make ALL of the music? <span class="required">*</span></span><br>
+                                                    <input type="radio" name="music" value="No" id="music-no" required style="font-size: 18px;"> No<br>
+                                                    <input type="radio" name="music" value="Yes, and it is copyright free" id="music-yes-free" required style="font-size: 18px;"> Yes, and it is copyright free<br>
+                                                    <input type="radio" name="music" value="Yes, and it is copyrighted (or will be)" id="music-yes-copyright" required style="font-size: 18px;"> Yes, and it is copyrighted (or will be)<br>
+                                                    <div id="streamer-mode-container" class="hidden" style="background-color: #301545; color: white; padding: 10px;">
+                                                        <input type="checkbox" name="streamer-mode" id="streamer-mode" style="font-size: 18px;"> Has a Streamer Mode
+                                                    </div>
+                                                </p>
+                                                <p style="background-color: #162553; color: white; padding: 10px;">
+                                                    <span style="font-size: 20px; font-weight: bold;">Your itch.io Name <span class="required">*</span></span><br>
+                                                    <input type="text" name="itchio-name" id="itchio-name" required title="Enter your itch.io name" placeholder="Your itch.io name" />
+                                                </p>
+                                                <p style="background-color: #301545; color: white; padding: 10px;">
+                                                    <span style="font-size: 20px; font-weight: bold;">Your YouTube Chat Name (Optional)</span><br>
+                                                    <input type="text" name="youtube-chat-name" id="youtube-chat-name" placeholder="Your YouTube Chat name" />
+                                                </p>
+                                                <p style="background-color: #162553; color: white; padding: 10px;">
+                                                    <span style="font-size: 20px; font-weight: bold;">Got any notes to add? (Optional)</span><br>
+                                                    <textarea name="notes" id="notes" rows="4" cols="40" placeholder="Any additional notes or comments"></textarea>
+                                                </p>
+                                                <p class="hidden">
+                                                    <label for="bot-field">Don't fill this out if you're human:</label>
+                                                    <input name="bot-field" id="bot-field" placeholder="Leave this field empty" />
+                                                </p>
+                                                <p>
+                                                    <button type="submit" class="button icon solid fa-plus" id="submit-button">Join Queue</button>
+                                                </p>
+                                            </form>
+                                            
+                                            <footer>
+                                                <!-- <i><b>NOTE:</b> "Join Queue" only works on Fridays!</i> -->
+                                            </footer>
+                                        </section>                                     
                                         
                                         <footer>
                                             <!-- <i><b>NOTE:</b> "Join Queue" only works on Fridays!</i> -->
@@ -147,7 +154,7 @@
                     const musicYesCopyright = document.getElementById('music-yes-copyright');
                     const streamerModeContainer = document.getElementById('streamer-mode-container');
                     const requiredFields = document.querySelectorAll('input[required], select[required]');
-
+            
                     function checkRequiredFields() {
                         for (const field of requiredFields) {
                             if (!field.value) {
@@ -163,15 +170,15 @@
                         }
                         return true;
                     }
-
+            
                     submitButton.disabled = !checkRequiredFields();
-
+            
                     document.querySelectorAll('input').forEach(input => {
                         input.addEventListener('input', function () {
                             submitButton.disabled = !checkRequiredFields();
                         });
                     });
-
+            
                     jamNo.addEventListener('change', function () {
                         if (jamNo.checked) {
                             locationContainer.classList.remove('hidden');
@@ -183,7 +190,7 @@
                         }
                         submitButton.disabled = !checkRequiredFields();
                     });
-
+            
                     jamYes.addEventListener('change', function () {
                         if (jamYes.checked) {
                             locationContainer.classList.add('hidden');
@@ -192,26 +199,26 @@
                         }
                         submitButton.disabled = !checkRequiredFields();
                     });
-
+            
                     musicNo.addEventListener('change', function () {
                         streamerModeContainer.classList.remove('hidden');
                         submitButton.disabled = !checkRequiredFields();
                     });
-
+            
                     musicYesFree.addEventListener('change', function () {
                         streamerModeContainer.classList.add('hidden');
                         const streamerModeCheckbox = document.getElementById('streamer-mode');
                         streamerModeCheckbox.checked = false;
                         submitButton.disabled = !checkRequiredFields();
                     });
-
+            
                     musicYesCopyright.addEventListener('change', function () {
                         streamerModeContainer.classList.remove('hidden');
                         submitButton.disabled = !checkRequiredFields();
                     });
                 });
-
-                </script>
+            
+            </script>
                 
 
                 <!-- Header/Footer -->
