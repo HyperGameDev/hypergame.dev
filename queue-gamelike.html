@@ -59,7 +59,6 @@
 
                                     <!-- Sidebar -->
                                     <section>
-                                        <h3>Join up so your game gets played sooner than later!</h3>
                                         <section>
                                             <h3>Join up so your game gets played sooner than later!</h3>
                                             <form name="queue-gamelike" action="messages/queue-joined.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
@@ -82,7 +81,9 @@
                                                     <input type="radio" name="music" value="Yes, and it is copyright free" id="music-yes-free" required style="font-size: 18px;"> Yes, and it is copyright free<br>
                                                     <input type="radio" name="music" value="Yes, and it is copyrighted (or will be)" id="music-yes-copyright" required style="font-size: 18px;"> Yes, and it is copyrighted (or will be)<br>
                                                     <div id="streamer-mode-container" class="hidden" style="background-color: #301545; color: white; padding: 10px;">
-                                                        <input type="checkbox" name="streamer-mode" id="streamer-mode" style="font-size: 18px;"> Has a Streamer Mode
+                                                        <span style="font-size: 20px; font-weight: bold;">Has a Streamer Mode <span class="required">*</span></span><br>
+                                                        <input type="radio" name="streamer-mode" value="Yes" id="streamer-yes" required style="font-size: 18px;"> Yes<br>
+                                                        <input type="radio" name="streamer-mode" value="No" id="streamer-no" required style="font-size: 18px;"> No<br>
                                                     </div>
                                                 </p>
                                                 <p style="background-color: #162553; color: white; padding: 10px;">
@@ -105,6 +106,11 @@
                                                     <button type="submit" class="button icon solid fa-plus" id="submit-button">Join Queue</button>
                                                 </p>
                                             </form>
+                                            
+                                            <footer>
+                                                <!-- <i><b>NOTE:</b> "Join Queue" only works on Fridays!</i> -->
+                                            </footer>
+                                        </section>                                   
                                             
                                             <footer>
                                                 <!-- <i><b>NOTE:</b> "Join Queue" only works on Fridays!</i> -->
@@ -165,8 +171,7 @@
                             return false;
                         }
                         if (musicNo.checked || musicYesCopyright.checked) {
-                            const streamerModeCheckbox = document.getElementById('streamer-mode');
-                            return streamerModeCheckbox.checked;
+                            return document.querySelector('input[name="streamer-mode"]:checked') !== null;
                         }
                         return true;
                     }
@@ -207,8 +212,7 @@
             
                     musicYesFree.addEventListener('change', function () {
                         streamerModeContainer.classList.add('hidden');
-                        const streamerModeCheckbox = document.getElementById('streamer-mode');
-                        streamerModeCheckbox.checked = false;
+                        document.querySelectorAll('input[name="streamer-mode"]').forEach(el => el.checked = false);
                         submitButton.disabled = !checkRequiredFields();
                     });
             
@@ -217,7 +221,6 @@
                         submitButton.disabled = !checkRequiredFields();
                     });
                 });
-            
             </script>
                 
 
