@@ -150,78 +150,94 @@
             <!-- Submit Disable -->
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
-                    const submitButton = document.getElementById('submit-button');
-                    const jamNo = document.getElementById('jam-no');
-                    const jamYes = document.getElementById('jam-yes');
-                    const locationContainer = document.getElementById('location-container');
-                    const locationField = document.getElementById('location');
-                    const musicNo = document.getElementById('music-no');
-                    const musicYesFree = document.getElementById('music-yes-free');
-                    const musicYesCopyright = document.getElementById('music-yes-copyright');
-                    const streamerModeContainer = document.getElementById('streamer-mode-container');
-                    const requiredFields = document.querySelectorAll('input[required], select[required]');
-            
-                    function checkRequiredFields() {
-                        for (const field of requiredFields) {
-                            if (!field.value) {
-                                return false;
-                            }
-                        }
-                        if (jamNo.checked && !locationField.value) {
-                            return false;
-                        }
-                        if (musicNo.checked || musicYesCopyright.checked) {
-                            return document.querySelector('input[name="streamer-mode"]:checked') !== null;
-                        }
-                        return true;
+                  const submitButton = document.getElementById('submit-button');
+                  const jamNo = document.getElementById('jam-no');
+                  const jamYes = document.getElementById('jam-yes');
+                  const locationContainer = document.getElementById('location-container');
+                  const locationField = document.getElementById('location');
+                  const musicNo = document.getElementById('music-no');
+                  const musicYesFree = document.getElementById('music-yes-free');
+                  const musicYesCopyright = document.getElementById('music-yes-copyright');
+                  const streamerModeContainer = document.getElementById('streamer-mode-container');
+                  const streamerYes = document.getElementById('streamer-yes');
+                  const streamerNo = document.getElementById('streamer-no');
+                  const requiredFields = document.querySelectorAll('input[required], select[required]');
+              
+                  function checkRequiredFields() {
+                    for (const field of requiredFields) {
+                      if (!field.value) {
+                        return false;
+                      }
                     }
-            
+                    if (jamNo.checked && !locationField.value) {
+                      return false;
+                    }
+                    if (musicNo.checked || musicYesCopyright.checked) {
+                      return document.querySelector('input[name="streamer-mode"]:checked') !== null;
+                    }
+                    return true;
+                  }
+              
+                  function updateStreamerModeRequired() {
+                    if (musicNo.checked || musicYesCopyright.checked) {
+                      streamerYes.required = true;
+                      streamerNo.required = true;
+                    } else {
+                      streamerYes.required = false;
+                      streamerNo.required = false;
+                    }
+                  }
+              
+                  submitButton.disabled = !checkRequiredFields();
+              
+                  document.querySelectorAll('input').forEach(input => {
+                    input.addEventListener('input', function () {
+                      submitButton.disabled = !checkRequiredFields();
+                    });
+                  });
+              
+                  jamNo.addEventListener('change', function () {
+                    if (jamNo.checked) {
+                      locationContainer.classList.remove('hidden');
+                      locationField.required = true;
+                    } else {
+                      locationContainer.classList.add('hidden');
+                      locationField.value = '';
+                      locationField.required = false;
+                    }
                     submitButton.disabled = !checkRequiredFields();
-            
-                    document.querySelectorAll('input').forEach(input => {
-                        input.addEventListener('input', function () {
-                            submitButton.disabled = !checkRequiredFields();
-                        });
-                    });
-            
-                    jamNo.addEventListener('change', function () {
-                        if (jamNo.checked) {
-                            locationContainer.classList.remove('hidden');
-                            locationField.required = true;
-                        } else {
-                            locationContainer.classList.add('hidden');
-                            locationField.value = '';
-                            locationField.required = false;
-                        }
-                        submitButton.disabled = !checkRequiredFields();
-                    });
-            
-                    jamYes.addEventListener('change', function () {
-                        if (jamYes.checked) {
-                            locationContainer.classList.add('hidden');
-                            locationField.value = '';
-                            locationField.required = false;
-                        }
-                        submitButton.disabled = !checkRequiredFields();
-                    });
-            
-                    musicNo.addEventListener('change', function () {
-                        streamerModeContainer.classList.remove('hidden');
-                        submitButton.disabled = !checkRequiredFields();
-                    });
-            
-                    musicYesFree.addEventListener('change', function () {
-                        streamerModeContainer.classList.add('hidden');
-                        document.querySelectorAll('input[name="streamer-mode"]').forEach(el => el.checked = false);
-                        submitButton.disabled = !checkRequiredFields();
-                    });
-            
-                    musicYesCopyright.addEventListener('change', function () {
-                        streamerModeContainer.classList.remove('hidden');
-                        submitButton.disabled = !checkRequiredFields();
-                    });
+                  });
+              
+                  jamYes.addEventListener('change', function () {
+                    if (jamYes.checked) {
+                      locationContainer.classList.add('hidden');
+                      locationField.value = '';
+                      locationField.required = false;
+                    }
+                    submitButton.disabled = !checkRequiredFields();
+                  });
+              
+                  musicNo.addEventListener('change', function () {
+                    streamerModeContainer.classList.remove('hidden');
+                    updateStreamerModeRequired();
+                    submitButton.disabled = !checkRequiredFields();
+                  });
+              
+                  musicYesFree.addEventListener('change', function () {
+                    streamerModeContainer.classList.add('hidden');
+                    document.querySelectorAll('input[name="streamer-mode"]').forEach(el => el.checked = false);
+                    updateStreamerModeRequired();
+                    submitButton.disabled = !checkRequiredFields();
+                  });
+              
+                  musicYesCopyright.addEventListener('change', function () {
+                    streamerModeContainer.classList.remove('hidden');
+                    updateStreamerModeRequired();
+                    submitButton.disabled = !checkRequiredFields();
+                  });
                 });
-            </script>
+              </script>
+              
                 
 
                 <!-- Header/Footer -->
