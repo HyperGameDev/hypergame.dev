@@ -304,7 +304,7 @@ footer, header, hgroup, menu, nav, section {
 		}
 
 		.row > .col-4 {
-			width: 33.33333%;
+			width: 60%;
 		}
 
 		.row > .off-4 {
@@ -336,7 +336,7 @@ footer, header, hgroup, menu, nav, section {
 		}
 
 		.row > .col-8 {
-			width: 66.66667%;
+			width: 40%;
 		}
 
 		.row > .off-8 {
@@ -1496,8 +1496,15 @@ footer, header, hgroup, menu, nav, section {
 /* Forms */
 
 	input[type="radio"] {
-		margin: 0 5px 0 0; /* Adds spacing between radio button and label */
+		appearance: auto !important;
 	}
+
+	input[type="checkbox"] {
+		appearance: auto !important;
+	}
+
+
+
 
     .hidden {
         display: none;
