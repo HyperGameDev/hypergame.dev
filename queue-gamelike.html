@@ -108,19 +108,9 @@
                                             </form>
                                             
                                             <footer>
-                                                <!-- <i><b>NOTE:</b> "Join Queue" only works on Fridays!</i> -->
+                                                <i><b>NOTE:</b> "Join Queue" only works during the week prior to a showcase stream!</i>
                                             </footer>
                                         </section>                                   
-                                            
-                                            <footer>
-                                                <!-- <i><b>NOTE:</b> "Join Queue" only works on Fridays!</i> -->
-                                            </footer>
-                                        </section>                                     
-                                        
-                                        <footer>
-                                            <!-- <i><b>NOTE:</b> "Join Queue" only works on Fridays!</i> -->
-                                        </footer>
-                                    </section>
                                     
 
                                         <section>
@@ -146,8 +136,7 @@
 			<div id="footer-container"></div> </div>
 
         <!-- Scripts -->
-
-            <!-- Submit Disable -->
+            <!-- Form listeners -->
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
                   const submitButton = document.getElementById('submit-button');
@@ -162,7 +151,8 @@
                   const streamerYes = document.getElementById('streamer-yes');
                   const streamerNo = document.getElementById('streamer-no');
                   const requiredFields = document.querySelectorAll('input[required], select[required]');
-              
+                  const submitOverride = false; // Set this boolean to True to enable the submit button
+                  
                   function checkRequiredFields() {
                     for (const field of requiredFields) {
                       if (!field.value) {
@@ -177,7 +167,7 @@
                     }
                     return true;
                   }
-              
+                
                   function updateStreamerModeRequired() {
                     if (musicNo.checked || musicYesCopyright.checked) {
                       streamerYes.required = true;
@@ -187,15 +177,23 @@
                       streamerNo.required = false;
                     }
                   }
-              
-                  submitButton.disabled = !checkRequiredFields();
-              
+                
+                  function updateSubmitButtonState() {
+                    if (!submitOverride) {
+                      submitButton.disabled = true;
+                    } else {
+                      submitButton.disabled = !checkRequiredFields();
+                    }
+                  }
+                
+                  updateSubmitButtonState();
+                
                   document.querySelectorAll('input').forEach(input => {
                     input.addEventListener('input', function () {
-                      submitButton.disabled = !checkRequiredFields();
+                      updateSubmitButtonState();
                     });
                   });
-              
+                
                   jamNo.addEventListener('change', function () {
                     if (jamNo.checked) {
                       locationContainer.classList.remove('hidden');
@@ -205,38 +203,39 @@
                       locationField.value = '';
                       locationField.required = false;
                     }
-                    submitButton.disabled = !checkRequiredFields();
+                    updateSubmitButtonState();
                   });
-              
+                
                   jamYes.addEventListener('change', function () {
                     if (jamYes.checked) {
                       locationContainer.classList.add('hidden');
                       locationField.value = '';
                       locationField.required = false;
                     }
-                    submitButton.disabled = !checkRequiredFields();
+                    updateSubmitButtonState();
                   });
-              
+                
                   musicNo.addEventListener('change', function () {
                     streamerModeContainer.classList.remove('hidden');
                     updateStreamerModeRequired();
-                    submitButton.disabled = !checkRequiredFields();
+                    updateSubmitButtonState();
                   });
-              
+                
                   musicYesFree.addEventListener('change', function () {
                     streamerModeContainer.classList.add('hidden');
                     document.querySelectorAll('input[name="streamer-mode"]').forEach(el => el.checked = false);
                     updateStreamerModeRequired();
-                    submitButton.disabled = !checkRequiredFields();
+                    updateSubmitButtonState();
                   });
-              
+                
                   musicYesCopyright.addEventListener('change', function () {
                     streamerModeContainer.classList.remove('hidden');
                     updateStreamerModeRequired();
-                    submitButton.disabled = !checkRequiredFields();
+                    updateSubmitButtonState();
                   });
                 });
               </script>
+            
               
                 
 
