@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<!--
+	Verti by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en" data-current-navlink="Live Queues">
+	<head>
+		<meta name="description" content="Official Website for the Hyper Game Dev YouTube Channel and Community.">
+		<title>Hyper Game Dev!</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+
+        <!-- Favicon Links -->
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="icon" type="image/svg+xml" href="favicon.svg">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="manifest" href="site.webmanifest">
+    </head>
+    <body class="is-preload homepage" data-current-navlink="Live Queues">
+        <noscript>
+            <div class="noscript-warning">
+                <p>JavaScript is disabled in your browser. Please enable JavaScript to view this website properly!</p>
+            </div>
+        </noscript>
+        <div id="page-wrapper">
+            <!-- Header -->
+            <div id="header-container"></div>
+
+            <!-- Main -->
+                <div id="main-wrapper">
+                    <div class="container">
+                        <div id="content">
+
+                            <!-- Content -->
+                                <article>
+
+                                    <h2>Privacy Policy</h2>
+                                    <p>Last updated: March 13th, 2025</p>
+
+                                    <h3>1. Introduction</h3>
+                                    <p>Welcome to <strong>HyperGame.Dev</strong>! This Privacy Policy explains how we collect, use, and protect your personal information when you visit our website or interact with our services. By using our website, you agree to the terms outlined in this policy.</p>
+
+                                    <h3>2. Information We Collect</h3>
+                                    <p>We collect the following types of information:</p>
+                                    <ul>
+                                        <li><strong>Information You Provide:</strong> When you fill out forms on our website (e.g., joining a queue or contacting us), we collect the information you provide, such as your name, email address, and message.</li>
+                                        <li><strong>Automatically Collected Information:</strong> When you visit our website, we may collect your IP address and browsing behavior using cookies or similar technologies.</li>
+                                        <li><strong>Third-Party Information:</strong> If you interact with embedded content (e.g., YouTube videos), third-party services may collect information about you. We do not control or have access to this data.</li>
+                                    </ul>
+
+                                    <h3>3. How We Use Your Information</h3>
+                                    <p>We use your information for the following purposes:</p>
+                                    <ul>
+                                        <li>To respond to your inquiries or requests.</li>
+                                        <li>To manage queues for livestreams and notify you when it's your turn to share your project.</li>
+                                        <li>To improve our website and services.</li>
+                                        <li>To send you newsletters or updates (only if you explicitly opt-in).</li>
+                                    </ul>
+
+                                    <h3>4. Data Retention</h3>
+                                    <p>We retain your information only for as long as necessary to fulfill the purposes outlined in this policy:</p>
+                                    <ul>
+                                        <li><strong>Queue Data:</strong> Data submitted for livestream queues is deleted within 24 hours of the stream's completion.</li>
+                                        <li><strong>Contact Form Data:</strong> Data submitted through contact forms is retained until your inquiry is resolved.</li>
+                                        <li><strong>Newsletter Data:</strong> If you opt-in to our newsletter, your email address will be retained until you unsubscribe.</li>
+                                    </ul>
+
+                                    <h3>5. Third-Party Services</h3>
+                                    <p>Our website uses third-party services that may collect information about you:</p>
+                                    <ul>
+                                        <li><strong>YouTube:</strong> Embedded YouTube videos may use cookies to track your viewing behavior. We do not control or have access to this data. For more information, please review <a href="https://policies.google.com/privacy" target="_blank">YouTube's Privacy Policy</a>.</li>
+                                        <li><strong>Netlify:</strong> We use Netlify to process form submissions. Netlify may collect your IP address and form data. For more information, please review <a href="https://www.netlify.com/privacy/" target="_blank">Netlify's Privacy Policy</a>.</li>
+                                    </ul>
+
+                                    <h3>6. Your Rights</h3>
+                                    <p>Under applicable data protection laws (e.g., GDPR), you have the following rights:</p>
+                                    <ul>
+                                        <li><strong>Access:</strong> You can request a copy of the personal data we hold about you.</li>
+                                        <li><strong>Correction:</strong> You can request that we correct inaccurate or incomplete data.</li>
+                                        <li><strong>Deletion:</strong> You can request that we delete your personal data.</li>
+                                        <li><strong>Opt-Out:</strong> You can opt-out of receiving newsletters or updates at any time.</li>
+                                    </ul>
+                                    <p>To exercise these rights, please contact us using the <a href="contact.html">Contact Form</a>.</p>
+
+                                    <h3>7. Changes to This Policy</h3>
+                                    <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated "Last updated" date. We encourage you to review this policy periodically.</p>
+
+                                    <h3>8. Contact Us</h3>
+                                    <p>If you have any questions or concerns about this Privacy Policy, please contact us using the <a href="contact.html">Contact Form</a>.</p>
+
+                                </article>
+
+                        </div>
+                    </div>
+                </div>
+
+		<!-- Footer -->
+			<div id="footer-container"></div> </div>
+
+        <!-- Scripts -->
+
+            <!-- Header/Footer -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    function loadContent(url, containerId) {
+                        fetch(url)
+                            .then(response => response.text())
+                            .then(data => {
+                                document.getElementById(containerId).innerHTML = data;
+                                if (containerId === 'header-container') {
+                                    applyDropdownFunctionality();
+                                    updateFlyoutMenu();
+                                    applyCurrentNavLinkClass(); // Apply current class after header is loaded
+                                }
+                            });
+                    }
+
+                    function applyDropdownFunctionality() {
+                        jQuery(document).ready(function($) {
+                            $('#nav > ul').dropotron({
+                                alignment: 'right',
+                                mode: 'fade',
+                                noOpenerFade: true,
+                                speed: 300
+                            });
+                        });
+                    }
+
+                    function updateFlyoutMenu() {
+                        const navLinks = document.querySelectorAll('#nav ul li a');
+                        const navPanel = document.querySelector('#navPanel nav');
+
+                        if (navPanel) {
+                            navPanel.innerHTML = ''; // Clear previous links
+                            navLinks.forEach(link => {
+                                const newLink = document.createElement('a');
+                                newLink.href = link.href;
+                                newLink.textContent = link.textContent;
+                                newLink.className = 'link depth-0';
+                                navPanel.appendChild(newLink);
+                            });
+                        } else {
+                            console.error('Nav panel container not found!');
+                        }
+                    }
+
+                    // Apply the "current" class based on the data-current-navlink attribute
+                    function applyCurrentNavLinkClass() {
+                        const navLinks = document.querySelectorAll('#nav a');
+                        const currentPageNavLink = document.documentElement.getAttribute('data-current-navlink');
+
+                        if (!currentPageNavLink) {
+                            console.error('No data-current-navlink attribute found.');
+                            return;
+                        }
+
+                        navLinks.forEach(link => {
+                            const linkText = link.textContent.trim();
+                            if (linkText === currentPageNavLink) {
+                                link.parentElement.classList.add('current');
+                                const parentLi = link.closest('li');
+                                if (parentLi && parentLi.parentElement.closest('li')) {
+                                    parentLi.parentElement.closest('li').classList.add('current');
+                                }
+                            }
+                        });
+                    }
+
+                    loadContent('header.html', 'header-container');
+                    loadContent('footer.html', 'footer-container');
+                });
+            </script>
+
+
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/jquery.dropotron.min.js"></script>
+            <script src="assets/js/browser.min.js"></script>
+            <script src="assets/js/breakpoints.min.js"></script>
+            <script src="assets/js/util.js"></script>
+            <script src="assets/js/main.js"></script>
+
+    </body>
+</html>

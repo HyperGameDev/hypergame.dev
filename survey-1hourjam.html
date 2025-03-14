@@ -1,0 +1,533 @@
+<!DOCTYPE HTML>
+<!--
+	Verti by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en" data-current-navlink="Live Queues">
+	<head>
+		<meta name="description" content="Official Website for the Hyper Game Dev YouTube Channel and Community.">
+		<title>Hyper Game Dev!</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+
+        <!-- Favicon Links -->
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="icon" type="image/svg+xml" href="favicon.svg">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="manifest" href="site.webmanifest">
+
+        <style>
+            .blue-box {
+                background-color: #162553; /* Blue hex code */
+                color: white;
+                padding: 10px;
+            }
+            .purple-box {
+                background-color: #301545; /* Purple hex code */
+                color: white;
+                padding: 10px;
+            }
+            .invisible-box {
+                background-color: transparent; /* Invisible background */
+                padding: 10px;
+            }
+            .hidden {
+                display: none;
+            }
+        </style>    
+
+    </head>
+    <body class="is-preload homepage" data-current-navlink="Live Queues">
+        <noscript>
+            <div class="noscript-warning">
+                <p>JavaScript is disabled in your browser. Please enable JavaScript to view this website properly!</p>
+            </div>
+        </noscript>
+        <div id="page-wrapper">
+            <!-- Header -->
+            <div id="header-container"></div>
+
+            <!-- Main -->
+            <div id="main-wrapper">
+                <div class="container">
+                    <div class="row gtr-200">
+                        <div class="col-8 col-12-medium">
+                            <div id="content">
+                                <!-- Content -->
+                                <article>
+                                    <h2>HGD Game Jams Survey</h2>
+                                    <h3>Help me make a video about the jams!</h3>
+                                    <br></br>
+                                    <h2>Privacy Information</h2>
+<h4>How will my responses be used?</h4>
+<p>The text and data you submit will aid the scriptwriting process for at least one future YouTube video about the Hyper 1 Hour Game Jam and/or Game-like Jam. Your responses are completely anonymous unless 1) the survey asks if you'd like to participate in an interview and 2) you agree to participate in that interview or 3) you incidentally disclose personal information in any of your responses. If you do agree to participate in an interview, you'll be asked for your email address.</p>
+
+<h4>What other information will you track about me?</h4>
+<p>The only information collected (besides what you provide in your responses) is an IP address associated with your browsing session. Your email address, and/or IP address, and/or any other identifying information incidentally included in your responses will not be disclosed to anyone other than the video editor(s) compiling each submission.</p>
+
+<h4>How long will the information you collect be stored?</h4>
+<p>Your IP address will be removed from any storage or server within 30 days of your submission. Any responses you submit will be stored as long as necessary to complete the YouTube video(s) associated with the survey. If the video(s) are not complete after a period of 6 months, the data will be anonymized in accordance with GDPR standards, meaning it can no longer be linked to you.</p>
+
+<h4>What are my rights under GDPR?</h4>
+<p>Under GDPR, you have the right to access, correct, or restrict the processing of your data. You also have the right to request the removal of your information or responses. To exercise these rights, please contact us using the <a href="contact.html">Contact Page</a>. If your data has been anonymized, it will only be removed after the necessary video(s) have been released. If the video has already been released, please note that the YouTube video(s) will not be updated to reflect your removal.</p>
+
+<h4>Third-Party Services</h4>
+<p>We use third-party services, such as Netlify, to process and store your data. These services are compliant with GDPR and other applicable data protection laws. Your data may be transferred to and processed in countries outside the EU/EEA. We ensure that such transfers comply with GDPR and that adequate safeguards are in place.</p>
+
+<h4>Contact Information</h4>
+<p>For any questions or requests regarding your data, please contact Hyper Game Dev through the <a href="contact.html">Contact Page</a>.</p>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="col-4 col-12-medium">
+                            <div id="sidebar">
+                                <!-- Sidebar -->
+                                <section>
+                                    <h3>Hyper Game Jams Survey</h3>
+                                    <form name="survey-1hourjam" action="messages/survey-submitted.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                                        <!-- Question 1.1 -->
+                                        <p class="blue-box">
+                                            <span style="font-size: 20px; font-weight: bold;">Have you ever watched or participated in a Hyper 1 Hour Game Jam? <span class="required">*</span></span><br>
+                                            <input type="radio" name="q1-1" value="No" id="q1-1-no" required> No<br>
+                                            <input type="radio" name="q1-1" value="Watched" id="q1-1-watched" required> Watched<br>
+                                            <input type="radio" name="q1-1" value="Participated" id="q1-1-participated" required> Participated<br>
+                                        </p>
+                                    
+                                        <!-- Question 2.1.1 -->
+                                        <div id="q2-1-1-container" class="purple-box hidden">
+                                            <span style="font-size: 20px; font-weight: bold;">Have you heard of, watched, or participated in a Game-like Jam yet? <span class="required">*</span></span><br>
+                                            <input type="radio" name="q2-1-1" value="No" id="q2-1-1-no" required> No<br>
+                                            <input type="radio" name="q2-1-1" value="Heard or Watched" id="q2-1-1-heard-watched" required> Heard of it or Watched it<br>
+                                            <input type="radio" name="q2-1-1" value="Participated" id="q2-1-1-participated" required> Participated<br>
+                                        </div>
+                                    
+                                        <!-- Question 1.2 -->
+                                        <div id="q1-2-container" class="blue-box hidden">
+                                            <span style="font-size: 20px; font-weight: bold;">What are your favorite memories from the 1 Hour Game Jam? <span class="required">*</span></span><br>
+                                            <textarea name="q1-2" id="q1-2" rows="4" cols="40" required placeholder="Share your favorite memories"></textarea>
+                                        </div>
+                                    
+                                        <!-- Question 1.3.1 -->
+                                        <div id="q1-3-1-container" class="blue-box hidden">
+                                            <span style="font-size: 20px; font-weight: bold;">What did you learn or gain from participating in the 1 Hour Game Jam? <span class="required">*</span></span><br>
+                                            <textarea name="q1-3-1" id="q1-3-1" rows="4" cols="40" required placeholder="Share what you learned or gained"></textarea>
+                                        </div>
+                                    
+                                        <!-- Question 1.3.2 -->
+                                        <div id="q1-3-2-container" class="blue-box hidden">
+                                            <span style="font-size: 20px; font-weight: bold;">Of your 1 Hour Jam entries, which is/are your favorite? Please include URL(s). <span class="required">*</span></span><br>
+                                            <textarea name="q1-3-2" id="q1-3-2" rows="4" cols="40" required placeholder="List your favorite entries with URLs"></textarea>
+                                        </div>
+                                    
+                                        <!-- Question 1.3.3 -->
+                                        <div id="q1-3-3-container" class="blue-box hidden">
+                                            <span style="font-size: 20px; font-weight: bold;">What do you think the pros/cons are of the 1 Hour Game Jam format? <span class="required">*</span></span><br>
+                                            <table>
+                                                <tr>
+                                                    <td><textarea name="q1-3-3-pros" id="q1-3-3-pros" rows="4" cols="20" placeholder="Pros"></textarea></td>
+                                                    <td><textarea name="q1-3-3-cons" id="q1-3-3-cons" rows="4" cols="20" placeholder="Cons"></textarea></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    
+                                        <!-- Question 2.1.2.1 -->
+                                        <div id="q2-1-2-1-container" class="purple-box hidden">
+                                            <span style="font-size: 20px; font-weight: bold;">What are your initial thoughts or expectations for the Game-like Jam? <span class="required">*</span></span><br>
+                                            <textarea name="q2-1-2-1" id="q2-1-2-1" rows="4" cols="40" required placeholder="Share your thoughts or expectations"></textarea>
+                                        </div>
+                                    
+                                        <!-- Question 2.1.2.2 -->
+                                        <div id="q2-1-2-2-container" class="purple-box hidden">
+                                            <span style="font-size: 20px; font-weight: bold;">How does the Game-like Jam compare to the 1 Hour Game Jam in terms of enjoyment and skill development? <span class="required">*</span></span><br>
+                                            <textarea name="q2-1-2-2" id="q2-1-2-2" rows="4" cols="40" required placeholder="Compare the two jams"></textarea>
+                                        </div>
+                                    
+                                        <!-- Question 2.1.3 -->
+                                        <div id="q2-1-3-container" class="blue-box hidden">
+                                            <span style="font-size: 20px; font-weight: bold;">Would you be willing to participate in a YouTube video about the history of the 1 Hour Game Jam? <span class="required">*</span></span><br>
+                                            <input type="radio" name="q2-1-3" value="No" id="q2-1-3-no" required> No<br>
+                                            <input type="radio" name="q2-1-3" value="Yes" id="q2-1-3-yes" required> Yes<br>
+                                        </div>
+                                    
+                                        <!-- Question 2.1.4 -->
+                                        <div id="q2-1-4-container" class="blue-box hidden">
+                                            <span style="font-size: 20px; font-weight: bold;">How would you be willing to participate in the YouTube video? <span class="required">*</span></span><br>
+                                            <input type="checkbox" name="q2-1-4" value="Text interview" id="q2-1-4-text"> Text interview<br>
+                                            <input type="checkbox" name="q2-1-4" value="Voice interview" id="q2-1-4-voice"> Voice interview<br>
+                                            <input type="checkbox" name="q2-1-4" value="Video interview" id="q2-1-4-video"> Video interview<br>
+                                        </div>
+                                    
+                                        <!-- Question 2.1.5 -->
+                                        <div id="q2-1-5-container" class="blue-box hidden">
+                                            <span style="font-size: 20px; font-weight: bold;">Please provide a valid email address: <span class="required">*</span></span><br>
+                                            <input type="email" name="q2-1-5" id="q2-1-5" required placeholder="Enter your email">
+                                        </div>
+                                    
+                                        <!-- Question 2.2 (always visible and last) -->
+                                        <div id="q2-2-container" class="invisible-box">
+                                            <span style="font-size: 20px; font-weight: bold;">Anything else you want to add? (Optional)</span><br>
+                                            <textarea name="q2-2" id="q2-2" rows="4" cols="40" placeholder="Any additional notes or comments"></textarea>
+                                        </div>
+                                    
+                                        <!-- Submit Button -->
+                                        <p>
+                                            <br><br>
+                                            <button type="submit" class="button icon solid fa-plus" id="submit-button" disabled>Submit Survey</button>
+                                        </p>
+                                    </form>
+                                        
+                                    <footer>
+                                        <i><b>NOTE:</b> Submit will only work if the required fields have been filled out.</i>
+                                    </footer>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div id="footer-container"></div>
+        </div>
+
+        <!-- Scripts -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const debugMode = true; // Toggle to false to disable debug logging.
+                const submitButton = document.getElementById('submit-button');
+                const prosField = document.getElementById('q1-3-3-pros');
+                const consField = document.getElementById('q1-3-3-cons');
+        
+                /**
+                 * Validate the pros and cons fields (Question 1.3.3).
+                 */
+                function validateProsCons() {
+                    let valid = false;
+                    if (prosField.offsetParent !== null || consField.offsetParent !== null) {
+                        if (prosField.value.trim().length > 0 || consField.value.trim().length > 0) {
+                            prosField.style.border = '';
+                            consField.style.border = '';
+                            valid = true;
+                        } else {
+                            prosField.style.border = '2px solid red';
+                            consField.style.border = '2px solid red';
+                        }
+                    } else {
+                        valid = true; // Ignore validation if not visible.
+                    }
+                    return valid;
+                }
+        
+                /**
+                 * Validate all visible textareas for minimum character count.
+                 */
+                function validateTextareas() {
+                    let allTextareasValid = true;
+                    document.querySelectorAll('textarea[required]').forEach(textarea => {
+                        if (textarea.offsetParent !== null && textarea.value.trim().length < 5) {
+                            textarea.style.border = '2px solid red';
+                            allTextareasValid = false;
+                        } else {
+                            textarea.style.border = '';
+                        }
+                    });
+                    return allTextareasValid;
+                }
+        
+                /**
+                 * Validate that each visible radio group has at least one selection.
+                 */
+                function validateRadios() {
+                    const radioGroups = {};
+                    document.querySelectorAll('input[required][type="radio"]').forEach(radio => {
+                        if (radio.offsetParent !== null) {
+                            if (!radioGroups[radio.name]) {
+                                radioGroups[radio.name] = false;
+                            }
+                            if (radio.checked) {
+                                radioGroups[radio.name] = true;
+                            }
+                        }
+                    });
+                    return Object.values(radioGroups).every(groupIsChecked => groupIsChecked);
+                }
+        
+                /**
+                 * Validate checkboxes for Question 2.1.4 if required.
+                 */
+                function validateCheckboxes() {
+                    const q2_1_3_yes = document.getElementById('q2-1-3-yes');
+                    if (q2_1_3_yes && q2_1_3_yes.offsetParent !== null && q2_1_3_yes.checked) {
+                        const checkedCheckboxes = Array.from(document.querySelectorAll('input[name="q2-1-4"]:checked'));
+                        return checkedCheckboxes.length > 0;
+                    }
+                    return true;
+                }
+        
+                /**
+                 * Generate and log a unique debug code to the console.
+                 */
+                function logDebugInfo() {
+                    if (!debugMode) return;
+        
+                    const filledFields = [];
+                    const unfilledFields = [];
+                    const visibleQuestions = [];
+        
+                    document.querySelectorAll('input, textarea').forEach(field => {
+                        if (field.offsetParent !== null) {
+                            visibleQuestions.push(field.getAttribute('name') || field.id);
+        
+                            if (
+                                (field.type === 'radio' && field.checked) ||
+                                (field.type === 'checkbox' && field.checked) ||
+                                (field.tagName === 'TEXTAREA' && field.value.trim().length > 0)
+                            ) {
+                                filledFields.push(field.getAttribute('name') || field.id);
+                            } else if (
+                                ((field.type === 'radio' || field.type === 'checkbox') && !field.checked) ||
+                                (field.tagName === 'TEXTAREA' && field.value.trim().length === 0)
+                            ) {
+                                unfilledFields.push(field.getAttribute('name') || field.id);
+                            }
+                        }
+                    });
+        
+                    const submitStatus = submitButton.disabled ? "Locked" : "Unlocked";
+                    console.log(`Debug Path Code: Filled: ${filledFields.join(', ')} | Unfilled: ${unfilledFields.join(', ')} | Visible: ${visibleQuestions.join(', ')} | Submit: ${submitStatus}`);
+                }
+        
+                /**
+                 * Check whether all visible, required fields are valid.
+                 */
+                function checkRequiredFields() {
+                    const allTextareasValid = validateTextareas();
+                    const allRadiosValid = validateRadios();
+                    const allProsConsValid = validateProsCons();
+                    const allCheckboxesValid = validateCheckboxes();
+                    return allTextareasValid && allRadiosValid && allProsConsValid && allCheckboxesValid;
+                }
+
+        /**
+         * Enforce a maximum character limit of 5000 for all text inputs and textareas.
+         */
+        function enforceMaxLength() {
+            // Apply to textareas
+            document.querySelectorAll('textarea').forEach(textarea => {
+                textarea.addEventListener('input', function () {
+                    if (textarea.value.length > 5000) {
+                        textarea.value = textarea.value.substring(0, 5000); // Truncate to 5000 characters
+                    }
+                });
+            });
+
+            // Apply to single-line text inputs (including email)
+            document.querySelectorAll('input[type="text"], input[type="email"]').forEach(input => {
+                input.addEventListener('input', function () {
+                    if (input.value.length > 5000) {
+                        input.value = input.value.substring(0, 5000); // Truncate to 5000 characters
+                    }
+                });
+            });
+        }
+
+        // Initial setup
+        updateVisibility();
+        enforceMaxLength(); // Updated function name
+
+
+                /**
+                 * Update the visibility of all containers based on logic conditions.
+                 */
+                function updateVisibility() {
+                    const q1_1_no = document.getElementById('q1-1-no');
+                    const q1_1_watched = document.getElementById('q1-1-watched');
+                    const q1_1_participated = document.getElementById('q1-1-participated');
+                    const q2_1_1_container = document.getElementById('q2-1-1-container');
+                    const q1_2_container = document.getElementById('q1-2-container');
+                    const q1_3_1_container = document.getElementById('q1-3-1-container');
+                    const q1_3_2_container = document.getElementById('q1-3-2-container');
+                    const q1_3_3_container = document.getElementById('q1-3-3-container');
+                    const q2_1_2_1_container = document.getElementById('q2-1-2-1-container');
+                    const q2_1_2_2_container = document.getElementById('q2-1-2-2-container');
+                    const q2_1_3_container = document.getElementById('q2-1-3-container');
+                    const q2_1_4_container = document.getElementById('q2-1-4-container');
+                    const q2_1_5_container = document.getElementById('q2-1-5-container');
+        
+                    // Question 1.1 Logic
+                    if (q1_1_no.checked) {
+                        q2_1_1_container.classList.remove('hidden');
+                        q1_2_container.classList.add('hidden');
+                        q1_3_1_container.classList.add('hidden');
+                        q1_3_2_container.classList.add('hidden');
+                        q1_3_3_container.classList.add('hidden');
+                        q2_1_3_container.classList.add('hidden');
+                        q2_1_4_container.classList.add('hidden');
+                        q2_1_5_container.classList.add('hidden');
+                        q2_1_2_1_container.classList.add('hidden');
+                        q2_1_2_2_container.classList.add('hidden');
+                    } else if (q1_1_watched.checked) {
+                        q1_2_container.classList.remove('hidden');
+                        q2_1_1_container.classList.remove('hidden');
+                        q2_1_3_container.classList.remove('hidden');
+                        q1_3_1_container.classList.add('hidden');
+                        q1_3_2_container.classList.add('hidden');
+                        q1_3_3_container.classList.add('hidden');
+                        q2_1_4_container.classList.add('hidden');
+                        q2_1_5_container.classList.add('hidden');
+                    } else if (q1_1_participated.checked) {
+                        q1_2_container.classList.remove('hidden');
+                        q2_1_1_container.classList.remove('hidden');
+                        q2_1_3_container.classList.remove('hidden');
+                        q1_3_1_container.classList.remove('hidden');
+                        q1_3_2_container.classList.remove('hidden');
+                        q1_3_3_container.classList.remove('hidden');
+                        q2_1_4_container.classList.add('hidden');
+                        q2_1_5_container.classList.add('hidden');
+                    }
+        
+                    // Question 2.1.1 Logic
+                    const q2_1_1_participated = document.getElementById('q2-1-1-participated');
+                    const q2_1_1_heard = document.getElementById('q2-1-1-heard-watched');
+                    if (q2_1_1_participated.checked || q2_1_1_heard.checked) {
+                        q2_1_2_1_container.classList.remove('hidden');
+                        q2_1_3_container.classList.remove('hidden');
+                        if (q2_1_1_participated.checked) {
+                            q2_1_2_2_container.classList.remove('hidden');
+                        } else {
+                            q2_1_2_2_container.classList.add('hidden');
+                        }
+                    } else {
+                        q2_1_2_1_container.classList.add('hidden');
+                        q2_1_2_2_container.classList.add('hidden');
+                        q2_1_3_container.classList.add('hidden');
+                        q2_1_4_container.classList.add('hidden');
+                        q2_1_5_container.classList.add('hidden');
+                    }
+        
+                    // Question 2.1.3 Logic
+                    const q2_1_3_yes = document.getElementById('q2-1-3-yes');
+                    if (q2_1_3_yes && q2_1_3_yes.checked && q2_1_3_container.offsetParent !== null) {
+                        q2_1_4_container.classList.remove('hidden');
+                        q2_1_5_container.classList.remove('hidden');
+                    } else {
+                        q2_1_4_container.classList.add('hidden');
+                        q2_1_5_container.classList.add('hidden');
+                    }
+        
+                    // Always ensure Question 2.2 is visible
+                    const q2_2_container = document.getElementById('q2-2-container');
+                    q2_2_container.classList.remove('hidden');
+        
+                    // Update Submit Button State
+                    updateSubmitButtonState();
+        
+                    // Log Debug Information
+                    logDebugInfo();
+                }
+        
+                /**
+                 * Enable or disable the submit button based on validation results.
+                 */
+                function updateSubmitButtonState() {
+                    submitButton.disabled = !checkRequiredFields();
+                }
+        
+                // Add event listeners to dynamically update visibility and validation
+                document.querySelectorAll('input, textarea').forEach(input => {
+                    input.addEventListener('input', updateVisibility);
+                });
+        
+                // Initial setup to ensure visibility is correct on page load
+                updateVisibility();
+            });
+        </script>
+
+                                    
+                <!-- Header/Footer -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        function loadContent(url, containerId) {
+                            fetch(url)
+                                .then(response => response.text())
+                                .then(data => {
+                                    document.getElementById(containerId).innerHTML = data;
+                                    if (containerId === 'header-container') {
+                                        applyDropdownFunctionality();
+                                        updateFlyoutMenu();
+                                        applyCurrentNavLinkClass(); // Apply current class after header is loaded
+                                    }
+                                });
+                        }
+
+                        function applyDropdownFunctionality() {
+                            jQuery(document).ready(function($) {
+                                $('#nav > ul').dropotron({
+                                    alignment: 'right',
+                                    mode: 'fade',
+                                    noOpenerFade: true,
+                                    speed: 300
+                                });
+                            });
+                        }
+
+                        function updateFlyoutMenu() {
+                            const navLinks = document.querySelectorAll('#nav ul li a');
+                            const navPanel = document.querySelector('#navPanel nav');
+
+                            if (navPanel) {
+                                navPanel.innerHTML = ''; // Clear previous links
+                                navLinks.forEach(link => {
+                                    const newLink = document.createElement('a');
+                                    newLink.href = link.href;
+                                    newLink.textContent = link.textContent;
+                                    newLink.className = 'link depth-0';
+                                    navPanel.appendChild(newLink);
+                                });
+                            } else {
+                                console.error('Nav panel container not found!');
+                            }
+                        }
+
+                        // Apply the "current" class based on the data-current-navlink attribute
+                        function applyCurrentNavLinkClass() {
+                            const navLinks = document.querySelectorAll('#nav a');
+                            const currentPageNavLink = document.documentElement.getAttribute('data-current-navlink');
+
+                            if (!currentPageNavLink) {
+                                console.error('No data-current-navlink attribute found.');
+                                return;
+                            }
+
+                            navLinks.forEach(link => {
+                                const linkText = link.textContent.trim();
+                                if (linkText === currentPageNavLink) {
+                                    link.parentElement.classList.add('current');
+                                    const parentLi = link.closest('li');
+                                    if (parentLi && parentLi.parentElement.closest('li')) {
+                                        parentLi.parentElement.closest('li').classList.add('current');
+                                    }
+                                }
+                            });
+                        }
+
+                        loadContent('header.html', 'header-container');
+                        loadContent('footer.html', 'footer-container');
+                    });
+                </script>
+
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/jquery.dropotron.min.js"></script>
+            <script src="assets/js/browser.min.js"></script>
+            <script src="assets/js/breakpoints.min.js"></script>
+            <script src="assets/js/util.js"></script>
+            <script src="assets/js/main.js"></script>
+
+    </body>
+</html>
+
+
