@@ -304,12 +304,30 @@
                 /**
                  * Check whether all visible, required fields are valid.
                  */
-                function checkRequiredFields() {
-                    const allTextareasValid = validateTextareas();
-                    const allRadiosValid = validateRadios();
-                    const allProsConsValid = validateProsCons();
-                    const allCheckboxesValid = validateCheckboxes();
-                    return allTextareasValid && allRadiosValid && allProsConsValid && allCheckboxesValid;
+                 function checkRequiredFields() {
+                    let allValid = true;
+
+                    // Check visible textareas
+                    document.querySelectorAll('textarea[required]').forEach(textarea => {
+                        if (textarea.offsetParent !== null && textarea.value.trim().length < 5) {
+                            allValid = false;
+                        }
+                    });
+
+                    // Check visible radio buttons
+                    document.querySelectorAll('input[required][type="radio"]').forEach(radio => {
+                        if (radio.offsetParent !== null && !radio.checked) {
+                            allValid = false;
+                        }
+                    });
+
+                    // Check visible email input
+                    const emailField = document.getElementById('q2-1-5');
+                    if (emailField.offsetParent !== null && !emailField.checkValidity()) {
+                        allValid = false;
+                    }
+
+                    return allValid;
                 }
 
         /**
@@ -343,7 +361,7 @@
                 /**
                  * Update the visibility of all containers based on logic conditions.
                  */
-                function updateVisibility() {
+                 function updateVisibility() {
                     const q1_1_no = document.getElementById('q1-1-no');
                     const q1_1_watched = document.getElementById('q1-1-watched');
                     const q1_1_participated = document.getElementById('q1-1-participated');
@@ -357,75 +375,157 @@
                     const q2_1_3_container = document.getElementById('q2-1-3-container');
                     const q2_1_4_container = document.getElementById('q2-1-4-container');
                     const q2_1_5_container = document.getElementById('q2-1-5-container');
-        
+
+                    // Toggle visibility and required attribute for each field
+                    const toggleRequired = (container, isVisible) => {
+                        const inputs = container.querySelectorAll('input, textarea, select');
+                        inputs.forEach(input => {
+                            if (isVisible) {
+                                input.setAttribute('required', true);
+                            } else {
+                                input.removeAttribute('required');
+                            }
+                        });
+                    };
+
                     // Question 1.1 Logic
                     if (q1_1_no.checked) {
                         q2_1_1_container.classList.remove('hidden');
+                        toggleRequired(q2_1_1_container, true);
+
                         q1_2_container.classList.add('hidden');
+                        toggleRequired(q1_2_container, false);
+
                         q1_3_1_container.classList.add('hidden');
+                        toggleRequired(q1_3_1_container, false);
+
                         q1_3_2_container.classList.add('hidden');
+                        toggleRequired(q1_3_2_container, false);
+
                         q1_3_3_container.classList.add('hidden');
+                        toggleRequired(q1_3_3_container, false);
+
                         q2_1_3_container.classList.add('hidden');
+                        toggleRequired(q2_1_3_container, false);
+
                         q2_1_4_container.classList.add('hidden');
+                        toggleRequired(q2_1_4_container, false);
+
                         q2_1_5_container.classList.add('hidden');
+                        toggleRequired(q2_1_5_container, false);
+
                         q2_1_2_1_container.classList.add('hidden');
+                        toggleRequired(q2_1_2_1_container, false);
+
                         q2_1_2_2_container.classList.add('hidden');
+                        toggleRequired(q2_1_2_2_container, false);
                     } else if (q1_1_watched.checked) {
                         q1_2_container.classList.remove('hidden');
+                        toggleRequired(q1_2_container, true);
+
                         q2_1_1_container.classList.remove('hidden');
+                        toggleRequired(q2_1_1_container, true);
+
                         q2_1_3_container.classList.remove('hidden');
+                        toggleRequired(q2_1_3_container, true);
+
                         q1_3_1_container.classList.add('hidden');
+                        toggleRequired(q1_3_1_container, false);
+
                         q1_3_2_container.classList.add('hidden');
+                        toggleRequired(q1_3_2_container, false);
+
                         q1_3_3_container.classList.add('hidden');
+                        toggleRequired(q1_3_3_container, false);
+
                         q2_1_4_container.classList.add('hidden');
+                        toggleRequired(q2_1_4_container, false);
+
                         q2_1_5_container.classList.add('hidden');
+                        toggleRequired(q2_1_5_container, false);
                     } else if (q1_1_participated.checked) {
                         q1_2_container.classList.remove('hidden');
+                        toggleRequired(q1_2_container, true);
+
                         q2_1_1_container.classList.remove('hidden');
+                        toggleRequired(q2_1_1_container, true);
+
                         q2_1_3_container.classList.remove('hidden');
+                        toggleRequired(q2_1_3_container, true);
+
                         q1_3_1_container.classList.remove('hidden');
+                        toggleRequired(q1_3_1_container, true);
+
                         q1_3_2_container.classList.remove('hidden');
+                        toggleRequired(q1_3_2_container, true);
+
                         q1_3_3_container.classList.remove('hidden');
+                        toggleRequired(q1_3_3_container, true);
+
                         q2_1_4_container.classList.add('hidden');
+                        toggleRequired(q2_1_4_container, false);
+
                         q2_1_5_container.classList.add('hidden');
+                        toggleRequired(q2_1_5_container, false);
                     }
-        
+
                     // Question 2.1.1 Logic
                     const q2_1_1_participated = document.getElementById('q2-1-1-participated');
                     const q2_1_1_heard = document.getElementById('q2-1-1-heard-watched');
                     if (q2_1_1_participated.checked || q2_1_1_heard.checked) {
                         q2_1_2_1_container.classList.remove('hidden');
+                        toggleRequired(q2_1_2_1_container, true);
+
                         q2_1_3_container.classList.remove('hidden');
+                        toggleRequired(q2_1_3_container, true);
+
                         if (q2_1_1_participated.checked) {
                             q2_1_2_2_container.classList.remove('hidden');
+                            toggleRequired(q2_1_2_2_container, true);
                         } else {
                             q2_1_2_2_container.classList.add('hidden');
+                            toggleRequired(q2_1_2_2_container, false);
                         }
                     } else {
                         q2_1_2_1_container.classList.add('hidden');
+                        toggleRequired(q2_1_2_1_container, false);
+
                         q2_1_2_2_container.classList.add('hidden');
+                        toggleRequired(q2_1_2_2_container, false);
+
                         q2_1_3_container.classList.add('hidden');
+                        toggleRequired(q2_1_3_container, false);
+
                         q2_1_4_container.classList.add('hidden');
+                        toggleRequired(q2_1_4_container, false);
+
                         q2_1_5_container.classList.add('hidden');
+                        toggleRequired(q2_1_5_container, false);
                     }
-        
+
                     // Question 2.1.3 Logic
                     const q2_1_3_yes = document.getElementById('q2-1-3-yes');
                     if (q2_1_3_yes && q2_1_3_yes.checked && q2_1_3_container.offsetParent !== null) {
                         q2_1_4_container.classList.remove('hidden');
+                        toggleRequired(q2_1_4_container, true);
+
                         q2_1_5_container.classList.remove('hidden');
+                        toggleRequired(q2_1_5_container, true);
                     } else {
                         q2_1_4_container.classList.add('hidden');
+                        toggleRequired(q2_1_4_container, false);
+
                         q2_1_5_container.classList.add('hidden');
+                        toggleRequired(q2_1_5_container, false);
                     }
-        
+
                     // Always ensure Question 2.2 is visible
                     const q2_2_container = document.getElementById('q2-2-container');
                     q2_2_container.classList.remove('hidden');
-        
+
                     // Update Submit Button State
                     updateSubmitButtonState();
-        
+
                     // Log Debug Information
                     logDebugInfo();
                 }
