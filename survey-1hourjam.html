@@ -310,13 +310,18 @@
                     // Check visible textareas
                     document.querySelectorAll('textarea[required]').forEach(textarea => {
                         if (textarea.offsetParent !== null && textarea.value.trim().length < 5) {
+                            console.log('Invalid textarea:', textarea.id);
                             allValid = false;
                         }
                     });
 
                     // Check visible radio buttons
                     document.querySelectorAll('input[required][type="radio"]').forEach(radio => {
-                        if (radio.offsetParent !== null && !radio.checked) {
+                        const radioGroup = document.querySelectorAll(`input[type="radio"][name="${radio.name}"]`);
+                        const isRadioGroupValid = Array.from(radioGroup).some(radio => radio.checked);
+
+                        if (radio.offsetParent !== null && !isRadioGroupValid) {
+                            console.log('Invalid radio group:', radio.name);
                             allValid = false;
                         }
                     });
@@ -324,9 +329,11 @@
                     // Check visible email input
                     const emailField = document.getElementById('q2-1-5');
                     if (emailField.offsetParent !== null && !emailField.checkValidity()) {
+                        console.log('Invalid email field:', emailField.id);
                         allValid = false;
                     }
 
+                    console.log('Form is valid:', allValid);
                     return allValid;
                 }
 
@@ -533,18 +540,33 @@
                 /**
                  * Enable or disable the submit button based on validation results.
                  */
-                function updateSubmitButtonState() {
-                    submitButton.disabled = !checkRequiredFields();
+                 function updateSubmitButtonState() {
+                    const isValid = checkRequiredFields();
+                    console.log('Submit button state:', isValid ? 'Enabled' : 'Disabled');
+                    submitButton.disabled = !isValid;
                 }
         
                 // Add event listeners to dynamically update visibility and validation
-                document.querySelectorAll('input, textarea').forEach(input => {
-                    input.addEventListener('input', updateVisibility);
-                });
+                    document.querySelectorAll('input, textarea').forEach(input => {
+                        input.addEventListener('input', function () {
+                            updateVisibility();
+                            updateSubmitButtonState(); // Explicitly update the button state
+                        });
+                    });
+
+                    // Add event listeners for radio buttons and checkboxes
+                    document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
+                        input.addEventListener('change', function () {
+                            updateVisibility();
+                            updateSubmitButtonState(); // Explicitly update the button state
+                        });
+                    });
         
-                // Initial setup to ensure visibility is correct on page load
-                updateVisibility();
-            });
+                    // Initial setup to ensure visibility is correct on page load
+                    updateVisibility();
+                    updateSubmitButtonState(); // Explicitly update the button state
+                    enforceMaxLength();
+                });
         </script>
 
                                     
