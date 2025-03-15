@@ -241,19 +241,29 @@
                 /**
                  * Validate that each visible radio group has at least one selection.
                  */
-                function validateRadios() {
-                    const radioGroups = {};
+                 function validateRadios() {
+                    let allRadiosValid = true;
+
+                    // Get all visible required radio groups
+                    const radioGroups = new Set();
                     document.querySelectorAll('input[required][type="radio"]').forEach(radio => {
                         if (radio.offsetParent !== null) {
-                            if (!radioGroups[radio.name]) {
-                                radioGroups[radio.name] = false;
-                            }
-                            if (radio.checked) {
-                                radioGroups[radio.name] = true;
-                            }
+                            radioGroups.add(radio.name);
                         }
                     });
-                    return Object.values(radioGroups).every(groupIsChecked => groupIsChecked);
+
+                    // Check if at least one radio button is selected in each group
+                    radioGroups.forEach(groupName => {
+                        const radioButtons = document.querySelectorAll(`input[type="radio"][name="${groupName}"]`);
+                        const isGroupValid = Array.from(radioButtons).some(radio => radio.checked);
+
+                        if (!isGroupValid) {
+                            console.log('Invalid radio group:', groupName);
+                            allRadiosValid = false;
+                        }
+                    });
+
+                    return allRadiosValid;
                 }
         
                 /**
@@ -262,10 +272,15 @@
                 function validateCheckboxes() {
                     const q2_1_3_yes = document.getElementById('q2-1-3-yes');
                     if (q2_1_3_yes && q2_1_3_yes.offsetParent !== null && q2_1_3_yes.checked) {
-                        const checkedCheckboxes = Array.from(document.querySelectorAll('input[name="q2-1-4"]:checked'));
-                        return checkedCheckboxes.length > 0;
+                        const checkboxes = document.querySelectorAll('input[name="q2-1-4"]');
+                        const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+
+                        if (!atLeastOneChecked) {
+                            console.log('At least one checkbox in q2-1-4 must be checked.');
+                            return false; // Validation fails if no checkboxes are checked.
+                        }
                     }
-                    return true;
+                    return true; // Validation passes if no checkboxes are required or at least one is checked.
                 }
         
                 /**
@@ -316,20 +331,21 @@
                     });
 
                     // Check visible radio buttons
-                    document.querySelectorAll('input[required][type="radio"]').forEach(radio => {
-                        const radioGroup = document.querySelectorAll(`input[type="radio"][name="${radio.name}"]`);
-                        const isRadioGroupValid = Array.from(radioGroup).some(radio => radio.checked);
-
-                        if (radio.offsetParent !== null && !isRadioGroupValid) {
-                            console.log('Invalid radio group:', radio.name);
-                            allValid = false;
-                        }
-                    });
+                    const allRadiosValid = validateRadios();
+                    if (!allRadiosValid) {
+                        allValid = false;
+                    }
 
                     // Check visible email input
                     const emailField = document.getElementById('q2-1-5');
                     if (emailField.offsetParent !== null && !emailField.checkValidity()) {
                         console.log('Invalid email field:', emailField.id);
+                        allValid = false;
+                    }
+
+                    // Check checkboxes for Question 2.1.4
+                    const checkboxesValid = validateCheckboxes();
+                    if (!checkboxesValid) {
                         allValid = false;
                     }
 
@@ -426,48 +442,36 @@
 
                         q2_1_2_2_container.classList.add('hidden');
                         toggleRequired(q2_1_2_2_container, false);
-                    } else if (q1_1_watched.checked) {
+                    } else if (q1_1_watched.checked || q1_1_participated.checked) {
                         q1_2_container.classList.remove('hidden');
                         toggleRequired(q1_2_container, true);
 
                         q2_1_1_container.classList.remove('hidden');
                         toggleRequired(q2_1_1_container, true);
 
+                        // Ensure q2-1-3-container is revealed when "Watched" or "Participated" is selected
                         q2_1_3_container.classList.remove('hidden');
                         toggleRequired(q2_1_3_container, true);
 
-                        q1_3_1_container.classList.add('hidden');
-                        toggleRequired(q1_3_1_container, false);
+                        if (q1_1_participated.checked) {
+                            q1_3_1_container.classList.remove('hidden');
+                            toggleRequired(q1_3_1_container, true);
 
-                        q1_3_2_container.classList.add('hidden');
-                        toggleRequired(q1_3_2_container, false);
+                            q1_3_2_container.classList.remove('hidden');
+                            toggleRequired(q1_3_2_container, true);
 
-                        q1_3_3_container.classList.add('hidden');
-                        toggleRequired(q1_3_3_container, false);
+                            q1_3_3_container.classList.remove('hidden');
+                            toggleRequired(q1_3_3_container, true);
+                        } else {
+                            q1_3_1_container.classList.add('hidden');
+                            toggleRequired(q1_3_1_container, false);
 
-                        q2_1_4_container.classList.add('hidden');
-                        toggleRequired(q2_1_4_container, false);
+                            q1_3_2_container.classList.add('hidden');
+                            toggleRequired(q1_3_2_container, false);
 
-                        q2_1_5_container.classList.add('hidden');
-                        toggleRequired(q2_1_5_container, false);
-                    } else if (q1_1_participated.checked) {
-                        q1_2_container.classList.remove('hidden');
-                        toggleRequired(q1_2_container, true);
-
-                        q2_1_1_container.classList.remove('hidden');
-                        toggleRequired(q2_1_1_container, true);
-
-                        q2_1_3_container.classList.remove('hidden');
-                        toggleRequired(q2_1_3_container, true);
-
-                        q1_3_1_container.classList.remove('hidden');
-                        toggleRequired(q1_3_1_container, true);
-
-                        q1_3_2_container.classList.remove('hidden');
-                        toggleRequired(q1_3_2_container, true);
-
-                        q1_3_3_container.classList.remove('hidden');
-                        toggleRequired(q1_3_3_container, true);
+                            q1_3_3_container.classList.add('hidden');
+                            toggleRequired(q1_3_3_container, false);
+                        }
 
                         q2_1_4_container.classList.add('hidden');
                         toggleRequired(q2_1_4_container, false);
@@ -483,9 +487,6 @@
                         q2_1_2_1_container.classList.remove('hidden');
                         toggleRequired(q2_1_2_1_container, true);
 
-                        q2_1_3_container.classList.remove('hidden');
-                        toggleRequired(q2_1_3_container, true);
-
                         if (q2_1_1_participated.checked) {
                             q2_1_2_2_container.classList.remove('hidden');
                             toggleRequired(q2_1_2_2_container, true);
@@ -499,32 +500,26 @@
 
                         q2_1_2_2_container.classList.add('hidden');
                         toggleRequired(q2_1_2_2_container, false);
-
-                        q2_1_3_container.classList.add('hidden');
-                        toggleRequired(q2_1_3_container, false);
-
-                        q2_1_4_container.classList.add('hidden');
-                        toggleRequired(q2_1_4_container, false);
-
-                        q2_1_5_container.classList.add('hidden');
-                        toggleRequired(q2_1_5_container, false);
                     }
+
+                    // ... (existing code)
 
                     // Question 2.1.3 Logic
                     const q2_1_3_yes = document.getElementById('q2-1-3-yes');
                     if (q2_1_3_yes && q2_1_3_yes.checked && q2_1_3_container.offsetParent !== null) {
                         q2_1_4_container.classList.remove('hidden');
-                        toggleRequired(q2_1_4_container, true);
+                        toggleRequired(q2_1_4_container, true); // Ensure checkboxes are required.
 
                         q2_1_5_container.classList.remove('hidden');
                         toggleRequired(q2_1_5_container, true);
                     } else {
                         q2_1_4_container.classList.add('hidden');
-                        toggleRequired(q2_1_4_container, false);
+                        toggleRequired(q2_1_4_container, false); // Remove required attribute if not visible.
 
                         q2_1_5_container.classList.add('hidden');
                         toggleRequired(q2_1_5_container, false);
                     }
+
 
                     // Always ensure Question 2.2 is visible
                     const q2_2_container = document.getElementById('q2-2-container');
