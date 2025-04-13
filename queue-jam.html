@@ -4,7 +4,7 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<html lang="en" data-current-navlink="Live Queues">
+<html lange="en" data-current-navlink="Live Queues">
 	<head>
 		<meta name="description" content="Official Website for the Hyper Game Dev YouTube Channel and Community.">
 		<title>Hyper Game Dev!</title>
@@ -33,118 +33,31 @@
             <!-- Main -->
                 <div id="main-wrapper">
                     <div class="container">
-                        <div class="row gtr-200">
-                            <div class="col-8 col-12-medium">
-                                <div id="content">
+                        <div id="content">
 
-                                    <!-- Content -->
-                                    <article>
+                            <!-- Content -->
+                                <article>
 
-                                        <h2>Hyper 1 Hour Jam Queue</h2>
+                                    <h2>Oops!</h2>
 
-                                        <p>Fill out the form to join the queue!</p>
-                                        <p>Someday you'll be able to check the queue here too.</p>
-                                        <br></br>
-                                        <h2>FAQ</h2>
-                                        <h4>How will I know if I'm next?</h4>
-                                        <p>Just ask!</p>
-                                        <h4>Can I submit multiple times?</h4>
-                                        <p>Only if you don't want to go as soon as you originally thought.</p>
-                                        <h4>Can I just submit in here for fun?</h4>
-                                        <p>Please don't. It could literally cost the channel money!</p>
-                                    </article>
+                                    <p>This queue has been retired.</p>
 
-                                </div>
-                            </div>
-                            <div class="col-4 col-12-medium">
-                                <div id="sidebar">
-
-                                    <!-- Sidebar -->
-                                    <section>
-                                        <h3>Submit your game</h3>
-                                        <form name="queue-jam" action="messages/queue-joined.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                                            <p class="hidden">
-                                                <label for="bot-field">Don't fill this out if you're human:</label>
-                                                <input name="bot-field" id="bot-field" title="Bot field" placeholder="Leave this field empty" />
-                                            </p>
-                                            <p>
-                                                <label for="game-name">Game Name <span class="required">*</span></label><br>
-                                                <input type="text" name="game-name" id="game-name" required title="Enter the name of your game" placeholder="My great game" />
-                                            </p>
-                                            <p>
-                                                <button type="submit" class="button icon solid fa-plus" id="submit-button" disabled>Join Queue</button>
-                                            </p>
-                                        </form>
+                                    <!-- <p><a href="queue-jam.html">Jam Entries</a>
+                                    <br>Want your Hyper 1 Hour Jam game played next on stream? Use this form!</br></p> -->
                                     
-                                        <footer>
-                                            <i><b>NOTE:</b> "Join Queue" only works on Fridays!</i>
-                                        </footer>
-                                    </section>
-                                    
+                                    <p style="font-size: 20px; font-weight: bold;">Go to the new one <a href="queue-shares-bimonthly.html">here:</a>
+                                        <br><span style="font-size: initial; font-weight: initial"><a href="queue-shares-bimonthly.html">https://hypergame.dev/queue-shares-bimonthly</a></span></br></p>
 
-                                        <section>
-                                            <!-- <h3>Subheading</h3>
-                                            <ul class="style2">
-                                                <li><a href="#">Amet turpis, feugiat et sit amet</a></li>
-                                                <li><a href="#">Ornare in hendrerit in lectus</a></li>
-                                                <li><a href="#">Semper mod quis eget mi dolore</a></li>
-                                                <li><a href="#">Quam turpis feugiat sit dolor</a></li>
-                                                <li><a href="#">Amet ornare in hendrerit in lectus</a></li>
-                                                <li><a href="#">Semper mod quisturpis nisi</a></li>
-                                            </ul> -->
-                                        </section>
+                                </article>
 
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
-
 
 		<!-- Footer -->
 			<div id="footer-container"></div> </div>
 
         <!-- Scripts -->
-
-            <!-- Submit Disable -->
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    const submitButton = document.getElementById('submit-button');
-                    const requiredField = document.querySelector('input[required]');
-                
-                    if (!submitButton || !requiredField) {
-                        console.error('One or more required elements are missing.');
-                        return;
-                    }
-                
-                    const dayOnly = false;
-                
-                    // Function to check if the current time is within the CT zone and it's Friday
-                    function checkCTFriday() {
-                        const now = new Date();
-                        const options = { timeZone: 'America/Chicago', weekday: 'long' };
-                        const dayInCT = now.toLocaleDateString('en-US', options);
-                
-                        // Enable button if today is Friday and required field is filled, or if the day check is disabled
-                        if ((dayInCT === 'Friday' || dayOnly) && requiredField.value) {
-                            submitButton.disabled = false;
-                        } else {
-                            submitButton.disabled = true;
-                        }
-                    }
-                
-                    // Run the check once on page load
-                    checkCTFriday();
-                
-                    // Optionally, you can set an interval to keep checking (e.g., every hour)
-                    setInterval(checkCTFriday, 3600000); // Check every hour
-                
-                    // Check required field on input change
-                    requiredField.addEventListener('input', checkCTFriday);
-                });
-                </script>
-                
-
 
             <!-- Header/Footer -->
             <script>
