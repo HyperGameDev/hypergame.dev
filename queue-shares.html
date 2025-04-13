@@ -33,244 +33,103 @@
             <!-- Main -->
                 <div id="main-wrapper">
                     <div class="container">
-                        <div class="row gtr-200">
-                            <div class="col-8 col-12-medium">
-                                <div id="content">
+                        <div id="content">
 
-                                    <!-- Content -->
-                                        <article>
+                            <!-- Content -->
+                                <article>
 
-                                            <h2>Community Shares Queue</h2>
+                                    <h2>Oops!</h2>
 
-                                            <p>Fill out the form to join the queue!</p>
-                                            <p>Someday you'll be able to check the queue here too.</p>
-                                            <br></br>
-                                            <h2>FAQ</h2>
-                                            <h4>How will I know if I'm next?</h4>
-                                            <p>Just ask!</p>
-                                            <h4>Can I submit multiple times?</h4>
-                                            <p>Only if you actually have another thing to share, please. <b>There is a two share maximum for the Community/Secret streams.</b></p>
-                                        </article>
+                                    <p>This queue has been retired.</p>
 
-                                </div>
-                            </div>
-                            <div class="col-4 col-12-medium">
-                                <div id="sidebar">
-
-                                    <!-- Sidebar -->
-                                    <section>
-                                        <h3>Share your thing!</h3>
-                                        <form name="queue-shares" action="messages/queue-joined.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                                            <p>
-                                                <label for="user-name">Who are you? <span class="required">*</span></label><br>
-                                                <input type="text" name="user-name" id="user-name" required title="Enter your name" placeholder="A hyper game dev!" />
-                                            </p>
-                                            <p>
-                                                <label for="game-name">What are you sharing? <span class="required">*</span></label><br>
-                                                <input type="text" name="game-name" id="game-name" required title="Enter the name of what you are sharing" placeholder="My cool thing" />
-                                            </p>
-                                            <p>
-                                                <label for="location-type">Where can it be found? <span class="required">*</span></label><br>
-                                                <select name="location-type" id="location-type" title="Location Type" required>
-                                                    <option value="Discord">Discord</option>
-                                                    <option value="Other">Other</option>
-                                                </select>
-                                            </p>
-                                            <p id="location-container" class="hidden">
-                                                <label for="location">Location: <span class="required">*</span></label><br>
-                                                <input type="text" name="location" id="location" title="Specify the location" placeholder="Explain, or share a URL" />
-                                            </p>
-                                            <p>
-                                                <label for="feedback">What feedback are you looking for? (Optional)</label><br>
-                                                <textarea name="feedback" id="feedback" rows="4" cols="40" title="Feedback details" placeholder="I want feedback on..."></textarea>
-                                            </p>
-                                            <p class="hidden">
-                                                <label for="bot-field">Don't fill this out if you're human:</label>
-                                                <input name="bot-field" id="bot-field" title="Bot field" placeholder="Leave this field empty" />
-                                            </p>
-                                            <p>
-                                                <button type="submit" class="button icon solid fa-plus" id="submit-button" disabled>Join Queue</button>
-                                            </p>
-                                        </form>
-                                        
-                                        
-                                        <footer>
-                                            <i><b>NOTE:</b> "Join Queue" only works on Fridays!</i>
-                                        </footer>
-                                    </section>
+                                    <!-- <p><a href="queue-jam.html">Jam Entries</a>
+                                    <br>Want your Hyper 1 Hour Jam game played next on stream? Use this form!</br></p> -->
                                     
+                                    <p style="font-size: 20px; font-weight: bold;">Go to the new one <a href="queue-shares-bimonthly.html">here:</a>
+                                        <br><span style="font-size: initial; font-weight: initial"><a href="queue-shares-bimonthly.html">https://hypergame.dev/queue-shares-bimonthly</a></span></br></p>
 
-                                        <section>
-                                            <!-- <h3>Subheading</h3>
-                                            <ul class="style2">
-                                                <li><a href="#">Amet turpis, feugiat et sit amet</a></li>
-                                                <li><a href="#">Ornare in hendrerit in lectus</a></li>
-                                                <li><a href="#">Semper mod quis eget mi dolore</a></li>
-                                                <li><a href="#">Quam turpis feugiat sit dolor</a></li>
-                                                <li><a href="#">Amet ornare in hendrerit in lectus</a></li>
-                                                <li><a href="#">Semper mod quisturpis nisi</a></li>
-                                            </ul> -->
-                                        </section>
+                                </article>
 
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
-
 
 		<!-- Footer -->
 			<div id="footer-container"></div> </div>
 
         <!-- Scripts -->
 
-            <!-- Submit Disable -->
+            <!-- Header/Footer -->
             <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    const submitButton = document.getElementById('submit-button');
-                    const locationType = document.getElementById('location-type');
-                    const locationContainer = document.getElementById('location-container');
-                    const locationField = document.getElementById('location');
-                    const requiredFields = document.querySelectorAll('input[required], select[required]');
-                
-                    // Check if all elements are found
-                    if (!submitButton || !locationType || !locationContainer || !locationField) {
-                        console.error('One or more required elements are missing.');
-                        return; // Exit if any element is not found
-                    }
-                
-                    const dayOnly = false;
-                
-                    // Function to check if the current time is within the CT zone and it's Friday
-                    function checkCTFriday() {
-                        const now = new Date();
-                        const options = { timeZone: 'America/Chicago', weekday: 'long' };
-                        const dayInCT = now.toLocaleDateString('en-US', options);
-                
-                        // Enable button if today is Friday and required fields are filled, or if the day check is disabled
-                        if ((dayInCT === 'Friday' || dayOnly) && checkRequiredFields()) {
-                            submitButton.disabled = false;
-                        } else {
-                            submitButton.disabled = true;
-                        }
-                    }
-                
-                    // Function to check if all required fields are filled
-                    function checkRequiredFields() {
-                        for (const field of requiredFields) {
-                            if (!field.value) {
-                                return false;
-                            }
-                        }
-                        // If 'Other' is selected, check the Location field
-                        if (locationType.value === 'Other' && !locationField.value) {
-                            return false;
-                        }
-                        return true;
-                    }
-                
-                    // Run the check once on page load
-                    checkCTFriday();
-                
-                    // Optionally, you can set an interval to keep checking (e.g., every hour)
-                    setInterval(checkCTFriday, 3600000); // Check every hour
-                
-                    // Show/Hide location field based on dropdown selection
-                    locationType.addEventListener('change', function() {
-                        console.log('Location type changed to:', locationType.value); // Debugging log
-                        if (locationType.value === 'Other') {
-                            locationContainer.classList.remove('hidden');
-                            locationField.required = true;
-                        } else {
-                            locationContainer.classList.add('hidden');
-                            locationField.value = ''; // Clear the Location field when hidden
-                            locationField.required = false;
-                        }
-                        checkCTFriday(); // Re-check after changing dropdown value
-                    });
-                
-                    // Check required fields on input change
-                    for (const field of requiredFields) {
-                        field.addEventListener('input', checkCTFriday);
-                    }
-                
-                    // Add event listener for the Location field
-                    locationField.addEventListener('input', checkCTFriday);
-                });
-                </script>
-                
-
-                <!-- Header/Footer -->
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        function loadContent(url, containerId) {
-                            fetch(url)
-                                .then(response => response.text())
-                                .then(data => {
-                                    document.getElementById(containerId).innerHTML = data;
-                                    if (containerId === 'header-container') {
-                                        applyDropdownFunctionality();
-                                        updateFlyoutMenu();
-                                        applyCurrentNavLinkClass(); // Apply current class after header is loaded
-                                    }
-                                });
-                        }
-
-                        function applyDropdownFunctionality() {
-                            jQuery(document).ready(function($) {
-                                $('#nav > ul').dropotron({
-                                    alignment: 'right',
-                                    mode: 'fade',
-                                    noOpenerFade: true,
-                                    speed: 300
-                                });
-                            });
-                        }
-
-                        function updateFlyoutMenu() {
-                            const navLinks = document.querySelectorAll('#nav ul li a');
-                            const navPanel = document.querySelector('#navPanel nav');
-
-                            if (navPanel) {
-                                navPanel.innerHTML = ''; // Clear previous links
-                                navLinks.forEach(link => {
-                                    const newLink = document.createElement('a');
-                                    newLink.href = link.href;
-                                    newLink.textContent = link.textContent;
-                                    newLink.className = 'link depth-0';
-                                    navPanel.appendChild(newLink);
-                                });
-                            } else {
-                                console.error('Nav panel container not found!');
-                            }
-                        }
-
-                        // Apply the "current" class based on the data-current-navlink attribute
-                        function applyCurrentNavLinkClass() {
-                            const navLinks = document.querySelectorAll('#nav a');
-                            const currentPageNavLink = document.documentElement.getAttribute('data-current-navlink');
-
-                            if (!currentPageNavLink) {
-                                console.error('No data-current-navlink attribute found.');
-                                return;
-                            }
-
-                            navLinks.forEach(link => {
-                                const linkText = link.textContent.trim();
-                                if (linkText === currentPageNavLink) {
-                                    link.parentElement.classList.add('current');
-                                    const parentLi = link.closest('li');
-                                    if (parentLi && parentLi.parentElement.closest('li')) {
-                                        parentLi.parentElement.closest('li').classList.add('current');
-                                    }
+                document.addEventListener('DOMContentLoaded', function() {
+                    function loadContent(url, containerId) {
+                        fetch(url)
+                            .then(response => response.text())
+                            .then(data => {
+                                document.getElementById(containerId).innerHTML = data;
+                                if (containerId === 'header-container') {
+                                    applyDropdownFunctionality();
+                                    updateFlyoutMenu();
+                                    applyCurrentNavLinkClass(); // Apply current class after header is loaded
                                 }
                             });
+                    }
+
+                    function applyDropdownFunctionality() {
+                        jQuery(document).ready(function($) {
+                            $('#nav > ul').dropotron({
+                                alignment: 'right',
+                                mode: 'fade',
+                                noOpenerFade: true,
+                                speed: 300
+                            });
+                        });
+                    }
+
+                    function updateFlyoutMenu() {
+                        const navLinks = document.querySelectorAll('#nav ul li a');
+                        const navPanel = document.querySelector('#navPanel nav');
+
+                        if (navPanel) {
+                            navPanel.innerHTML = ''; // Clear previous links
+                            navLinks.forEach(link => {
+                                const newLink = document.createElement('a');
+                                newLink.href = link.href;
+                                newLink.textContent = link.textContent;
+                                newLink.className = 'link depth-0';
+                                navPanel.appendChild(newLink);
+                            });
+                        } else {
+                            console.error('Nav panel container not found!');
+                        }
+                    }
+
+                    // Apply the "current" class based on the data-current-navlink attribute
+                    function applyCurrentNavLinkClass() {
+                        const navLinks = document.querySelectorAll('#nav a');
+                        const currentPageNavLink = document.documentElement.getAttribute('data-current-navlink');
+
+                        if (!currentPageNavLink) {
+                            console.error('No data-current-navlink attribute found.');
+                            return;
                         }
 
-                        loadContent('header.html', 'header-container');
-                        loadContent('footer.html', 'footer-container');
-                    });
-                </script>
+                        navLinks.forEach(link => {
+                            const linkText = link.textContent.trim();
+                            if (linkText === currentPageNavLink) {
+                                link.parentElement.classList.add('current');
+                                const parentLi = link.closest('li');
+                                if (parentLi && parentLi.parentElement.closest('li')) {
+                                    parentLi.parentElement.closest('li').classList.add('current');
+                                }
+                            }
+                        });
+                    }
+
+                    loadContent('header.html', 'header-container');
+                    loadContent('footer.html', 'footer-container');
+                });
+            </script>
 
 
             <script src="assets/js/jquery.min.js"></script>
@@ -282,5 +141,3 @@
 
     </body>
 </html>
-
-
