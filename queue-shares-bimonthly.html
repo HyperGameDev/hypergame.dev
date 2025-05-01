@@ -56,7 +56,7 @@
                                             <h4>How will I know if I'm next?</h4>
                                             <p>Just ask!</p>
                                             <h4>Can I submit multiple times?</h4>
-                                            <p>Only if you actually have another thing to share, please. <b>There is a two share maximum for these feedback streams.</b></p>
+                                            <p>Only the most recent submission will be played. <b>There is a one submission maximum for these streams.</b></p>
                                         </article>
 
                                 </div>
@@ -68,28 +68,40 @@
                                     <section>
                                         <h3>Share your game!</h3>
                                         <form name="queue-shares-bimonthly" action="messages/queue-joined.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                                            <p>
-                                                <label for="user-name">Who are you? <span class="required">*</span></label><br>
-                                                <input type="text" name="user-name" id="user-name" required title="Enter your name" placeholder="A hyper game dev!" />
+                                            <p style="background-color: #301545; color: white; padding: 10px;">
+                                                <span style="font-size: 20px; font-weight: bold;">Who are you? <span class="required">*</span></span><br>
+                                                <input type="text" name="user-name" id="user-name" required title="Enter your name" placeholder="A hyper game dev!" style="font-size: 18px;" />
                                             </p>
-                                            <p>
-                                                <label for="game-name">What are you sharing? <span class="required">*</span></label><br>
-                                                <input type="text" name="game-name" id="game-name" required title="Enter the name of what you are sharing" placeholder="My cool thing" />
+                                            <p style="background-color: #162553; color: white; padding: 10px;">
+                                                <span style="font-size: 20px; font-weight: bold;">What are you sharing? <span class="required">*</span></span><br>
+                                                <input type="text" name="game-name" id="game-name" required title="Enter the name of what you are sharing" placeholder="My cool thing" style="font-size: 18px;" />
                                             </p>
-                                            <p>
-                                                <label for="location-type">Where can it be found? <span class="required">*</span></label><br>
-                                                <select name="location-type" id="location-type" title="Location Type" required>
+                                            <p style="background-color: #301545; color: white; padding: 10px;">
+                                                <span style="font-size: 20px; font-weight: bold;">Did you/your team make ALL of the music? <span class="required">*</span></span><br>
+                                                <input type="radio" name="music" value="No" id="music-no" required style="font-size: 18px;"> No<br>
+                                                <input type="radio" name="music" value="No there is no music" id="music-none" required style="font-size: 18px;"> No, there is no music<br>
+                                                <input type="radio" name="music" value="Yes, and it is copyright free" id="music-yes-free" required style="font-size: 18px;"> Yes, and it is copyright free<br>
+                                                <input type="radio" name="music" value="Yes, and it is copyrighted (or will be)" id="music-yes-copyright" required style="font-size: 18px;"> Yes, and it is copyrighted (or will be)<br>
+                                                <div id="streamer-mode-container" class="hidden" style="background-color: #301545; color: white; padding: 10px;">
+                                                    <span style="font-size: 20px; font-weight: bold;">Has a Streamer Mode <span class="required">*</span></span><br>
+                                                    <input type="radio" name="streamer-mode" value="Yes" id="streamer-yes" required style="font-size: 18px;"> Yes<br>
+                                                    <input type="radio" name="streamer-mode" value="No" id="streamer-no" required style="font-size: 18px;"> No<br>
+                                                </div>
+                                            </p>
+                                            <p style="background-color: #162553; color: white; padding: 10px;">
+                                                <span style="font-size: 20px; font-weight: bold;">Where can it be found? <span class="required">*</span></span><br>
+                                                <select name="location-type" id="location-type" title="Location Type" required style="font-size: 18px;">
                                                     <option value="Discord">Discord</option>
                                                     <option value="Other">Other</option>
                                                 </select>
                                             </p>
-                                            <p id="location-container" class="hidden">
-                                                <label for="location">Location: <span class="required">*</span></label><br>
-                                                <input type="text" name="location" id="location" title="Specify the location" placeholder="Explain, or share a URL" />
+                                            <p id="location-container" class="hidden" style="background-color: #162553; color: white; padding: 10px;">
+                                                <span style="font-size: 20px; font-weight: bold;">Location: <span class="required">*</span></span><br>
+                                                <input type="text" name="location" id="location" title="Specify the location" placeholder="Explain, or share a URL" style="font-size: 18px;" />
                                             </p>
-                                            <p>
-                                                <label for="feedback">What feedback are you looking for? (Optional)</label><br>
-                                                <textarea name="feedback" id="feedback" rows="4" cols="40" title="Feedback details" placeholder="I want feedback on..."></textarea>
+                                            <p style="background-color: #301545; color: white; padding: 10px;">
+                                                <span style="font-size: 20px; font-weight: bold;">What feedback are you looking for? (Optional)</span><br>
+                                                <textarea name="feedback" id="feedback" rows="4" cols="40" title="Feedback details" placeholder="I want feedback on..." style="font-size: 18px;"></textarea>
                                             </p>
                                             <p class="hidden">
                                                 <label for="bot-field">Don't fill this out if you're human:</label>
@@ -99,7 +111,6 @@
                                                 <button type="submit" class="button icon solid fa-plus" id="submit-button" disabled>Join Queue</button>
                                             </p>
                                         </form>
-                                        
                                         
                                         <footer>
                                             <!-- <i><b>NOTE:</b> "Join Queue" only works on Fridays!</i> -->
@@ -138,16 +149,17 @@
                     const locationType = document.getElementById('location-type');
                     const locationContainer = document.getElementById('location-container');
                     const locationField = document.getElementById('location');
+                    const musicNo = document.getElementById('music-no');
+                    const musicNone = document.getElementById('music-none');
+                    const musicYesFree = document.getElementById('music-yes-free');
+                    const musicYesCopyright = document.getElementById('music-yes-copyright');
+                    const streamerModeContainer = document.getElementById('streamer-mode-container');
+                    const streamerYes = document.getElementById('streamer-yes');
+                    const streamerNo = document.getElementById('streamer-no');
                     const requiredFields = document.querySelectorAll('input[required], select[required]');
-                
-                    // Check if all elements are found
-                    if (!submitButton || !locationType || !locationContainer || !locationField) {
-                        console.error('One or more required elements are missing.');
-                        return;
-                    }
-                
-                    // Function to check if all required fields are filled
-                    function checkFormValidity() {
+                    const submitOverride = true; // Set this boolean to True to enable the submit button
+                    
+                    function checkRequiredFields() {
                         for (const field of requiredFields) {
                             if (!field.value) {
                                 return false;
@@ -157,18 +169,39 @@
                         if (locationType.value === 'Other' && !locationField.value) {
                             return false;
                         }
+                        // Only require streamer mode if "No" or "Yes, copyrighted" is selected
+                        if ((musicNo.checked || musicYesCopyright.checked) && !musicNone.checked) {
+                            return document.querySelector('input[name="streamer-mode"]:checked') !== null;
+                        }
                         return true;
                     }
                 
-                    // Function to update submit button state
-                    function updateSubmitButton() {
-                        submitButton.disabled = !checkFormValidity();
+                    function updateStreamerModeRequired() {
+                        if ((musicNo.checked || musicYesCopyright.checked) && !musicNone.checked) {
+                            streamerYes.required = true;
+                            streamerNo.required = true;
+                        } else {
+                            streamerYes.required = false;
+                            streamerNo.required = false;
+                        }
                     }
                 
-                    // Initial check (disable by default)
-                    submitButton.disabled = true;
+                    function updateSubmitButtonState() {
+                        if (!submitOverride) {
+                            submitButton.disabled = true;
+                        } else {
+                            submitButton.disabled = !checkRequiredFields();
+                        }
+                    }
                 
-                    // Show/Hide location field based on dropdown selection
+                    updateSubmitButtonState();
+                
+                    document.querySelectorAll('input').forEach(input => {
+                        input.addEventListener('input', function () {
+                            updateSubmitButtonState();
+                        });
+                    });
+                
                     locationType.addEventListener('change', function() {
                         if (locationType.value === 'Other') {
                             locationContainer.classList.remove('hidden');
@@ -178,16 +211,34 @@
                             locationField.value = '';
                             locationField.required = false;
                         }
-                        updateSubmitButton();
+                        updateSubmitButtonState();
                     });
                 
-                    // Check required fields on input change
-                    for (const field of requiredFields) {
-                        field.addEventListener('input', updateSubmitButton);
-                    }
+                    musicNo.addEventListener('change', function () {
+                        streamerModeContainer.classList.remove('hidden');
+                        updateStreamerModeRequired();
+                        updateSubmitButtonState();
+                    });
                 
-                    // Add event listener for the Location field
-                    locationField.addEventListener('input', updateSubmitButton);
+                    musicNone.addEventListener('change', function () {
+                        streamerModeContainer.classList.add('hidden');
+                        document.querySelectorAll('input[name="streamer-mode"]').forEach(el => el.checked = false);
+                        updateStreamerModeRequired();
+                        updateSubmitButtonState();
+                    });
+                
+                    musicYesFree.addEventListener('change', function () {
+                        streamerModeContainer.classList.add('hidden');
+                        document.querySelectorAll('input[name="streamer-mode"]').forEach(el => el.checked = false);
+                        updateStreamerModeRequired();
+                        updateSubmitButtonState();
+                    });
+                
+                    musicYesCopyright.addEventListener('change', function () {
+                        streamerModeContainer.classList.remove('hidden');
+                        updateStreamerModeRequired();
+                        updateSubmitButtonState();
+                    });
                 });
             </script>
                 

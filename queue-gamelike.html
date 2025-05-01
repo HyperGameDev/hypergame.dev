@@ -78,6 +78,7 @@
                                                 <p style="background-color: #301545; color: white; padding: 10px;">
                                                     <span style="font-size: 20px; font-weight: bold;">Did you/your team make ALL of the music? <span class="required">*</span></span><br>
                                                     <input type="radio" name="music" value="No" id="music-no" required style="font-size: 18px;"> No<br>
+                                                    <input type="radio" name="music" value="No there is no music" id="music-none" required style="font-size: 18px;"> No, there is no music<br>
                                                     <input type="radio" name="music" value="Yes, and it is copyright free" id="music-yes-free" required style="font-size: 18px;"> Yes, and it is copyright free<br>
                                                     <input type="radio" name="music" value="Yes, and it is copyrighted (or will be)" id="music-yes-copyright" required style="font-size: 18px;"> Yes, and it is copyrighted (or will be)<br>
                                                     <div id="streamer-mode-container" class="hidden" style="background-color: #301545; color: white; padding: 10px;">
@@ -139,102 +140,110 @@
             <!-- Form listeners -->
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
-                  const submitButton = document.getElementById('submit-button');
-                  const jamNo = document.getElementById('jam-no');
-                  const jamYes = document.getElementById('jam-yes');
-                  const locationContainer = document.getElementById('location-container');
-                  const locationField = document.getElementById('location');
-                  const musicNo = document.getElementById('music-no');
-                  const musicYesFree = document.getElementById('music-yes-free');
-                  const musicYesCopyright = document.getElementById('music-yes-copyright');
-                  const streamerModeContainer = document.getElementById('streamer-mode-container');
-                  const streamerYes = document.getElementById('streamer-yes');
-                  const streamerNo = document.getElementById('streamer-no');
-                  const requiredFields = document.querySelectorAll('input[required], select[required]');
-                  const submitOverride = false; // Set this boolean to True to enable the submit button
-                  
-                  function checkRequiredFields() {
-                    for (const field of requiredFields) {
-                      if (!field.value) {
-                        return false;
-                      }
+                    const submitButton = document.getElementById('submit-button');
+                    const jamNo = document.getElementById('jam-no');
+                    const jamYes = document.getElementById('jam-yes');
+                    const locationContainer = document.getElementById('location-container');
+                    const locationField = document.getElementById('location');
+                    const musicNo = document.getElementById('music-no');
+                    const musicNone = document.getElementById('music-none');
+                    const musicYesFree = document.getElementById('music-yes-free');
+                    const musicYesCopyright = document.getElementById('music-yes-copyright');
+                    const streamerModeContainer = document.getElementById('streamer-mode-container');
+                    const streamerYes = document.getElementById('streamer-yes');
+                    const streamerNo = document.getElementById('streamer-no');
+                    const requiredFields = document.querySelectorAll('input[required], select[required]');
+                    const submitOverride = false; // Set this boolean to True to enable the submit button
+                    
+                    function checkRequiredFields() {
+                        for (const field of requiredFields) {
+                            if (!field.value) {
+                                return false;
+                            }
+                        }
+                        if (jamNo.checked && !locationField.value) {
+                            return false;
+                        }
+                        if ((musicNo.checked || musicYesCopyright.checked) && !musicNone.checked) {
+                            return document.querySelector('input[name="streamer-mode"]:checked') !== null;
+                        }
+                        return true;
                     }
-                    if (jamNo.checked && !locationField.value) {
-                      return false;
-                    }
-                    if (musicNo.checked || musicYesCopyright.checked) {
-                      return document.querySelector('input[name="streamer-mode"]:checked') !== null;
-                    }
-                    return true;
-                  }
                 
-                  function updateStreamerModeRequired() {
-                    if (musicNo.checked || musicYesCopyright.checked) {
-                      streamerYes.required = true;
-                      streamerNo.required = true;
-                    } else {
-                      streamerYes.required = false;
-                      streamerNo.required = false;
+                    function updateStreamerModeRequired() {
+                        if ((musicNo.checked || musicYesCopyright.checked) && !musicNone.checked) {
+                            streamerYes.required = true;
+                            streamerNo.required = true;
+                        } else {
+                            streamerYes.required = false;
+                            streamerNo.required = false;
+                        }
                     }
-                  }
                 
-                  function updateSubmitButtonState() {
-                    if (!submitOverride) {
-                      submitButton.disabled = true;
-                    } else {
-                      submitButton.disabled = !checkRequiredFields();
+                    function updateSubmitButtonState() {
+                        if (!submitOverride) {
+                            submitButton.disabled = true;
+                        } else {
+                            submitButton.disabled = !checkRequiredFields();
+                        }
                     }
-                  }
                 
-                  updateSubmitButtonState();
+                    updateSubmitButtonState();
                 
-                  document.querySelectorAll('input').forEach(input => {
-                    input.addEventListener('input', function () {
-                      updateSubmitButtonState();
+                    document.querySelectorAll('input').forEach(input => {
+                        input.addEventListener('input', function () {
+                            updateSubmitButtonState();
+                        });
                     });
-                  });
                 
-                  jamNo.addEventListener('change', function () {
-                    if (jamNo.checked) {
-                      locationContainer.classList.remove('hidden');
-                      locationField.required = true;
-                    } else {
-                      locationContainer.classList.add('hidden');
-                      locationField.value = '';
-                      locationField.required = false;
-                    }
-                    updateSubmitButtonState();
-                  });
+                    jamNo.addEventListener('change', function () {
+                        if (jamNo.checked) {
+                            locationContainer.classList.remove('hidden');
+                            locationField.required = true;
+                        } else {
+                            locationContainer.classList.add('hidden');
+                            locationField.value = '';
+                            locationField.required = false;
+                        }
+                        updateSubmitButtonState();
+                    });
                 
-                  jamYes.addEventListener('change', function () {
-                    if (jamYes.checked) {
-                      locationContainer.classList.add('hidden');
-                      locationField.value = '';
-                      locationField.required = false;
-                    }
-                    updateSubmitButtonState();
-                  });
+                    jamYes.addEventListener('change', function () {
+                        if (jamYes.checked) {
+                            locationContainer.classList.add('hidden');
+                            locationField.value = '';
+                            locationField.required = false;
+                        }
+                        updateSubmitButtonState();
+                    });
                 
-                  musicNo.addEventListener('change', function () {
-                    streamerModeContainer.classList.remove('hidden');
-                    updateStreamerModeRequired();
-                    updateSubmitButtonState();
-                  });
+                    musicNo.addEventListener('change', function () {
+                        streamerModeContainer.classList.remove('hidden');
+                        updateStreamerModeRequired();
+                        updateSubmitButtonState();
+                    });
                 
-                  musicYesFree.addEventListener('change', function () {
-                    streamerModeContainer.classList.add('hidden');
-                    document.querySelectorAll('input[name="streamer-mode"]').forEach(el => el.checked = false);
-                    updateStreamerModeRequired();
-                    updateSubmitButtonState();
-                  });
+                    musicNone.addEventListener('change', function () {
+                        streamerModeContainer.classList.add('hidden');
+                        document.querySelectorAll('input[name="streamer-mode"]').forEach(el => el.checked = false);
+                        updateStreamerModeRequired();
+                        updateSubmitButtonState();
+                    });
                 
-                  musicYesCopyright.addEventListener('change', function () {
-                    streamerModeContainer.classList.remove('hidden');
-                    updateStreamerModeRequired();
-                    updateSubmitButtonState();
-                  });
+                    musicYesFree.addEventListener('change', function () {
+                        streamerModeContainer.classList.add('hidden');
+                        document.querySelectorAll('input[name="streamer-mode"]').forEach(el => el.checked = false);
+                        updateStreamerModeRequired();
+                        updateSubmitButtonState();
+                    });
+                
+                    musicYesCopyright.addEventListener('change', function () {
+                        streamerModeContainer.classList.remove('hidden');
+                        updateStreamerModeRequired();
+                        updateSubmitButtonState();
+                    });
                 });
-              </script>
+            </script>
             
               
                 
