@@ -49,7 +49,7 @@
                                             <h4>How will I know if I'm next?</h4>
                                             <p>Just ask!</p>
                                             <h4>Can I submit multiple times?</h4>
-                                            <p>Please, don't! If you got to the confirmation page, you're good.</b></p>
+                                            <p>Please, don't! If you got to the confirmation page, you're good. However, if you want your game played later than you thought, go ahead and submit again; the most recent entry will be your place in line.</b></p>
                                         </article>
 
                                 </div>
@@ -153,7 +153,7 @@
                     const streamerYes = document.getElementById('streamer-yes');
                     const streamerNo = document.getElementById('streamer-no');
                     const requiredFields = document.querySelectorAll('input[required], select[required]');
-                    const submitOverride = false; // Set this boolean to True to enable the submit button
+                    const submitOverride = true; // Set this boolean to True to enable the submit button
                     
                     function checkRequiredFields() {
                         for (const field of requiredFields) {
